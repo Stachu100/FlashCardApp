@@ -33,8 +33,6 @@ namespace FiszkiApp
 
         private async Task LogoutAsync()
         {
-            Preferences.Remove("FlashcardBackgroundColor");
-            Preferences.Remove("FlashcardTextColor");
             _authService.Logout();
             await Shell.Current.GoToAsync("//LoginPage");
         }

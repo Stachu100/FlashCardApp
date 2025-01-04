@@ -131,8 +131,6 @@ namespace FiszkiApp.ViewModel
         [RelayCommand]
         public async Task LogoutCommand(AuthService authService)
         {
-            Preferences.Remove("FlashcardBackgroundColor");
-            Preferences.Remove("FlashcardTextColor");
             _authService.Logout();
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }

@@ -46,6 +46,8 @@ namespace FiszkiApp.Services
         }
         public void Logout()
         {
+            Preferences.Remove("FlashcardBackgroundColor");
+            Preferences.Remove("FlashcardTextColor");
             Preferences.Default.Remove(AuthStateKey);
         }
     }
