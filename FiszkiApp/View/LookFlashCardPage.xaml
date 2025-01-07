@@ -33,32 +33,31 @@
 
         <ScrollView Grid.Row="2" Padding="10">
             <StackLayout>
-                <ListView ItemsSource="{Binding Flashcards}"
-                          SelectedItem="{Binding SelectedFlashcard, Mode=TwoWay}"
-                          SelectionMode="Single">
-                    <ListView.ItemTemplate>
+                <CollectionView ItemsSource="{Binding Flashcards}"
+                        SelectedItem="{Binding SelectedFlashcard, Mode=TwoWay}"
+                        SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="10" VerticalOptions="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding Lp}" 
-                                           Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <Label Text="{Binding ID_flashcard}" 
-                                           Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <Label Text="{Binding FrontFlashCard}" 
-                                           Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <Label Text="{Binding BackFlashCard}" 
-                                           Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" />
-                                </Grid>
-                            </ViewCell>
+                            <Grid Padding="10" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Lp}" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" />
+                                <Label Text="{Binding ID_flashcard}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" />
+                                <Label Text="{Binding FrontFlashCard}" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" />
+                                <Label Text="{Binding BackFlashCard}" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" />
+                            </Grid>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button Text="Załaduj więcej"
+                Command="{Binding LoadFlashcardsCommand}"
+                HorizontalOptions="Center" />
+                
             </StackLayout>
         </ScrollView>
 
