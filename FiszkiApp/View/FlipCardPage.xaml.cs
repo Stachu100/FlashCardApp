@@ -34,22 +34,27 @@ namespace FiszkiApp.View
             _isAnimating = true;
 
             var flipView = FlashCardFrame;
-
-            await flipView.RotateYTo(90, 300);
-
             var viewModel = BindingContext as FlipCardPageViewModel;
+
+            await Task.WhenAll(
+                flipView.ScaleXTo(0, 150, Easing.CubicIn),
+                flipView.FadeTo(0.6, 150, Easing.CubicIn)
+            );
+
             if (viewModel != null)
             {
                 viewModel.IsFrontVisible = !viewModel.IsFrontVisible;
                 viewModel.IsBackVisible = !viewModel.IsBackVisible;
             }
 
-            await flipView.RotateYTo(180, 300);
-
-            flipView.RotationY = 0;
+            await Task.WhenAll(
+                flipView.ScaleXTo(1, 150, Easing.CubicOut),
+                flipView.FadeTo(1, 150, Easing.CubicOut)
+            );
 
             _isAnimating = false;
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
