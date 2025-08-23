@@ -37,8 +37,8 @@ namespace FiszkiApp.View
             var viewModel = BindingContext as FlipCardPageViewModel;
 
             await Task.WhenAll(
-                flipView.ScaleXTo(0, 150, Easing.CubicIn),
-                flipView.FadeTo(0.6, 150, Easing.CubicIn)
+                flipView.ScaleXTo(0, 400, Easing.CubicIn),
+                flipView.FadeTo(0.6, 400, Easing.CubicIn)
             );
 
             if (viewModel != null)
@@ -48,8 +48,8 @@ namespace FiszkiApp.View
             }
 
             await Task.WhenAll(
-                flipView.ScaleXTo(1, 150, Easing.CubicOut),
-                flipView.FadeTo(1, 150, Easing.CubicOut)
+                flipView.ScaleXTo(1, 400, Easing.CubicOut),
+                flipView.FadeTo(1, 400, Easing.CubicOut)
             );
 
             _isAnimating = false;
