@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using APIFlashCard.Data;
-
+using APIFlashCard.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers();
 
 //Webio.pl Db
@@ -22,13 +21,11 @@ builder.Services.AddDbContext<FlashCardDbContext>(options =>
     )
 );
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -37,6 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ErrorLoggingMiddleware>();
 
 app.UseAuthorization();
 

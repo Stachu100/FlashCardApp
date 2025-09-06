@@ -20,10 +20,12 @@ namespace APIFlashCard.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Countries>>> GetAllCountries()
         {
-            return await _context.Countries.ToListAsync();
+            var countries = await _context.Countries.ToListAsync();
+
+            return Ok(countries);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Countries>> GetCountryById(int id)
         {
             var country = await _context.Countries.FindAsync(id);
@@ -33,7 +35,7 @@ namespace APIFlashCard.Controllers
                 return NotFound();
             }
 
-            return country;
+            return Ok(country);
         }
 
         [HttpGet("{countryName}")]
@@ -47,7 +49,7 @@ namespace APIFlashCard.Controllers
                 return NotFound();
             }
 
-            return country;
+            return Ok(country);
         }
     }
 }

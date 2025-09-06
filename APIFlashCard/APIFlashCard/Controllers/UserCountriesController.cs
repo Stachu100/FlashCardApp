@@ -16,15 +16,14 @@ namespace APIFlashCard.Controllers
             _context = context;
         }
 
-        // GET: api/UserCountries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserCountries>>> GetUserCountries()
         {
-            return await _context.UserCountries.ToListAsync();
+            var userCountries = await _context.UserCountries.ToListAsync();
+            return Ok(userCountries);
         }
 
-        // GET: api/UserCountries/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<UserCountries>> GetUserCountry(int id)
         {
             var userCountry = await _context.UserCountries.FindAsync(id);
@@ -34,11 +33,10 @@ namespace APIFlashCard.Controllers
                 return NotFound();
             }
 
-            return userCountry;
+            return Ok(userCountry);
         }
 
-        // GET: api/UserCountries/user/{userId}
-        [HttpGet("user/{userId}")]
+        [HttpGet("user/{userId:int}")]
         public async Task<ActionResult<IEnumerable<UserCountries>>> GetUserCountriesByUserId(int userId)
         {
             var userCountries = await _context.UserCountries
@@ -50,10 +48,9 @@ namespace APIFlashCard.Controllers
                 return NotFound();
             }
 
-            return userCountries;
+            return Ok(userCountries);
         }
 
-        // POST: api/UserCountries
         [HttpPost]
         public async Task<IActionResult> PostUserCountry(UserCountries userCountry)
         {
@@ -68,7 +65,6 @@ namespace APIFlashCard.Controllers
             return CreatedAtAction(nameof(GetUserCountry), new { id = userCountry.ID_UserCountries }, userCountry);
         }
 
-        // DELETE: api/UserCountries?userId={userId}&countryId={countryId}
         [HttpDelete]
         public async Task<IActionResult> DeleteUserCountry(int userId, int countryId)
         {

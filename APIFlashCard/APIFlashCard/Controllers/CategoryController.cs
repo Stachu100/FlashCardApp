@@ -2,7 +2,6 @@
 using APIFlashCard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 
 namespace APIFlashCard.Controllers
 {
@@ -18,37 +17,30 @@ namespace APIFlashCard.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategory([FromBody] Category category)
+        public async Task<IActionResult> AddCategory(Category category)
         {
-            if (category == null)
+            if (category == null || string.IsNullOrWhiteSpace(category.CategoryName))
             {
                 return BadRequest(new { message = "Nieprawidłowe dane kategorii." });
             }
 
-            try
-            {
-                _context.Categories.Add(category);
-                await _context.SaveChangesAsync();
-                return CreatedAtAction(nameof(AddCategory), new { id = category.ID_Category }, category);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = $"Wystąpił błąd: {ex.Message}" });
-            }
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(AddCategory), new { id = category.ID_Category }, category);
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            try
+            var categories = await _context.Categories.ToListAsync();
+
+            if (!categories.Any())
             {
-                var categories = await _context.Categories.ToListAsync();
-                return Ok(categories);
+                return NotFound(new { message = "Brak dostępnych kategorii." });
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
-            }
+
+            return Ok(categories);
         }
     }
 }

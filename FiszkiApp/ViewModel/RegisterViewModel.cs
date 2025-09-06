@@ -130,15 +130,6 @@ namespace FiszkiApp.ViewModel
                 // Handle exceptions
                 await Application.Current.MainPage.DisplayAlert("Error", "An error occurred while uploading the image.", "OK");
             }
-        }
-
-        private byte[] ReadFully(Stream input)
-        {
-            using (var ms = new MemoryStream())
-            {
-                input.CopyTo(ms);
-                return ms.ToArray();
-            }
-        }        
+        }     
     }
 }

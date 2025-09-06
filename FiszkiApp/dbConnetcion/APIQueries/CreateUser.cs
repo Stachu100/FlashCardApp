@@ -36,7 +36,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 var user = new User { UserName = name, UserPassword = encryptedPassword };
                 var userContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                var userResponse = await _httpClient.PostAsync("user", userContent);
+                var userResponse = await _httpClient.PostAsync("User", userContent);
 
                 if (!userResponse.IsSuccessStatusCode)
                 {

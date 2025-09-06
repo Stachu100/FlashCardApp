@@ -16,7 +16,7 @@ namespace APIFlashCard.Controllers
             _context = context;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("{userId:int}")]
         public async Task<ActionResult<EncryptionKeys>> GetEncryptionKeys(int userId)
         {
             var encryptionKeys = await _context.EncryptionKeys
@@ -25,7 +25,7 @@ namespace APIFlashCard.Controllers
 
             if (encryptionKeys == null)
             {
-                return NotFound("Klucze szyfrowania dla użytkownika nie zostały znalezione.");
+                return NotFound(new { message = $"Błąd danych logowania." });
             }
 
             return encryptionKeys;
@@ -36,7 +36,7 @@ namespace APIFlashCard.Controllers
         {
             if (encryptionKeys == null)
             {
-                return BadRequest("Dane klucza szyfrowania są wymagane.");
+                return NotFound(new { message = $"Błąd danych logowania." });
             }
 
             _context.EncryptionKeys.Add(encryptionKeys);

@@ -16,33 +16,26 @@ namespace APIFlashCard.Controllers
             _context = context;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("{userId:int}")]
         public async Task<IActionResult> GetUserDetails(int userId)
         {
-            try
-            {
-                var userDetails = await _context.UserDetails
-                    .Where(u => u.ID_User == userId)
-                    .Select(u => new
-                    {
-                        u.FirstName,
-                        u.LastName,
-                        u.Country,
-                        u.Avatar
-                    })
-                    .FirstOrDefaultAsync();
-
-                if (userDetails == null)
+            var userDetails = await _context.UserDetails
+                .Where(u => u.ID_User == userId)
+                .Select(u => new
                 {
-                    return NotFound(new { message = "Nie znaleziono użytkownika." });
-                }
+                    u.FirstName,
+                    u.LastName,
+                    u.Country,
+                    u.Avatar
+                })
+                .FirstOrDefaultAsync();
 
-                return Ok(userDetails);
-            }
-            catch (Exception ex)
+            if (userDetails == null)
             {
-                return StatusCode(500, new { message = $"Wystąpił błąd: {ex.Message}" });
+                return NotFound(new { message = "Nie znaleziono użytkownika." });
             }
+
+            return Ok(userDetails);
         }
 
         [HttpGet("check-email/{email}")]
@@ -63,7 +56,7 @@ namespace APIFlashCard.Controllers
             _context.UserDetails.Add(userDetails);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserDetails", new { userId = userDetails.ID_User }, userDetails);
+            return CreatedAtAction(nameof(GetUserDetails), new { userId = userDetails.ID_User }, userDetails);
         }
     }
 }

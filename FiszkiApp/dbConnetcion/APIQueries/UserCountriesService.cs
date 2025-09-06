@@ -14,7 +14,6 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             _httpClient = HttpClientService.Instance.HttpClient;
         }
 
-        // GET: Pobierz listę wszystkich UserCountries
         public async Task<List<UserCountries>> GetUserCountriesAsync()
         {
             try
@@ -39,7 +38,6 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             }
         }
 
-        // GET: Pobierz listę UserCountries dla konkretnego ID_User
         public async Task<List<UserCountries>> GetUserCountriesByUserIdAsync(int userId)
         {
             try
@@ -64,7 +62,6 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             }
         }
 
-        // POST: Dodaj nowy UserCountry
         public async Task<bool> AddUserCountryAsync(UserCountries userCountry)
         {
             try

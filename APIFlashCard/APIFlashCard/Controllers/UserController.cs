@@ -24,7 +24,7 @@ namespace APIFlashCard.Controllers
             {
                 return NotFound();
             }
-            return user;
+            return Ok(user);
         }
 
         [HttpGet("check-username/{username}")]
@@ -39,7 +39,7 @@ namespace APIFlashCard.Controllers
         {
             if (user == null)
             {
-                return BadRequest("Dane użytkownika są wymagane.");
+                return BadRequest(new { message = "Dane użytkownika są wymagane." });
             }
 
             _context.Users.Add(user);

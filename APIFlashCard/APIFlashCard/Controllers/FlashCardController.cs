@@ -2,7 +2,6 @@
 using APIFlashCard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 
 namespace APIFlashCard.Controllers
 {
@@ -25,57 +24,46 @@ namespace APIFlashCard.Controllers
                 return BadRequest(new { message = "Lista fiszek jest pusta lub nieprawidłowa." });
             }
 
-            try
-            {
-                _context.FlashCards.AddRange(flashCards);
-                await _context.SaveChangesAsync();
+            _context.FlashCards.AddRange(flashCards);
+            await _context.SaveChangesAsync();
 
-                return Ok(new { message = "Fiszki zostały dodane pomyślnie.", count = flashCards.Count });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = $"Wystąpił błąd: {ex.Message}" });
-            }
+            return Ok(new { message = "Fiszki zostały dodane pomyślnie.", count = flashCards.Count });
         }
 
-        [HttpGet("{categoryId}")]
-        public async Task<ActionResult<IEnumerable<FlashCard>>> GetFlashCardsByCategory(int categoryId)
+        [HttpGet("{categoryId:int}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetFlashCardsByCategory(int categoryId)
         {
-            try
-            {
-                var flashcards = await _context.FlashCards
-                    .Where(f => f.ID_Category == categoryId)
-                    .Select(f => new { f.FrontFlashCard, f.BackFlashCard })
-                    .ToListAsync();
+            var flashcards = await _context.FlashCards
+                .Where(f => f.ID_Category == categoryId)
+                .Select(f => new { f.FrontFlashCard, f.BackFlashCard })
+                .ToListAsync();
 
-                return Ok(flashcards);
-            }
-            catch (Exception ex)
+            if (!flashcards.Any())
             {
-                return StatusCode(500, new { message = $"Wystąpił błąd: {ex.Message}" });
+                return NotFound(new { message = "Nie znaleziono fiszek dla tej kategorii." });
             }
+
+            return Ok(flashcards);
         }
 
         [HttpGet("display/{categoryId}/{page}")]
         public async Task<ActionResult<IEnumerable<FlashCard>>> GetFlashCardsForDisplay(int categoryId, int page = 1)
         {
-            try
-            {
-                const int pageSize = 10;
+            const int pageSize = 10;
 
-                var flashcards = await _context.FlashCards
-                    .Where(f => f.ID_Category == categoryId)
-                    .OrderBy(f => f.ID_flashcard)
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToListAsync();
+            var flashcards = await _context.FlashCards
+                .Where(f => f.ID_Category == categoryId)
+                .OrderBy(f => f.ID_flashcard)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
-                return Ok(flashcards);
-            }
-            catch (Exception ex)
+            if (!flashcards.Any())
             {
-                return StatusCode(500, new { message = $"Wystąpił błąd: {ex.Message}" });
+                return NotFound(new { message = "Brak fiszek do wyświetlenia." });
             }
+
+            return Ok(flashcards);
         }
     }
 }

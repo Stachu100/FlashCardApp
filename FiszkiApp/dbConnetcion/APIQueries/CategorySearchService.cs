@@ -35,7 +35,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 var json = JsonConvert.SerializeObject(filters);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync("DynamicCategoryList/search", content);
+                var response = await _httpClient.PostAsync("CategoryList/search", content);
                 var responseContent = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
