@@ -14,22 +14,22 @@
         <VerticalStackLayout Grid.Row="0" Padding="10" Spacing="10">
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Entry Placeholder="Szukaj kategorii" MaxLength="50" x:Name="CategorySearchEntry" Text="{Binding CategorySearch}" HorizontalOptions="FillAndExpand" />
-                <Button BackgroundColor="Red" CornerRadius="15" WidthRequest="30" HeightRequest="30" Command="{Binding ClearCategorySearchCommand}" />
+                <ImageButton Source="trash_red2.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearCategorySearchCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Picker x:Name="LanguageLevelPicker" Title="Poziom językowy" ItemsSource="{Binding LanguageLevels}" SelectedItem="{Binding SelectedLanguageLevel}" HorizontalOptions="FillAndExpand" />
-                <Button BackgroundColor="Red" CornerRadius="15" WidthRequest="30" HeightRequest="30" Command="{Binding ClearSelectedLanguageLevelCommand}" />
+                <ImageButton Source="trash_red2.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearSelectedLanguageLevelCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Entry Placeholder="Fiszki użytkownika" MaxLength="50" x:Name="UserSearchEntry" Text="{Binding UserSearch}" HorizontalOptions="FillAndExpand" />
-                <Button BackgroundColor="Red" CornerRadius="15" WidthRequest="30" HeightRequest="30" Command="{Binding ClearUserSearchCommand}" />
+                <ImageButton Source="trash_red2.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearUserSearchCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Picker x:Name="LanguagePicker" Title="Język" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" HorizontalOptions="FillAndExpand" />
-                <Button BackgroundColor="Red" CornerRadius="15" WidthRequest="30" HeightRequest="30" Command="{Binding ClearSelectedLanguageCommand}" />
+                <ImageButton Source="trash_red2.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearSelectedLanguageCommand}" />
             </StackLayout>
 
             <Button Text="Wyszukaj" Command="{Binding SearchCommand}" />
