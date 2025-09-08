@@ -5,8 +5,23 @@
              Title="LoadingPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
-    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-        <ActivityIndicator IsRunning="True"/>
-        <Label Text="Sprawdzanie poprawnmości danych"/>
-    </VerticalStackLayout>
+
+    <Grid>
+        <Image Source="background.png"
+               Aspect="AspectFill"
+               Opacity="0.2"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand" />
+
+        <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="10">
+            <ActivityIndicator IsRunning="True" />
+            <Label Text="Sprawdzanie poprawności danych" 
+                   HorizontalTextAlignment="Center"
+                   TextColor="Black"
+                   FontSize="18"/>
+        </VerticalStackLayout>
+
+    </Grid>
 </ContentPage>
