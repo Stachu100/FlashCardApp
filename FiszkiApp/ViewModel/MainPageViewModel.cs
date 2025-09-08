@@ -11,7 +11,7 @@ using Microsoft.Maui.Controls;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class MainPageViewModel : MainViewModel
+    public partial class MainPageViewModel : ObservableValidator
     {
         private readonly DatabaseService _databaseService;
         private readonly CountriesDic _countriesDic;
@@ -67,7 +67,7 @@ namespace FiszkiApp.ViewModel
                     var frontFlag = countryUrls.FirstOrDefault(c => c.Country == category.FrontLanguage).Url;
                     var backFlag = countryUrls.FirstOrDefault(c => c.Country == category.BackLanguage).Url;
 
-                    category.FrontFlagUrl = frontFlag; //dodać domyślny url poźniej: category.FrontFlagUrl = frontFlag ?? "default_front_flag_url";
+                    category.FrontFlagUrl = frontFlag;
                     category.BackFlagUrl = backFlag;
 
                     Categories.Add(category);

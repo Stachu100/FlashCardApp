@@ -9,7 +9,7 @@ using FiszkiApp.View;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class LoginPageViewModel : MainViewModel
+    public partial class LoginPageViewModel : ObservableValidator
     {
         private readonly AuthService _authService;
         public LoginPageViewModel(AuthService authService)

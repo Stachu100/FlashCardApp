@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class FlipCardPageViewModel : MainViewModel
+    public partial class FlipCardPageViewModel : ObservableValidator
     {
         private readonly int _categoryId;
         private readonly DatabaseService _databaseService;

@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:FiszkiApp.ViewModel"
              x:DataType="vm:LoginPageViewModel"    
              Title="LoginPage"
+             Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
 
     <Grid BackgroundColor="White">

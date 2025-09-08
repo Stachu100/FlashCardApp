@@ -6,7 +6,7 @@ using FiszkiApp.EntityClasses.Models;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class SettingsPageViewModel : MainViewModel
+    public partial class SettingsPageViewModel : ObservableValidator
     {
         private readonly DatabaseService _databaseService;
         private readonly AuthService _authService;

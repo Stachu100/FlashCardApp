@@ -12,7 +12,7 @@ using FiszkiApp.dbConnetcion.APIQueries;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class ProfileViewModel : MainViewModel
+    public partial class ProfileViewModel : ObservableValidator
     {
         private readonly AuthService _authService;
 

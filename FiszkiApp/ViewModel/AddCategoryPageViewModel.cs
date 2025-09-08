@@ -10,7 +10,7 @@ using Microsoft.Maui.Controls;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class AddCategoryViewModel : MainViewModel
+    public partial class AddCategoryViewModel : ObservableValidator
     {
         private readonly CountriesDic _countriesDic;
         private readonly DatabaseService _databaseService;

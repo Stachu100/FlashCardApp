@@ -8,7 +8,7 @@ using Microsoft.Maui.Controls;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class AddFlashcardsPageViewModel : MainViewModel
+    public partial class AddFlashcardsPageViewModel : ObservableValidator
     {
         private readonly int _categoryId;
         private readonly DatabaseService _databaseService;

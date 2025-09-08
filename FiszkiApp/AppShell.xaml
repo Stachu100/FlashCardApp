@@ -11,6 +11,7 @@
          Title="Loading"
          ContentTemplate="{DataTemplate view:LoadingPage}"
          Route="LoadingPage"
+         Shell.FlyoutBehavior="Disabled"
          Shell.FlyoutItemIsVisible="False"/>
 
     <ShellContent

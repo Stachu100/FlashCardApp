@@ -10,7 +10,7 @@ using static FiszkiApp.EntityClasses.AesManaged;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class RegisterViewModel : MainViewModel
+    public partial class RegisterViewModel : ObservableValidator
     {
         public IAsyncRelayCommand LoadCountriesCommand { get; }
         private byte[] imageData;

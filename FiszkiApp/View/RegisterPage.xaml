@@ -5,6 +5,7 @@
              x:DataType="vm:RegisterViewModel"
              x:Class="FiszkiApp.View.RegisterPage"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+             Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
     <ContentPage.BindingContext>
         <vm:RegisterViewModel />

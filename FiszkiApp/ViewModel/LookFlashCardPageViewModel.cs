@@ -11,7 +11,7 @@ using Microsoft.Maui.Controls;
 
 namespace FiszkiApp.ViewModel
 {
-    public partial class LookFlashCardPageViewModel : ObservableObject
+    public partial class LookFlashCardPageViewModel : ObservableValidator
     {
         private readonly FlashCardService _flashCardService;
         private readonly int _categoryId;
