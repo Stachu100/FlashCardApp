@@ -39,9 +39,13 @@
 
                     <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0"
                            BackgroundColor="#33512BD4" HorizontalOptions="Center" HasShadow="False">
-                        
-                        <Image Source="{Binding ImageAsByte, Converter={toolkit:ByteArrayToImageSourceConverter}}" Aspect="AspectFill"/>
-                        
+
+                        <Image Aspect="AspectFill">
+                            <Image.Source>
+                                <Binding Path="ImageAsByte" Converter="{toolkit:ByteArrayToImageSourceConverter}" TargetNullValue="avataricon.png" />
+                            </Image.Source>
+                        </Image>
+
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AvatarCommand}" />
                         </Frame.GestureRecognizers>

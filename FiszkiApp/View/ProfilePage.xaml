@@ -23,16 +23,19 @@
         <ScrollView Grid.Row="0">
             <StackLayout Padding="20" HorizontalOptions="Center">
 
-                <Frame HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="0" Margin="0,0,0,0" HorizontalOptions="Center">
-                    <Image Source="{Binding ImageAsBytes, Converter={StaticResource ByteArrayToImageSourceConverter}}" />
+                <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0,0,0,0" HorizontalOptions="Center">
+                    <Image Source="{Binding ImageAsBytes, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
+               Aspect="AspectFill"/>
                 </Frame>
 
-                <Label Text="{Binding User}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                
-                <Label Text="{Binding Country}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                
-                <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}"  Title="Wybierz język"/>
-                
+                <Label Text="{Binding User}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+
+                <Label Text="{Binding Country}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" Margin="0,5,0,5"/>
+
+                <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}" Title="Wybierz język" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                </Frame>
+
                 <ListView x:Name="listView" ItemsSource="{Binding Items}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -46,9 +49,9 @@
 
                                     <Image Source="{Binding Image}" WidthRequest="50" HeightRequest="50" Grid.Column="0" Margin="5,0" HorizontalOptions="Start" VerticalOptions="Center" />
 
-                                    <Label Text="{Binding Name}" Grid.Column="1" Margin="10,0" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" />
+                                    <Label Text="{Binding Name}" Grid.Column="1" TextColor="DarkViolet" Margin="10,0" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" />
 
-                                    <Button Text="Usuń" TextColor="White" BackgroundColor="Red" WidthRequest="65" HeightRequest="35" Grid.Column="2" Margin="10,0,0,0" HorizontalOptions="End" VerticalOptions="Center"
+                                    <Button ImageSource="trash_red.png" BackgroundColor="#33512BD4" WidthRequest="65" HeightRequest="35" Grid.Column="2" Margin="10,0,0,0" HorizontalOptions="End" VerticalOptions="Center"
                                             Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference listView}}" CommandParameter="{Binding .}" />
 
                                 </Grid>
