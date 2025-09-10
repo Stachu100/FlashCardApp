@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FiszkiApp.dbConnetcion.APIQueries;
-using FiszkiApp.ViewModel;
 using FiszkiApp.View;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -14,14 +13,12 @@ namespace FiszkiApp.ViewModel
     public partial class MainPageViewModel : ObservableValidator
     {
         private readonly DatabaseService _databaseService;
-        private readonly CountriesDic _countriesDic;
         private readonly CategoryPost _categoryPost;
         private readonly AuthService _authService;
 
         public MainPageViewModel()
         {
             _databaseService = App.Database;
-            _countriesDic = new CountriesDic();
             _categoryPost = new CategoryPost();
             _authService = new AuthService();
             Categories = new ObservableCollection<LocalCategoryTable>();
@@ -59,7 +56,7 @@ namespace FiszkiApp.ViewModel
             {
                 var categoriesFromDb = await _databaseService.GetCategoriesByUserIdAsync(userId);
 
-                var countryUrls = await _countriesDic.GetCountriesWithFlagsAsync();
+                var countryUrls = App.CountriesDic.Countries;
 
                 Categories.Clear();
                 foreach (var category in categoriesFromDb)

@@ -1,19 +1,23 @@
 ﻿using Microsoft.Extensions.Configuration;
 using FiszkiApp.Services;
+using FiszkiApp.dbConnetcion.APIQueries;
 using System;
 using System.IO;
-using FiszkiApp.View;
 
 namespace FiszkiApp
 {
     public partial class App : Application
     {
         public static IConfiguration Configuration { get; private set; }
+        public static CountriesDic CountriesDic { get; private set; }
+
         private static DatabaseService _databaseService;
 
         public App()
         {
             InitializeComponent();
+
+            CountriesDic = new CountriesDic();
 
             var builder = new ConfigurationBuilder()
             .SetBasePath(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))

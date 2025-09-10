@@ -4,7 +4,6 @@ using FiszkiApp.Services;
 using FiszkiApp.EntityClasses.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace FiszkiApp.ViewModel
 {

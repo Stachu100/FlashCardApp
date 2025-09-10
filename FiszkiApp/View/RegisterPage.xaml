@@ -34,57 +34,64 @@
                 <Label Grid.Row="0" Text="Rejestracja" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
 
                 <StackLayout Grid.Row="1" Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="10">
-                    <Frame HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="0" Margin="0,0,0,0" HorizontalOptions="Center">
-                        <Image Source="{Binding ImageAsByte, Converter={toolkit:ByteArrayToImageSourceConverter}}" />
+
+                    <Label Text="Wybierz avatar" HorizontalOptions="Center" TextColor="DarkViolet" FontAttributes="Bold" Margin="0,10,0,0"/>
+
+                    <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0"
+                           BackgroundColor="#33512BD4" HorizontalOptions="Center" HasShadow="False">
+                        
+                        <Image Source="{Binding ImageAsByte, Converter={toolkit:ByteArrayToImageSourceConverter}}" Aspect="AspectFill"/>
+                        
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AvatarCommand}" />
+                        </Frame.GestureRecognizers>
                     </Frame>
 
-                    <Button Text="Wybierz avatar" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding AvatarCommand}"/>
-
-                    <Frame BackgroundColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Entry Text="{Binding User.Name}" Placeholder="Nazwa" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                            <Entry Text="{Binding User.Name}" Placeholder="Nazwa" PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                         </StackLayout>
                     </Frame>
 
-                    <Frame BackgroundColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Entry Text="{Binding User.FirstName}" Placeholder="Imię" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                            <Entry Text="{Binding User.FirstName}" Placeholder="Imię" PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                         </StackLayout>
                     </Frame>
 
-                    <Frame BackgroundColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Entry Text="{Binding User.LastName}" Placeholder="Nazwisko" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                            <Entry Text="{Binding User.LastName}" Placeholder="Nazwisko" PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                         </StackLayout>
                     </Frame>
 
-                    <Frame BackgroundColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <Picker ItemsSource="{Binding CountryPicker}" Title="Wybierz kraj" TextColor="Black" FontAttributes="Bold" SelectedItem="{Binding User.Country}" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
                     </Frame>
 
-                    <Frame BackgroundColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Entry Text="{Binding User.Password}" Placeholder="Hasło" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                            <Entry Text="{Binding User.Password}" Placeholder="Hasło" PlaceholderColor="DarkViolet" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                         </StackLayout>
                     </Frame>
 
-                    <Frame BackgroundColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Entry Text="{Binding User.RepeatPassword}" Placeholder="Powtórz hasło" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                            <Entry Text="{Binding User.RepeatPassword}" Placeholder="Powtórz hasło" PlaceholderColor="DarkViolet" IsPassword="True" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                         </StackLayout>
                     </Frame>
 
-                    <Frame BackgroundColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Entry Text="{Binding User.Email, Mode=TwoWay}"  Placeholder="Email" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                            <Entry Text="{Binding User.Email, Mode=TwoWay}"  Placeholder="Email" PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                         </StackLayout>
                     </Frame>
 
                     <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
                         <CheckBox IsChecked="{Binding User.IsAcceptedPolicy}" />
-                        <Label Text="Oświadczam że, akceptuję " TextColor="DarkGray" FontSize="Micro" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        <Label Text="Oświadczam że, akceptuję " TextColor="DarkViolet" FontAttributes="Bold" FontSize="Micro" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         <Label Text="politykę prywatności i regulamin" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Micro">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnPrivacyPolicyTapped" />

@@ -98,8 +98,7 @@ namespace FiszkiApp.ViewModel
                 var userCountries = await service.GetUserCountriesByUserIdAsync(intUserId);
                 if (userCountries != null && Items.Count == 0)
                 {
-                    var countriesDic = new CountriesDic();
-                    var countries = await countriesDic.GetCountriesWithFlagsAsync();
+                    var countries = App.CountriesDic.Countries;
 
                     foreach (var userCountry in userCountries)
                     {
@@ -121,8 +120,7 @@ namespace FiszkiApp.ViewModel
 
         private async Task LoadCountry()
         {
-            var countriesDic = new CountriesDic();
-            var countries = await countriesDic.GetCountriesWithFlagsAsync();
+            var countries = App.CountriesDic.Countries;
 
             countriesWithUrl = countries.Select(c => (c.ID_Country ,c.Country, c.Url)).ToList();
             CountryPicker = new ObservableCollection<string>(countries.Select(c => c.Country));

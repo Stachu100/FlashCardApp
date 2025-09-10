@@ -14,30 +14,6 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             _httpClient = HttpClientService.Instance.HttpClient;
         }
 
-        public async Task<List<UserCountries>> GetUserCountriesAsync()
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync("usercountries");
-                response.EnsureSuccessStatusCode();
-
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var userCountries = JsonConvert.DeserializeObject<List<UserCountries>>(responseContent);
-
-                return userCountries;
-            }
-            catch (HttpRequestException httpEx)
-            {
-                Console.WriteLine($"HTTP Error: {httpEx.Message}");
-                return new List<UserCountries>();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"General Error: {ex.Message}");
-                return new List<UserCountries>();
-            }
-        }
-
         public async Task<List<UserCountries>> GetUserCountriesByUserIdAsync(int userId)
         {
             try

@@ -15,13 +15,18 @@ public partial class LoadingPage : ContentPage
     {
         base.OnAppearing();
 
-        await Task.Delay(1000);
+        var (isAuthenticated, userId) = await _authService.IsAuthenticatedAsync();
 
-        var (isAuthenticated, userID) = await _authService.IsAuthenticatedAsync();
+        if (isAuthenticated && int.TryParse(userId, out int parsedUserId))
+        {
+            await App.CountriesDic.GetCountriesWithFlagsAsync();
 
-        if (isAuthenticated)
+            await Task.Delay(500);
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+        }
         else
+        {
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+        }
     }
 }

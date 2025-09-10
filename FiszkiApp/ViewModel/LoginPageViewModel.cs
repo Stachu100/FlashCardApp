@@ -53,13 +53,15 @@ namespace FiszkiApp.ViewModel
             }
             else
             {
-                string result = await _authService.Login(UserName, UserPassword, rememberMe);
+                string result = await _authService.Login(UserName, UserPassword, RememberMe);
 
-                if (result != "Hasło lub login jest nie poprawne" && result != "Wystąpił błąd podczas logowania")
+                if (result != "Hasło lub login jest niepoprawne" && result != "Wystąpił błąd podczas logowania")
                 {
-                    
+                    int userId = int.Parse(result);
+
+                    await App.CountriesDic.GetCountriesWithFlagsAsync();
+
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-                    ErrorMessages = null;
                 }
                 else
                 {

@@ -22,7 +22,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 var userResponse = await _httpClient.GetAsync($"user/{name}");
                 if (!userResponse.IsSuccessStatusCode)
                 {
-                    return "Hasło lub login jest nie poprawne";
+                    return "Hasło lub login jest niepoprawne";
                 }
 
                 var userJson = await userResponse.Content.ReadAsStringAsync();
@@ -30,7 +30,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 if (user == null)
                 {
-                    return "Hasło lub login jest nie poprawne";
+                    return "Hasło lub login jest niepoprawne";
                 }
 
                 var keysResponse = await _httpClient.GetAsync($"encryptionkeys/{user.ID_User}");
@@ -55,7 +55,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 }
                 else
                 {
-                    return "Hasło lub login jest nie poprawne";
+                    return "Hasło lub login jest niepoprawne";
                 }
             }
             catch (Exception ex)
