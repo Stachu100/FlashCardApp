@@ -64,7 +64,7 @@
         <Grid Grid.Row="2" VerticalOptions="End">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
 
             <BoxView Grid.Row="0" Color="Red" />
@@ -76,8 +76,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Text="CodeBros (c) Wszelkie prawa zastrzeżone" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <Label Grid.Column="1" Text="Wersja aplikacji: 1.00" TextColor="White" VerticalOptions="Center" HorizontalOptions="End"/>
+                <Label Grid.Column="0" Text="CodeBros (c) &#10;Wszelkie prawa zastrzeżone" FontSize="Small" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Label Grid.Column="1" Text="Wersja aplikacji: 1.01" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End"/>
             </Grid>
         </Grid>
 

@@ -16,40 +16,32 @@
         <VerticalStackLayout Grid.Row="0" Padding="10" Spacing="10">
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Entry Placeholder="Szukaj kategorii" MaxLength="50" x:Name="CategorySearchEntry" Text="{Binding CategorySearch}" 
+                    <Entry Placeholder="Szukaj kategorii" MaxLength="50" x:Name="CategorySearchEntry" Text="{Binding CategorySearch}" 
                        PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
                 </Frame>
                 <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearCategorySearchCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Picker x:Name="LanguageLevelPicker" Title="Poziom językowy" ItemsSource="{Binding LanguageLevels}" SelectedItem="{Binding SelectedLanguageLevel}" 
+                    <Picker x:Name="LanguageLevelPicker" Title="Poziom językowy" TitleColor="DarkViolet" ItemsSource="{Binding LanguageLevels}" SelectedItem="{Binding SelectedLanguageLevel}" 
                         TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
                 </Frame>
                 <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearSelectedLanguageLevelCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Entry Placeholder="Fiszki użytkownika" MaxLength="50" x:Name="UserSearchEntry" Text="{Binding UserSearch}" 
+                    <Entry Placeholder="Fiszki użytkownika" MaxLength="50" x:Name="UserSearchEntry" Text="{Binding UserSearch}" 
                        PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
                 </Frame>
                 <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearUserSearchCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Picker x:Name="LanguagePicker" Title="Język" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" 
+                    <Picker x:Name="LanguagePicker" Title="Język" TitleColor="DarkViolet" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" 
                         TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
                 </Frame>
                 <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearSelectedLanguageCommand}" />
             </StackLayout>
@@ -79,17 +71,16 @@
                                               CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
 
-                            <Label Text="{Binding CategoryName}" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="Medium" />
+                            <Label Text="{Binding CategoryName}" TextColor="DarkViolet" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="Medium" />
 
-                            <Label Text="{Binding LanguageLevel}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                            <Label Text="{Binding LanguageLevel}" TextColor="DarkViolet" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
 
-                            <Label Text="{Binding FrontLanguage}" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
+                            <Label Text="{Binding FrontLanguage}" TextColor="DarkViolet" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
 
-                            <Label Text="{Binding BackLanguage}" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
+                            <Label Text="{Binding BackLanguage}" TextColor="DarkViolet" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
 
-                            <Button Text="+" Grid.Column="4" WidthRequest="35" HeightRequest="35" Margin="3" 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:FlashCardListViewModel}}, Path=AddToLocalCommand}" 
-                                    CommandParameter="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <ImageButton Source="add.png" Grid.Column="4" WidthRequest="35" HeightRequest="35" Margin="3" BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:FlashCardListViewModel}}, Path=AddToLocalCommand}" 
+                                         CommandParameter="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

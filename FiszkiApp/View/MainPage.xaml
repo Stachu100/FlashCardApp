@@ -35,7 +35,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="12" HasShadow="True" BackgroundColor="#f0f4ff">
+                    <Frame Padding="10" Margin="5" CornerRadius="12" HasShadow="True" BackgroundColor="#B2F0F4FF">
                         <Grid VerticalOptions="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

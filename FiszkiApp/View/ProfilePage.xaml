@@ -32,8 +32,8 @@
 
                 <Label Text="{Binding Country}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" Margin="0,5,0,5"/>
 
-                <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}" Title="Wybierz język" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                <Frame BackgroundColor="#44512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}" Title="Wybierz język" TitleColor="DarkViolet" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                 </Frame>
 
                 <ListView x:Name="listView" ItemsSource="{Binding Items}">
