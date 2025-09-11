@@ -26,6 +26,9 @@ public partial class LoadingPage : ContentPage
         }
         else
         {
+            await App.CountriesDic.GetCountriesWithFlagsAsync();
+
+            await Task.Delay(500);
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }

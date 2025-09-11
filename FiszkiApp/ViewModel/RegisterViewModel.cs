@@ -47,8 +47,7 @@ namespace FiszkiApp.ViewModel
 
         private async Task LoadCountry()
         {
-            var countriesDic = new CountriesDic();
-            var countriesWithFlags = await countriesDic.GetCountriesWithFlagsAsync();
+            var countriesWithFlags = App.CountriesDic.Countries;
             CountryPicker = new ObservableCollection<string>(countriesWithFlags.Select(c => c.Country));
         }
 

@@ -59,8 +59,6 @@ namespace FiszkiApp.ViewModel
                 {
                     int userId = int.Parse(result);
 
-                    await App.CountriesDic.GetCountriesWithFlagsAsync();
-
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 }
                 else
