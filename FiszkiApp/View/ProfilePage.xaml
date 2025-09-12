@@ -20,55 +20,53 @@
 
         <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="2"/>
 
-        <ScrollView Grid.Row="0">
-            <StackLayout Padding="20" HorizontalOptions="Center">
+        <StackLayout Grid.Row="0" Padding="20" HorizontalOptions="Center">
 
-                <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0,0,0,0" HorizontalOptions="Center">
-                    <Image Source="{Binding ImageAsBytes, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
+            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0,0,0,0" HorizontalOptions="Center">
+                <Image Source="{Binding ImageAsBytes, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
                Aspect="AspectFill"/>
-                </Frame>
+            </Frame>
 
-                <Label Text="{Binding User}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+            <Label Text="{Binding User}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
 
-                <Label Text="{Binding Country}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" Margin="0,5,0,5"/>
+            <Label Text="{Binding Country}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" Margin="0,5,0,5"/>
 
-                <Frame BackgroundColor="#44512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}" Title="Wybierz język" TitleColor="DarkViolet" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                </Frame>
+            <Frame BackgroundColor="#44512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}" Title="Wybierz język" FontAttributes="Bold" TitleColor="DarkViolet" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            </Frame>
 
-                <ListView x:Name="listView" ItemsSource="{Binding Items}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="10" VerticalOptions="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+            <ListView ItemsSource="{Binding Items}" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
 
-                                    <Image Source="{Binding Image}" WidthRequest="50" HeightRequest="50" Grid.Column="0" Margin="5,0" HorizontalOptions="Start" VerticalOptions="Center" />
+                                <Image Source="{Binding Image}" WidthRequest="50" HeightRequest="50" Grid.Column="0" Margin="5,0" HorizontalOptions="Start" VerticalOptions="Center" />
 
-                                    <Label Text="{Binding Name}" Grid.Column="1" TextColor="DarkViolet" Margin="10,0" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" />
+                                <Label Text="{Binding Name}" Grid.Column="1" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="End" FontAttributes="Bold" FontSize="18" />
 
-                                    <Button ImageSource="trash_red.png" BackgroundColor="#33512BD4" WidthRequest="65" HeightRequest="35" Grid.Column="2" Margin="10,0,0,0" HorizontalOptions="End" VerticalOptions="Center"
-                                            Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference listView}}" CommandParameter="{Binding .}" />
+                                <ImageButton Grid.Column="2" Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" HorizontalOptions="End"
+                                                                   Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}" />
 
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Button Text="Wyloguj się" Command="{Binding LogoutCommandCommand}" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
-            </StackLayout>
-        </ScrollView>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Wyloguj się" Command="{Binding LogoutCommandCommand}" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
+        </StackLayout>
 
         <Grid Grid.Row="1" VerticalOptions="End">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5" />
+                <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="Red" />
+            <BoxView Grid.Row="0" Color="#D600AA" />
         </Grid>
     </Grid>
 

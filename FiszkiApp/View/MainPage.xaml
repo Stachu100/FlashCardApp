@@ -27,7 +27,7 @@
                HorizontalOptions="FillAndExpand"
                Grid.RowSpan="3"/>
 
-        <Button Text="Dodaj kategorię" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,10" Grid.Row="0" Command="{Binding AddCategoryCommand}" />
+        <Button Text="Dodaj kategorię" CornerRadius="30" WidthRequest="200" Margin="0,15,0,10" Grid.Row="0" Command="{Binding AddCategoryCommand}" />
 
         <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}" SelectionMode="Single"
                         SelectionChangedCommand="{Binding CategoryTappedCommand}"
@@ -51,7 +51,7 @@
                                               CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
 
-                            <Label Text="{Binding CategoryName}" Grid.Column="0" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" TextColor="#333" />
+                            <Label Text="{Binding CategoryName}" Grid.Column="0" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="DarkViolet" />
 
                             <Image Source="{Binding FrontFlagUrl}" Grid.Column="1" WidthRequest="40" HeightRequest="25" Margin="5"/>
                             <Image Source="{Binding BackFlagUrl}" Grid.Column="2" WidthRequest="40" HeightRequest="25" Margin="5"/>
@@ -79,10 +79,10 @@
 
         <Grid Grid.Row="2" VerticalOptions="End">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5" />
+                <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="Red" />
+            <BoxView Grid.Row="0" Color="#D600AA" />
         </Grid>
     </Grid>
 </ContentPage>

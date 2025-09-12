@@ -11,79 +11,70 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="4"/>
         
         <StackLayout Padding="10" Grid.Row="0">
             <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" HasShadow="False" Margin="0,5">
-                <Entry Text="{Binding FrontText}" Placeholder="Przód fiszki" PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand"/>
+                <Entry Text="{Binding FrontText}" Placeholder="Przód fiszki" PlaceholderColor="DarkViolet" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand"/>
             </Frame>
 
             <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" HasShadow="False" Margin="0,5">
-                <Entry Text="{Binding BackText}" Placeholder="Tył fiszki" PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand"/>
+                <Entry Text="{Binding BackText}" Placeholder="Tył fiszki" PlaceholderColor="DarkViolet" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand"/>
             </Frame>
-
-            <Button Text="Kolejna" CornerRadius="30" WidthRequest="200" Margin="5" Command="{Binding AddFlashcardCommand}" />
-            <Button Text="Zatwierdź" CornerRadius="30" WidthRequest="200" Margin="5" Command="{Binding SubmitFlashcardsCommand}" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Dodaj" CornerRadius="30" WidthRequest="150" Margin="5" Command="{Binding AddFlashcardCommand}" />
+            <Button Text="Dodaj i wyjdź" CornerRadius="30" WidthRequest="150" Margin="5" Command="{Binding SubmitFlashcardsCommand}" />
+            </StackLayout>
         </StackLayout>
 
-        <Grid Grid.Row="1" BackgroundColor="#22512BD4" Padding="10">
+        <Grid Grid.Row="1" BackgroundColor="#22512BD4" Padding="10" Margin="10,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
 
-            <Label Text="Lp" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" />
-            <Label Text="ID Fiszki" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" />
-            <Label Text="Przód Fiszki" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
-            <Label Text="Tył Fiszki" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="3" />
-            <Label Grid.Column="4" />
+            <Label Text="Lp" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" />
+            <Label Text="Przód Fiszki" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" />
+            <Label Text="Tył Fiszki" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
+            <Label Grid.Column="3" HorizontalOptions="End"/>
         </Grid>
-        <ScrollView Grid.Row="2" Padding="10">
-            <StackLayout>
-                <ListView ItemsSource="{Binding Flashcards}"
-                          SelectedItem="{Binding SelectedFlashcard, Mode=TwoWay}"
-                          SelectionMode="Single">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="10" VerticalOptions="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="30" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding Lp}" 
-                                           Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <Label Text="{Binding ID_Flashcard}" 
-                                           Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <Label Text="{Binding FrontFlashCard}" 
-                                           Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <Label Text="{Binding BackFlashCard}" 
-                                           Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15"
-                                                 Command="{Binding Source={x:Reference AddFlashcardsPageContent}, Path=BindingContext.DeleteFlashcardCommand}" CommandParameter="{Binding .}" Grid.Column="4" />
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-        </ScrollView>
+
+        <ListView Grid.Row="2" Margin="10,0" ItemsSource="{Binding Flashcards}" SelectionMode="None" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10" VerticalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Lp}" 
+                                           Grid.Column="0" VerticalOptions="Center" TextColor="DarkViolet" FontAttributes="Bold" HorizontalOptions="Start" />
+                            <Label Text="{Binding FrontFlashCard}" 
+                                           Grid.Column="1" VerticalOptions="Center" TextColor="DarkViolet" FontAttributes="Bold" HorizontalOptions="Center" />
+                            <Label Text="{Binding BackFlashCard}" 
+                                           Grid.Column="2" VerticalOptions="Center" TextColor="DarkViolet" FontAttributes="Bold" HorizontalOptions="Center" />
+                            <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15"
+                                                 Command="{Binding Source={x:Reference AddFlashcardsPageContent}, Path=BindingContext.DeleteFlashcardCommand}" CommandParameter="{Binding .}" Grid.Column="3" HorizontalOptions="End" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Grid Grid.Row="3" VerticalOptions="End">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5" />
+                <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="Red" />
+            <BoxView Grid.Row="0" Color="#D600AA" />
         </Grid>
     </Grid>
 </ContentPage>

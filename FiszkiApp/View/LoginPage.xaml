@@ -28,8 +28,8 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="1" Text="Witaj!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
-            <Label Grid.Row="2" Text="Zaloguj się" HorizontalOptions="Center" FontSize="Subtitle"/>
+            <Label Grid.Row="1" Text="Witaj!" HorizontalOptions="Center" FontSize="38" TextColor="DarkViolet" FontAttributes="Bold" Padding="0" Margin="0"/>
+            <Label Grid.Row="2" Text="Zaloguj się" HorizontalOptions="Center" FontAttributes="Bold" FontSize="22"/>
 
             <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="10">
                 <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
@@ -63,12 +63,12 @@
 
         <Grid Grid.Row="2" VerticalOptions="End">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5"/>
+                <RowDefinition Height="3"/>
                 <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="Red" />
-            <BoxView Grid.Row="1" Color="#512BD4"/>
+            <BoxView Grid.Row="0" Color="#D600AA" />
+            <BoxView Grid.Row="1" Color="#ac99ea"/>
 
             <Grid Grid.Row="1" Padding="10,0" ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
@@ -76,8 +76,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Text="CodeBros (c) &#10;Wszelkie prawa zastrzeżone" FontSize="Small" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <Label Grid.Column="1" Text="Wersja aplikacji: 1.01" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End"/>
+                <Label Grid.Column="0" Text="CodeBros (c) &#10;Wszelkie prawa zastrzeżone" FontSize="Small" TextColor="#D600AA" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Label Grid.Column="1" Text="Wersja aplikacji: 1.01" TextColor="#D600AA" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End"/>
             </Grid>
         </Grid>
 

@@ -3,6 +3,7 @@
              xmlns:local="clr-namespace:FiszkiApp.ViewModel"
              xmlns:vm="clr-namespace:FiszkiApp.ViewModel"
              x:Class="FiszkiApp.View.FlashCardList"
+             Title="Lista wyszukiwania"
              x:Name="List">
     <Grid>
         <Grid.RowDefinitions>
@@ -49,11 +50,7 @@
             <Button Text="Wyszukaj" Command="{Binding SearchCommand}" CornerRadius="30" WidthRequest="200" />
         </VerticalStackLayout>
 
-        <ListView Grid.Row="1"
-                  ItemsSource="{Binding SearchResults}"
-                  x:Name="ResultsListView"
-                  Margin="10"
-                  HasUnevenRows="True">
+        <ListView Grid.Row="1" ItemsSource="{Binding SearchResults}" Margin="10" x:Name="ResultsListView" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -88,7 +85,7 @@
         </ListView>
 
         <Grid Grid.Row="2" VerticalOptions="End">
-            <BoxView Color="Red" HeightRequest="5" />
+            <BoxView Color="#D600AA" HeightRequest="3" />
         </Grid>
     </Grid>
 </ContentPage>

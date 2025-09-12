@@ -58,10 +58,10 @@
 
         <Grid Grid.Row="2" VerticalOptions="End">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5" />
+                <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="Red" />
+            <BoxView Grid.Row="0" Color="#D600AA" />
         </Grid>
     </Grid>
 </ContentPage>

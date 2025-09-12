@@ -34,11 +34,11 @@
                 <Picker x:Name="BackLanguagePicker" Title="Język tyłu fiszek*" TitleColor="DarkViolet" ItemsSource="{Binding BackLanguages}" SelectedItem="{Binding SelectedBackLanguage}" IsEnabled="{Binding IsBackLanguageEnabled}" />
             </Frame>
 
-            <Label Text="Pola oznaczone gwiazdką (*) są wymagane" HorizontalOptions="Center" FontAttributes="Bold,Italic"  TextColor="DarkViolet" />
+            <Label Text="Pola oznaczone gwiazdką (*) są wymagane" HorizontalOptions="Center" FontAttributes="Bold,Italic" TextColor="DarkViolet" />
 
             <Button Text="Zatwierdź" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" VerticalOptions="EndAndExpand" Margin="0,15" Command="{Binding SubmitCategoryCommand}" />
 
-            <Label Text="Anuluj" FontAttributes="Bold" TextColor="Blue" FontSize="Medium" HorizontalOptions="Center">
+            <Label Text="Anuluj" FontAttributes="Bold" TextColor="#D600AA" FontSize="Medium" HorizontalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CancelCategoryCommand}" />
                 </Label.GestureRecognizers>
@@ -47,10 +47,10 @@
 
         <Grid Grid.Row="1" VerticalOptions="End">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5" />
+                <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="Red" />
+            <BoxView Grid.Row="0" Color="#D600AA" />
         </Grid>
     </Grid>
 </ContentPage>

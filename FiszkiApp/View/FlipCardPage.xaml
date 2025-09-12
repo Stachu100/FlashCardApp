@@ -2,53 +2,35 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FiszkiApp.View.FlipCardPage"
-             x:Name="FlipCardPageContent">
+             x:Name="FlipCardPageContent"
+             Title="Obróć i zapamiętaj!">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
         <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="4"/>
 
-        <Label Text="{Binding CategoryName}"
-               FontSize="36"
-               FontAttributes="Bold"
-            HorizontalOptions="Center" 
-               VerticalOptions="Start" 
-               Grid.Row="0"/>
+        <Label Text="{Binding CategoryName}" Margin="50" TextColor="DarkViolet" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Start" Grid.Row="0"/>
 
-        <Grid x:Name="FlashCard" VerticalOptions="Start" HorizontalOptions="Center" Margin="0, 50, 0, 10" Grid.Row="1">
+        <Grid Margin="10" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Frame 
-                   x:Name="FlashCardFrame"
-                   Grid.Row="1" Padding="20"
-                   BackgroundColor="{Binding FlashcardBackgroundColor}"
-                   BorderColor="#808080"
-                   CornerRadius="15"
-                   HasShadow="True"
-                   VerticalOptions="Center" HorizontalOptions="Center"
-                   WidthRequest="350" HeightRequest="225"
-                   IsClippedToBounds="True">
+            <Frame x:Name="FlashCardFrame" Grid.Row="1" Padding="20" BackgroundColor="{Binding FlashcardBackgroundColor}" BorderColor="#808080" CornerRadius="30" HasShadow="True"
+                   WidthRequest="350" HeightRequest="225" IsClippedToBounds="True">
 
-                <Grid x:Name="FlashCardContent" VerticalOptions="Center" HorizontalOptions="Center">
+                <Grid>
+                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsFrontVisible}" TextColor="{Binding FlashcardTextColor}" />
 
-                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}"
-               FontSize="48" HorizontalOptions="Center" VerticalOptions="Center"
-               IsVisible="{Binding IsFrontVisible}" TextColor="{Binding FlashcardTextColor}" />
-
-                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}"
-               FontSize="48" HorizontalOptions="Center" VerticalOptions="Center"
-               IsVisible="{Binding IsBackVisible}" TextColor="{Binding FlashcardTextColor}" />
-
+                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBackVisible}" TextColor="{Binding FlashcardTextColor}" />
                 </Grid>
 
                 <Frame.GestureRecognizers>
@@ -58,22 +40,23 @@
             </Frame>
         </Grid>
 
-        <Grid Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Center" Margin="0, 50, 0, 10">
+        <Grid Grid.Row="2" VerticalOptions="End" HorizontalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Text="Poprzednia" Command="{Binding PreviousFlashcardCommand}" Grid.Column="0" IsEnabled="{Binding CanGoPrevious}" Margin="0,0,10,0"/>
-            <Button Text="Następna" Command="{Binding NextFlashcardCommand}" Grid.Column="1" IsEnabled="{Binding CanGoNext}" />
+            <ImageButton Source="previous.png" Command="{Binding PreviousFlashcardCommand}" Grid.Column="0" IsEnabled="{Binding CanGoPrevious}" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent" Margin="0,0,40,0"/>
+
+            <ImageButton Source="next.png" Command="{Binding NextFlashcardCommand}" Grid.Column="1" IsEnabled="{Binding CanGoNext}" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent"/>
         </Grid>
 
         <Grid Grid.Row="3" VerticalOptions="End">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5" />
+                <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="Red" />
+            <BoxView Grid.Row="0" Color="#D600AA" />
         </Grid>
     </Grid>
 </ContentPage>

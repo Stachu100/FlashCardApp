@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:FiszkiApp"
     xmlns:view="clr-namespace:FiszkiApp.View"
     Shell.FlyoutBehavior="Flyout"
-    FlyoutBackgroundColor="#DFD8F7" >
+    FlyoutBackgroundColor="#DFD8F7">
 
     <ShellContent
          Title="Loading"
@@ -53,7 +53,7 @@
         Route="LookFlashCardPage"
         Shell.FlyoutItemIsVisible="False"/>
 
-    <TabBar FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarBackgroundColor="#512BD4" Shell.TabBarForegroundColor="White" Shell.TabBarTitleColor="White" Shell.TabBarUnselectedColor="LightGray">
+    <TabBar FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarBackgroundColor="#ac99ea" Shell.TabBarForegroundColor="#D600AA" Shell.TabBarTitleColor="#D600AA" Shell.TabBarUnselectedColor="White">
         <ShellContent
          Icon="homebuttonicon.png"
          Title="Dom"
