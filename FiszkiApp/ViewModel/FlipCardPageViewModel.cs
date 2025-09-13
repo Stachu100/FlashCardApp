@@ -66,7 +66,7 @@ namespace FiszkiApp.ViewModel
             OnPropertyChanged(nameof(CanGoPrevious));
         }
 
-        private async Task NextFlashcardAsync()
+        public async Task NextFlashcardAsync()
         {
             if (CanGoNext && _flashcards.Count > 0)
             {
@@ -82,7 +82,7 @@ namespace FiszkiApp.ViewModel
 
             await Task.CompletedTask;
         }
-        private async Task PreviousFlashcardAsync()
+        public async Task PreviousFlashcardAsync()
         {
             if (CanGoPrevious)
             {

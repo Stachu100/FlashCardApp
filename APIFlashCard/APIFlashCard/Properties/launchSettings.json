@@ -22,7 +22,7 @@
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false, // wyłączenie okna swagger
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7190;http://localhost:5278",
       "environmentVariables": {

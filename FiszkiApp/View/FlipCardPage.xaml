@@ -24,13 +24,13 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Frame x:Name="FlashCardFrame" Grid.Row="1" Padding="20" BackgroundColor="{Binding FlashcardBackgroundColor}" BorderColor="#808080" CornerRadius="30" HasShadow="True"
+            <Frame x:Name="FlashCardFrame" Grid.Row="1" BackgroundColor="{Binding FlashcardBackgroundColor}" BorderColor="#808080" CornerRadius="30" HasShadow="True"
                    WidthRequest="350" HeightRequest="225" IsClippedToBounds="True">
 
                 <Grid>
-                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsFrontVisible}" TextColor="{Binding FlashcardTextColor}" />
+                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsFrontVisible}" TextColor="{Binding FlashcardTextColor}" SizeChanged="FrontCard_SizeChanged" />
 
-                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBackVisible}" TextColor="{Binding FlashcardTextColor}" />
+                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBackVisible}" TextColor="{Binding FlashcardTextColor}" SizeChanged="BackCard_SizeChanged" />
                 </Grid>
 
                 <Frame.GestureRecognizers>
@@ -46,9 +46,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ImageButton Source="previous.png" Command="{Binding PreviousFlashcardCommand}" Grid.Column="0" IsEnabled="{Binding CanGoPrevious}" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent" Margin="0,0,40,0"/>
+            <ImageButton Source="previous.png" Command="{Binding PreviousFlashcardCommand}" Grid.Column="0" IsEnabled="{Binding CanGoPrevious}" Clicked="OnPreviousButtonClicked" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent" Margin="0,0,40,0"/>
 
-            <ImageButton Source="next.png" Command="{Binding NextFlashcardCommand}" Grid.Column="1" IsEnabled="{Binding CanGoNext}" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent"/>
+            <ImageButton Source="next.png" Command="{Binding NextFlashcardCommand}" Grid.Column="1" IsEnabled="{Binding CanGoNext}" Clicked="OnNextButtonClicked" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent"/>
         </Grid>
 
         <Grid Grid.Row="3" VerticalOptions="End">
