@@ -8,21 +8,21 @@
 <body>
     <header>
         <h1>Admin Panel</h1>
-        <button onclick="logout()">Logout</button>
+        <button id="logoutBtn" class="btn-primary">Logout</button>
     </header>
 
     <div id="grid">
-        <div class="card">
+        <div class="card users">
             <h2>Users</h2>
             <ul id="users"></ul>
         </div>
 
-        <div class="card">
+        <div class="card logs">
             <h2>Logs</h2>
             <ul id="logs"></ul>
         </div>
 
-        <div class="card">
+        <div class="card categories">
             <h2>Categories</h2>
             <ul id="categories"></ul>
 
@@ -31,13 +31,14 @@
             <input id="frontLang" placeholder="Front Language">
             <input id="backLang" placeholder="Back Language">
             <input id="level" placeholder="Level (optional)">
-            <button id="addCategoryBtn">Add Category</button>
+            <button id="addCategoryBtn" class="btn-primary">Add Category</button>
         </div>
 
-        <div class="card">
+        <div class="card flashcards">
             <h2>FlashCards</h2>
             <div id="flashcardSection">
                 <h3 id="flashcardsTitle">Select a category to see its flashcards.</h3>
+
                 <table id="flashcardsTable" class="flashcards-table" style="display:none;">
                     <thead>
                         <tr>
@@ -52,7 +53,7 @@
                     <h4>Add FlashCard</h4>
                     <input id="flashcardQuestion" placeholder="Question" required>
                     <input id="flashcardAnswer" placeholder="Answer" required>
-                    <button id="addFlashcardBtn">Add FlashCard</button>
+                    <button id="addFlashcardBtn" class="btn-primary">Add FlashCard</button>
                 </div>
             </div>
         </div>
