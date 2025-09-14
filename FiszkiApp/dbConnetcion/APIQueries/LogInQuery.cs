@@ -58,9 +58,8 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                     return "Hasło lub login jest niepoprawne";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Błąd podczas logowania: {ex.Message}");
                 return "Wystąpił błąd podczas logowania";
             }
         }

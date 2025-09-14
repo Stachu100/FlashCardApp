@@ -114,9 +114,9 @@ namespace FiszkiApp.ViewModel
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Wystąpił błąd podczas pobierania szczegółów użytkownika: {ex.Message}");
+                await Shell.Current.DisplayAlert("Error", $"Ups... Coś poszło nie tak.", "OK");
             }
         }
 
@@ -187,9 +187,34 @@ namespace FiszkiApp.ViewModel
                     await updateService.UpdateAvatarAsync(intUserId, ImageAsBytes);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error", "Błąd przy wyborze obrazka", "OK");
+                await Shell.Current.DisplayAlert("Error", $"Ups... Coś poszło nie tak.", "OK");
+            }
+        }
+
+        [RelayCommand]
+        public async Task DeleteAvatar()
+        {
+            bool confirm = await Application.Current.MainPage.DisplayAlert(
+                    "Usuń avatar",
+                    "Czy na pewno chcesz usunąć avatar?",
+                    "Tak",
+                    "Nie");
+
+            if (!confirm)
+                return;
+
+            try
+            {
+                ImageAsBytes = null;
+
+                var profileDetails = new ProfileDetails();
+                await profileDetails.DeleteAvatarAsync(intUserId);
+            }
+            catch (Exception)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Ups... Coś poszło nie tak.", "OK");
             }
         }
     }

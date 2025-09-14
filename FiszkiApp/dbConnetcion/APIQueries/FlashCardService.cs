@@ -28,18 +28,15 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 }
                 else
                 {
-                    Console.WriteLine($"Błąd API: {response.StatusCode} - {responseContent}");
                     return new List<FlashCard>();
                 }
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"HTTP Error: {httpEx.Message}");
                 return new List<FlashCard>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"General Error: {ex.Message}");
                 return new List<FlashCard>();
             }
         }
@@ -58,18 +55,15 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 }
                 else
                 {
-                    Console.WriteLine($"Błąd API: {response.StatusCode} - {responseContent}");
                     return new List<FlashCard>();
                 }
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"HTTP Error: {httpEx.Message}");
                 return new List<FlashCard>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"General Error: {ex.Message}");
                 return new List<FlashCard>();
             }
         }

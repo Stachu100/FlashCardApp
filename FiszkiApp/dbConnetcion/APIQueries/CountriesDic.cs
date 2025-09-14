@@ -36,9 +36,8 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 return Countries.ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Error fetching countries: {ex.Message}");
                 return Countries.ToList();
             }
         }

@@ -27,14 +27,12 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 return userDetails;
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"Błąd HTTP: {httpEx.Message}");
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Błąd: {ex.Message}");
                 return null;
             }
         }
@@ -50,11 +48,17 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 return response.IsSuccessStatusCode;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Błąd przy aktualizacji avatara: {ex.Message}");
                 return false;
             }
+        }
+
+        public async Task DeleteAvatarAsync(int userId)
+        {
+            var content = new StringContent("{}", System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"userdetails/{userId}/delete-avatar", content);
+            response.EnsureSuccessStatusCode();
         }
     }
 }

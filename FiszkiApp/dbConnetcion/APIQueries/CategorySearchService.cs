@@ -45,18 +45,15 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 }
                 else
                 {
-                    Console.WriteLine($"Błąd API: {response.StatusCode} - {responseContent}");
                     return new List<Category>();
                 }
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"HTTP Error: {httpEx.Message}");
                 return new List<Category>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"General Error: {ex.Message}");
                 return new List<Category>();
             }
         }

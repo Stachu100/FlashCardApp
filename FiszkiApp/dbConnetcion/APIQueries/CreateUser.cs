@@ -81,12 +81,10 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 return "Rejestracja zakończyła się sukcesem";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
                 return "Wystąpił błąd podczas rejestracji";
             }
         }
-
     }
 }

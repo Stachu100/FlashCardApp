@@ -102,7 +102,7 @@ namespace FiszkiApp.ViewModel
                     }
                     else
                     {
-                        Console.WriteLine("Błąd podczas wysyłania kategorii i fiszek.");
+                        await Shell.Current.DisplayAlert("Error", $"Ups... Coś poszło nie tak.", "OK");
                     }
                 }
             }

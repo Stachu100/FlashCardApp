@@ -51,7 +51,7 @@ namespace FiszkiApp.ViewModel
             var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
             if (!isAuthenticated || !int.TryParse(userIdString, out int userId) || userId <= 0)
             {
-                await Shell.Current.DisplayAlert("B³¹d", "Nie uda³o siê pobraæ ID u¿ytkownika.", "OK");
+                await Shell.Current.DisplayAlert("Error", $"Ups... Coœ posz³o nie tak.", "OK");
                 return;
             }
 
@@ -72,9 +72,9 @@ namespace FiszkiApp.ViewModel
 
                 await Shell.Current.DisplayAlert("Sukces", "Dane zosta³y usuniête.", "OK");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                await Shell.Current.DisplayAlert("B³¹d", $"Wyst¹pi³ b³¹d podczas usuwania danych: {ex.Message}", "OK");
+                await Shell.Current.DisplayAlert("Error", $"Ups... Coœ posz³o nie tak.", "OK");
             }
         }
     }

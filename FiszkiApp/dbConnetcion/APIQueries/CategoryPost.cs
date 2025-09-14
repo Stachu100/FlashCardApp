@@ -48,23 +48,18 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                         }
                         else
                         {
-                            Console.WriteLine($"Błąd podczas wysyłania fiszek: {responseFlashcardsContent}");
                             return false;
                         }
                     }
                 }
-
-                Console.WriteLine($"Błąd podczas dodawania kategorii: {responseCategoryContent}");
                 return false;
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"Błąd HTTP: {httpEx.Message}");
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Błąd: {ex.Message}");
                 return false;
             }
         }

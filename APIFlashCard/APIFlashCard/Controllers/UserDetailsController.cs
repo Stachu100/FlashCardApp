@@ -73,5 +73,16 @@ namespace APIFlashCard.Controllers
 
             return Ok(new { message = "Avatar updated successfully." });
         }
+
+        [HttpPut("{userId}/delete-avatar")]
+        public async Task<IActionResult> DeleteAvatar(int userId)
+        {
+            var user = await _context.UserDetails.FindAsync(userId);
+            if (user == null) return NotFound();
+
+            user.Avatar = null;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

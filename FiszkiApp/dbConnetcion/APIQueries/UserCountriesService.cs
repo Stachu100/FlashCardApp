@@ -26,14 +26,12 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 return userCountries;
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"HTTP Error: {httpEx.Message}");
                 return new List<UserCountries>();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"General Error: {ex.Message}");
                 return new List<UserCountries>();
             }
         }
@@ -50,14 +48,12 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 return true;
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"HTTP Error: {httpEx.Message}");
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"General Error: {ex.Message}");
                 return false;
             }
         }
@@ -73,14 +69,12 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 return true;
             }
-            catch (HttpRequestException httpEx)
+            catch (HttpRequestException)
             {
-                Console.WriteLine($"HTTP Error: {httpEx.Message}");
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"General Error: {ex.Message}");
                 return false;
             }
         }

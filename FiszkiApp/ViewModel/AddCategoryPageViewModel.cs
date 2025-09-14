@@ -93,7 +93,7 @@ namespace FiszkiApp.ViewModel
             var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
             if (!isAuthenticated || !int.TryParse(userIdString, out int userId) || userId <= 0)
             {
-                await Shell.Current.DisplayAlert("Błąd", "Nie udało się pobrać identyfikatora użytkownika.", "OK");
+                await Shell.Current.DisplayAlert("Error", $"Ups... Coś poszło nie tak.", "OK");
                 return;
             }
 

@@ -38,7 +38,6 @@ namespace FiszkiApp.Services
                 Preferences.Default.Set(UserPasswordKey, userPassword);
                 Preferences.Default.Set(UserIdKey, result);
                 Preferences.Default.Set(RememberMe, rememberMe);
-                Console.WriteLine($"Logged in user: {userName} with ID: {result}");
                 return result;
             }
 
