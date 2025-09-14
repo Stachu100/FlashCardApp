@@ -14,7 +14,7 @@ namespace FiszkiApp.EntityClasses
                 return ImageSource.FromStream(() => stream);
             }
 
-            return "gnomeprofile.png";
+            return "avataricon2.png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

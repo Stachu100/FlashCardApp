@@ -38,5 +38,23 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 return null;
             }
         }
+
+        public async Task<bool> UpdateAvatarAsync(int userId, byte[] avatar)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(avatar);
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PutAsync($"userdetails/{userId}/avatar", content);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Błąd przy aktualizacji avatara: {ex.Message}");
+                return false;
+            }
+        }
     }
 }

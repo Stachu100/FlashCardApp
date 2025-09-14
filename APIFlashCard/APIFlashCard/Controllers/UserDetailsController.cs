@@ -58,5 +58,20 @@ namespace APIFlashCard.Controllers
 
             return CreatedAtAction(nameof(GetUserDetails), new { userId = userDetails.ID_User }, userDetails);
         }
+
+        [HttpPut("{userId:int}/avatar")]
+        public async Task<IActionResult> UpdateAvatar(int userId, [FromBody] byte[] avatar)
+        {
+            var user = await _context.UserDetails.FirstOrDefaultAsync(u => u.ID_User == userId);
+            if (user == null)
+            {
+                return NotFound(new { message = "Nie znaleziono użytkownika." });
+            }
+
+            user.Avatar = avatar;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Avatar updated successfully." });
+        }
     }
 }

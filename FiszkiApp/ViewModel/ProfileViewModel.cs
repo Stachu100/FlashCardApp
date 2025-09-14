@@ -20,6 +20,8 @@ namespace FiszkiApp.ViewModel
         public IAsyncRelayCommand LoadCountriesUrlCommand { get; }
         public Command<object> DeleteCommand { get; set; }
 
+        private byte[] imageData;
+
         public int intUserId;
 
         private List<(int ID_Country, string Country, string Url)> countriesWithUrl;
@@ -156,6 +158,38 @@ namespace FiszkiApp.ViewModel
                 
                 Items.Add(item);
                 
+            }
+        }
+
+        [RelayCommand]
+        public async Task ChangeAvatar()
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    FileTypes = FilePickerFileType.Images,
+                    PickerTitle = "Wybierz nowe zdjęcie profilowe"
+                });
+
+                if (result != null)
+                {
+                    using (var stream = await result.OpenReadAsync())
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await stream.CopyToAsync(memoryStream);
+                            ImageAsBytes = memoryStream.ToArray();
+                        }
+                    }
+
+                    var updateService = new ProfileDetails();
+                    await updateService.UpdateAvatarAsync(intUserId, ImageAsBytes);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error", "Błąd przy wyborze obrazka", "OK");
             }
         }
     }

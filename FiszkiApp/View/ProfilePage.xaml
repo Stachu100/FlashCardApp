@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FiszkiApp.View.ProfilePage"
              xmlns:vm="clr-namespace:FiszkiApp.ViewModel"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
              xmlns:converters="clr-namespace:FiszkiApp.EntityClasses"
              Title="Profil">
 
@@ -22,9 +23,17 @@
 
         <StackLayout Grid.Row="0" Padding="20" HorizontalOptions="Center">
 
-            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" HorizontalOptions="Center">
-                <Image Source="{Binding ImageAsBytes, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
-               Aspect="AspectFill"/>
+            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0" BackgroundColor="#33512BD4" HorizontalOptions="Center" HasShadow="False">
+
+                <Image Aspect="AspectFill">
+                    <Image.Source>
+                        <Binding Path="ImageAsBytes" Converter="{toolkit:ByteArrayToImageSourceConverter}" TargetNullValue="avataricon2.png" />
+                    </Image.Source>
+                </Image>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeAvatarCommand}" />
+                </Frame.GestureRecognizers>
             </Frame>
 
             <Label Text="{Binding User}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#80005F" FontAttributes="Bold" FontSize="Medium"/>
