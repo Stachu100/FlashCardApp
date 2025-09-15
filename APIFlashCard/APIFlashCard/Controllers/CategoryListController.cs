@@ -42,6 +42,5 @@ namespace APIFlashCard.Controllers
             var categories = await query.ToListAsync();
             return Ok(categories);
         }
-
     }
 }

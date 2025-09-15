@@ -35,6 +35,38 @@ button, .btn-primary {
         transform: translateY(-1px);
     }
 
+.edit-btn {
+    margin-left: 6px;
+    padding: 0.3em 0.6em;
+    font-size: 0.85em;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    background-color: #66bb6a;
+    color: white;
+}
+
+    .edit-btn:hover {
+        background-color: #4caf50;
+    }
+
+.delete-btn {
+    margin-left: 6px;
+    padding: 0.3em 0.6em;
+    font-size: 0.85em;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    background-color: #ef9a9a;
+    color: white;
+}
+
+    .delete-btn:hover {
+        background-color: #f44336;
+    }
+
 #grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -115,7 +147,14 @@ input, select {
     margin-bottom: 4px;
     background-color: #ffffff;
     border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+    #categories li span {
+        flex-grow: 1;
+    }
 
     #categories li:hover {
         background-color: #dbe1ec;

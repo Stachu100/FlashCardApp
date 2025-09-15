@@ -46,6 +46,48 @@ public class AdminController : ControllerBase
         return Ok(category);
     }
 
+    [HttpPut("categories/{id}")]
+    public async Task<IActionResult> UpdateCategory(int id, [FromBody] Category updatedCategory)
+    {
+        var category = await _context.Categories.FindAsync(id);
+
+        if (category == null)
+            return NotFound(new { message = "Kategoria nie istnieje." });
+
+        category.CategoryName = updatedCategory.CategoryName;
+        category.FrontLanguage = updatedCategory.FrontLanguage;
+        category.BackLanguage = updatedCategory.BackLanguage;
+        category.LanguageLevel = updatedCategory.LanguageLevel;
+
+        await _context.SaveChangesAsync();
+        return Ok(new { message = "Kategoria została zaktualizowana." });
+    }
+
+    [HttpDelete("categories/{id}")]
+    public async Task<IActionResult> DeleteCategory(int id)
+    {
+        var flashcards = await _context.FlashCards
+            .Where(f => f.ID_Category == id)
+            .ToListAsync();
+
+        if (flashcards.Any())
+        {
+            _context.FlashCards.RemoveRange(flashcards);
+            await _context.SaveChangesAsync();
+        }
+
+        var category = await _context.Categories.FindAsync(id);
+        if (category == null)
+        {
+            return NotFound(new { message = "Nie znaleziono kategorii." });
+        }
+
+        _context.Categories.Remove(category);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Kategoria oraz jej fiszki zostały usunięte." });
+    }
+
     [HttpGet("flashcards/{categoryId:int}")]
     public async Task<ActionResult<IEnumerable<object>>> GetFlashCardsByCategory(int categoryId)
     {

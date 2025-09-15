@@ -27,11 +27,28 @@ async function loadCategories() {
     const categories = await res.json();
     const ul = document.getElementById('categories');
     ul.innerHTML = '';
+
     categories.forEach(c => {
         const li = document.createElement('li');
-        li.textContent = `${c.iD_Category} ${c.categoryName} (${c.frontLanguage} → ${c.backLanguage})`;
-        li.style.cursor = 'pointer';
-        li.onclick = () => loadFlashCards(c.iD_Category, c.categoryName);
+
+        const span = document.createElement('span');
+        span.textContent = `${c.iD_Category} ${c.categoryName} (${c.frontLanguage} → ${c.backLanguage})`;
+        span.onclick = () => loadFlashCards(c.iD_Category, c.categoryName);
+
+        const editBtn = document.createElement('button');
+        editBtn.textContent = '✎';
+        editBtn.className = 'edit-btn';
+        editBtn.onclick = () => editCategory(c);
+
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '🗑';
+        delBtn.className = 'delete-btn';
+        delBtn.onclick = () => deleteCategory(c.iD_Category);
+
+        li.appendChild(span);
+        li.appendChild(editBtn);
+        li.appendChild(delBtn);
+
         ul.appendChild(li);
     });
 }
@@ -57,6 +74,39 @@ async function addCategory() {
     document.getElementById('frontLang').value = '';
     document.getElementById('backLang').value = '';
     document.getElementById('level').value = '';
+    loadCategories();
+}
+
+async function editCategory(category) {
+    const newName = prompt("New name:", category.categoryName);
+    if (!newName) return;
+
+    const newFront = prompt("Front Language:", category.frontLanguage);
+    if (!newFront) return;
+
+    const newBack = prompt("Back Language:", category.backLanguage);
+    if (!newBack) return;
+
+    const newLevel = prompt("Level:", category.languageLevel ?? "");
+
+    await fetch(`/admin/categories/${category.iD_Category}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            categoryName: newName,
+            frontLanguage: newFront,
+            backLanguage: newBack,
+            languageLevel: newLevel
+        })
+    });
+
+    loadCategories();
+}
+
+async function deleteCategory(id) {
+    if (!confirm("Delete this category (and its flashcards)?")) return;
+
+    await fetch(`/admin/categories/${id}`, { method: 'DELETE' });
     loadCategories();
 }
 
