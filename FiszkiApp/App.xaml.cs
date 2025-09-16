@@ -11,6 +11,8 @@ namespace FiszkiApp
         public static IConfiguration Configuration { get; private set; }
         public static CountriesDic CountriesDic { get; private set; }
 
+        public static ProfileDetails ProfileDetails { get; private set; }
+
         private static DatabaseService _databaseService;
 
         public App()
@@ -18,6 +20,7 @@ namespace FiszkiApp
             InitializeComponent();
 
             CountriesDic = new CountriesDic();
+            ProfileDetails = new ProfileDetails();
 
             var builder = new ConfigurationBuilder()
             .SetBasePath(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))

@@ -20,6 +20,7 @@ public partial class LoadingPage : ContentPage
         if (isAuthenticated && int.TryParse(userId, out int parsedUserId))
         {
             await App.CountriesDic.GetCountriesWithFlagsAsync();
+            await App.ProfileDetails.GetUserDetailsAsync(parsedUserId);
 
             await Task.Delay(500);
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");

@@ -82,9 +82,8 @@ namespace FiszkiApp.ViewModel
             {
                 var (isAuthenticated, userID) = await _authService.IsAuthenticatedAsync();
                 intUserId = Convert.ToInt32(userID);
-                var profileDetails = new ProfileDetails();
 
-                var userDetails = await profileDetails.GetUserDetailsAsync(intUserId);
+                var userDetails = App.ProfileDetails.CurrentUser;
 
                 if (userDetails != null)
                 {
@@ -122,7 +121,7 @@ namespace FiszkiApp.ViewModel
 
         private async Task LoadCountry()
         {
-            var countries = App.CountriesDic.Countries;
+            var countries =  App.CountriesDic.Countries;
 
             countriesWithUrl = countries.Select(c => (c.ID_Country ,c.Country, c.Url)).ToList();
             CountryPicker = new ObservableCollection<string>(countries.Select(c => c.Country));
@@ -183,8 +182,7 @@ namespace FiszkiApp.ViewModel
                         }
                     }
 
-                    var updateService = new ProfileDetails();
-                    await updateService.UpdateAvatarAsync(intUserId, ImageAsBytes);
+                    await App.ProfileDetails.UpdateAvatarAsync(ImageAsBytes);
                 }
             }
             catch (Exception)
@@ -209,8 +207,7 @@ namespace FiszkiApp.ViewModel
             {
                 ImageAsBytes = null;
 
-                var profileDetails = new ProfileDetails();
-                await profileDetails.DeleteAvatarAsync(intUserId);
+                await App.ProfileDetails.DeleteAvatarAsync();
             }
             catch (Exception)
             {

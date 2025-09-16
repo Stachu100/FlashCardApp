@@ -30,7 +30,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             {
                 return new List<UserCountries>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new List<UserCountries>();
             }
