@@ -14,7 +14,7 @@
 
         <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3"/>
 
-        <Grid Grid.Row="0" BackgroundColor="#22512BD4" Padding="10" Margin="10">
+        <Grid Grid.Row="0" BackgroundColor="#22512BD4" Padding="10" Margin="0,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="*" />
@@ -46,7 +46,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Załaduj więcej" Command="{Binding LoadFlashcardsCommand}" CornerRadius="30" WidthRequest="200" HorizontalOptions="Center" />
+            <Button Text="Załaduj więcej" Command="{Binding LoadFlashcardsCommand}" Margin="20" CornerRadius="30" WidthRequest="200" HorizontalOptions="Center" />
         </StackLayout>
 
         <Grid Grid.Row="2" VerticalOptions="End">
