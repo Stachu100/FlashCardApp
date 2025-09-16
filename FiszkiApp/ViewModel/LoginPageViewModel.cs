@@ -60,6 +60,7 @@ namespace FiszkiApp.ViewModel
                     int userId = int.Parse(result);
 
                     await App.ProfileDetails.GetUserDetailsAsync(userId);
+                    await App.UserCountriesService.GetUserCountriesByUserIdAsync(userId);
 
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 }

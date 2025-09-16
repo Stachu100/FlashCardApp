@@ -2,37 +2,51 @@
 using Newtonsoft.Json;
 using FiszkiApp.Services;
 using FiszkiApp.EntityClasses.Models;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FiszkiApp.dbConnetcion.APIQueries
 {
-    public class UserCountriesService
+    public class UserCountriesService : INotifyPropertyChanged
     {
         private readonly HttpClient _httpClient;
+        private List<UserCountries>? _currentUserCountries;
+
+        public List<UserCountries>? CurrentUserCountries
+        {
+            get => _currentUserCountries;
+            private set
+            {
+                _currentUserCountries = value;
+                OnPropertyChanged();
+            }
+        }
 
         public UserCountriesService()
         {
             _httpClient = HttpClientService.Instance.HttpClient;
         }
 
-        public async Task<List<UserCountries>> GetUserCountriesByUserIdAsync(int userId)
+        public async Task<List<UserCountries>> GetUserCountriesByUserIdAsync(int userId, bool forceReload = false)
         {
+            if (!forceReload && CurrentUserCountries != null)
+                return CurrentUserCountries;
+
             try
             {
                 var response = await _httpClient.GetAsync($"usercountries/user/{userId}");
                 response.EnsureSuccessStatusCode();
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var userCountries = JsonConvert.DeserializeObject<List<UserCountries>>(responseContent);
+                var userCountries = JsonConvert.DeserializeObject<List<UserCountries>>(responseContent) ?? new List<UserCountries>();
 
-                return userCountries;
+                CurrentUserCountries = userCountries;
+
+                return CurrentUserCountries;
             }
-            catch (HttpRequestException)
+            catch
             {
-                return new List<UserCountries>();
-            }
-            catch (Exception)
-            {
-                return new List<UserCountries>();
+                return CurrentUserCountries ?? new List<UserCountries>();
             }
         }
 
@@ -44,15 +58,16 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 var response = await _httpClient.PostAsync("usercountries", content);
-                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    CurrentUserCountries?.Add(userCountry);
+                    OnPropertyChanged(nameof(CurrentUserCountries));
+                    return true;
+                }
 
-                return true;
-            }
-            catch (HttpRequestException)
-            {
                 return false;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
@@ -63,20 +78,26 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             try
             {
                 var url = $"usercountries?userId={userId}&countryId={countryId}";
-
                 var response = await _httpClient.DeleteAsync(url);
-                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    CurrentUserCountries?.RemoveAll(c => c.ID_UserCountries == countryId);
+                    OnPropertyChanged(nameof(CurrentUserCountries));
+                    return true;
+                }
 
-                return true;
+                return false;
             }
-            catch (HttpRequestException)
+            catch
             {
                 return false;
             }
-            catch (Exception)
-            {
-                return false;
-            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

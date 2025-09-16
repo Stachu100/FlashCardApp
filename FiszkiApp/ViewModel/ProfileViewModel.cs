@@ -71,8 +71,8 @@ namespace FiszkiApp.ViewModel
             if (obj is Item item)
             {
                 Items.Remove(item);
-                var service = new UserCountriesService();
-                bool isDeleted = await service.DeleteUserCountryAsync(intUserId, item.ID_Country);
+
+                bool isDeleted = await App.UserCountriesService.DeleteUserCountryAsync(intUserId, item.ID_Country);
             }
         }
 
@@ -95,8 +95,9 @@ namespace FiszkiApp.ViewModel
                         ImageAsBytes = userDetails.Avatar;
                     }
                 }
-                var service = new UserCountriesService();
-                var userCountries = await service.GetUserCountriesByUserIdAsync(intUserId);
+
+                var userCountries = App.UserCountriesService.CurrentUserCountries;
+
                 if (userCountries != null && Items.Count == 0)
                 {
                     var countries = App.CountriesDic.Countries;
@@ -145,8 +146,8 @@ namespace FiszkiApp.ViewModel
                         ID_User = UserId.Value,
                         ID_Country = CountryId
                     };
-                    var service = new UserCountriesService();
-                    var isAdded = await service.AddUserCountryAsync(newUserCountry);
+
+                    var isAdded = await App.UserCountriesService.AddUserCountryAsync(newUserCountry);
                 }               
 
                 ImageSource imgSource = ImageSource.FromFile(imageName);

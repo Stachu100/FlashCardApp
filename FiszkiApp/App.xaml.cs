@@ -13,6 +13,8 @@ namespace FiszkiApp
 
         public static ProfileDetails ProfileDetails { get; private set; }
 
+        public static UserCountriesService UserCountriesService { get; private set; }
+
         private static DatabaseService _databaseService;
 
         public App()
@@ -21,6 +23,7 @@ namespace FiszkiApp
 
             CountriesDic = new CountriesDic();
             ProfileDetails = new ProfileDetails();
+            UserCountriesService = new UserCountriesService();
 
             var builder = new ConfigurationBuilder()
             .SetBasePath(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))

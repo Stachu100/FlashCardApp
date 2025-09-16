@@ -11,13 +11,11 @@ namespace FiszkiApp.ViewModel
 {
     public partial class AddCategoryViewModel : ObservableValidator
     {
-        private readonly CountriesDic _countriesDic;
         private readonly DatabaseService _databaseService;
         private readonly AuthService _authService;
 
         public AddCategoryViewModel()
         {
-            _countriesDic = new CountriesDic();
             _authService = new AuthService();
             _databaseService = App.Database;
 
@@ -64,7 +62,8 @@ namespace FiszkiApp.ViewModel
 
         private async Task LoadLanguages()
         {
-            var countries = await _countriesDic.GetCountriesWithFlagsAsync();
+            var countries = App.CountriesDic.Countries;
+
             _allLanguages = new ObservableCollection<string>(countries.Select(c => c.Country).ToList());
 
             FrontLanguages = new ObservableCollection<string>(_allLanguages);

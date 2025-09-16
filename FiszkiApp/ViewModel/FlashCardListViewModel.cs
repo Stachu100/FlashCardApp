@@ -150,13 +150,11 @@ namespace FiszkiApp.ViewModel
 
             if (isAuthenticated && int.TryParse(userIdString, out int userId) && userId > 0)
             {
-                var userCountriesService = new UserCountriesService();
-                var userCountries = await userCountriesService.GetUserCountriesByUserIdAsync(userId);
+                var userCountries = App.UserCountriesService.CurrentUserCountries;
 
                 if (userCountries != null)
                 {
-                    var countriesDic = new CountriesDic();
-                    var allCountries = await countriesDic.GetCountriesWithFlagsAsync();
+                    var allCountries = App.CountriesDic.Countries;
 
                     var filteredLanguages = allCountries
                         .Where(c => userCountries.Any(uc => uc.ID_Country == c.ID_Country))

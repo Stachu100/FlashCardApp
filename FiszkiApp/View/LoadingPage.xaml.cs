@@ -21,6 +21,7 @@ public partial class LoadingPage : ContentPage
         {
             await App.CountriesDic.GetCountriesWithFlagsAsync();
             await App.ProfileDetails.GetUserDetailsAsync(parsedUserId);
+            await App.UserCountriesService.GetUserCountriesByUserIdAsync(parsedUserId);
 
             await Task.Delay(500);
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
