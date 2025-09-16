@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using Microsoft.Maui.Controls;
+﻿using System.Globalization;
 
 namespace FiszkiApp.EntityClasses
 {
@@ -8,13 +6,12 @@ namespace FiszkiApp.EntityClasses
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is byte[] imageAsBytes && imageAsBytes.Length > 0)
+            if (value is byte[] bytes && bytes.Length > 0)
             {
-                var stream = new MemoryStream(imageAsBytes);
-                return ImageSource.FromStream(() => stream);
+                return ImageSource.FromStream(() => new MemoryStream(bytes));
             }
 
-            return "avataricon2.png";
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

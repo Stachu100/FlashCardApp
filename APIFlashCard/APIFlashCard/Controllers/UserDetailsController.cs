@@ -23,6 +23,7 @@ namespace APIFlashCard.Controllers
                 .Where(u => u.ID_User == userId)
                 .Select(u => new
                 {
+                    u.ID_User,
                     u.FirstName,
                     u.LastName,
                     u.Country,
@@ -77,7 +78,10 @@ namespace APIFlashCard.Controllers
         [HttpPut("{userId}/delete-avatar")]
         public async Task<IActionResult> DeleteAvatar(int userId)
         {
-            var user = await _context.UserDetails.FindAsync(userId);
+            var user = await _context.UserDetails
+                             .Where(u => u.ID_User == userId)
+                             .SingleOrDefaultAsync();
+
             if (user == null) return NotFound();
 
             user.Avatar = null;

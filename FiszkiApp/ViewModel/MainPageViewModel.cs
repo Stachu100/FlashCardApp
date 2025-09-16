@@ -36,6 +36,9 @@ namespace FiszkiApp.ViewModel
         [ObservableProperty]
         private LocalCategoryTable selectedCategory;
 
+        [ObservableProperty]
+        private byte[] imageAsBytes;
+
         public IAsyncRelayCommand LoadCategoriesCommand { get; }
         public IAsyncRelayCommand<LocalCategoryTable> SendCategoryCommand { get; }
         public IAsyncRelayCommand<LocalCategoryTable> DeleteCategoryCommand { get; }
@@ -70,6 +73,12 @@ namespace FiszkiApp.ViewModel
                     Categories.Add(category);
                 }
             }
+        }
+
+        public async Task LoadAvatarAsync()
+        {
+            var userDetails = App.ProfileDetails.CurrentUser;
+            ImageAsBytes = userDetails.Avatar;
         }
 
         private async Task SendCategoryAsync(LocalCategoryTable category)

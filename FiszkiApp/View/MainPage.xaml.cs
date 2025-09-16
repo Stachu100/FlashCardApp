@@ -17,6 +17,7 @@ namespace FiszkiApp.View
             if (BindingContext is MainPageViewModel viewModel)
             {
                 await viewModel.LoadCategoriesAsync();
+                await viewModel.LoadAvatarAsync();
             }
         }
     }

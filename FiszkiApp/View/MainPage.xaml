@@ -10,6 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:IsSentToVisibilityConverter x:Key="IsSentToVisibilityConverter" />
+            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -28,6 +29,13 @@
                Grid.RowSpan="3"/>
 
         <Button Text="Dodaj kategorię" CornerRadius="30" WidthRequest="200" Margin="0,15,0,10" Grid.Row="0" Command="{Binding AddCategoryCommand}" />
+
+        <Image HeightRequest="60" WidthRequest="60" Aspect="AspectFill" HorizontalOptions="End" Margin="5" IsVisible="{Binding ImageAsBytes, Converter={StaticResource NullToBoolConverter}}">
+            <Image.Source>
+                <Binding Path="ImageAsBytes"
+                 Converter="{StaticResource ByteArrayToImageSourceConverter}" />
+            </Image.Source>
+        </Image>
 
         <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}" SelectionMode="Single"
                         SelectionChangedCommand="{Binding CategoryTappedCommand}"
