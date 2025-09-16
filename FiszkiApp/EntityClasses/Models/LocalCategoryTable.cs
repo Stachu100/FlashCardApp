@@ -25,5 +25,8 @@ namespace FiszkiApp.EntityClasses.Models
 
         [Ignore]
         public int API_ID_Category { get; set; }
+
+        [Ignore]
+        public string UserName { get; set; }
     }
 }

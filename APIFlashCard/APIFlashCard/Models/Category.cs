@@ -26,5 +26,8 @@ namespace APIFlashCard.Models
 
         [MaxLength(50)]
         public string LanguageLevel { get; set; }
+
+        [ForeignKey("UserID")]
+        public User User { get; set; }
     }
 }

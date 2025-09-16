@@ -19,18 +19,15 @@ namespace APIFlashCard.Controllers
         [HttpPost("search")]
         public async Task<IActionResult> SearchCategories([FromBody] CategoryFilter filters)
         {
-            var query = _context.Categories.AsQueryable();
+            var query = _context.Categories.Include(c => c.User).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filters.CategoryName))
                 query = query.Where(c => EF.Functions.Like(c.CategoryName, $"%{filters.CategoryName}%"));
 
             if (!string.IsNullOrWhiteSpace(filters.UserName))
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == filters.UserName);
-                if (user != null)
-                    query = query.Where(c => c.UserID == user.ID_User);
-                else
-                    return Ok(new List<Category>());
+                var usernameNormalized = filters.UserName.ToLower().Trim();
+                query = query.Where(c => c.User.UserName.ToLower() == usernameNormalized);
             }
 
             if (!string.IsNullOrWhiteSpace(filters.LanguageLevel))
@@ -39,7 +36,19 @@ namespace APIFlashCard.Controllers
             if (!string.IsNullOrWhiteSpace(filters.UserLanguage))
                 query = query.Where(c => c.FrontLanguage == filters.UserLanguage || c.BackLanguage == filters.UserLanguage);
 
-            var categories = await query.ToListAsync();
+            var categories = await query
+                .Include(c => c.User)
+                .Select(c => new
+                {
+                    c.ID_Category,
+                    c.CategoryName,
+                    c.FrontLanguage,
+                    c.BackLanguage,
+                    c.LanguageLevel,
+                    c.User.UserName
+                })
+                .ToListAsync();
+
             return Ok(categories);
         }
     }

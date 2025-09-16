@@ -68,8 +68,13 @@
                                               CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
 
-                            <Label Text="{Binding CategoryName}" TextColor="DarkViolet" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="Medium" />
+                            <StackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Spacing="0">
 
+                                <Label Text="{Binding CategoryName}" TextColor="DarkViolet" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="Medium" />
+                                <Label Text="{Binding UserName}" TextColor="Gray" FontSize="Small" />
+                                
+                            </StackLayout>
+                            
                             <Label Text="{Binding LanguageLevel}" TextColor="DarkViolet" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
 
                             <Label Text="{Binding FrontLanguage}" TextColor="DarkViolet" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />

@@ -97,7 +97,8 @@ namespace FiszkiApp.ViewModel
                         LanguageLevel = category.LanguageLevel,
                         UserID = category.UserID,
                         IsSent = 1,
-                        API_ID_Category = category.ID_Category
+                        API_ID_Category = category.ID_Category,
+                        UserName = category.UserName
                     });
                 }
             }
