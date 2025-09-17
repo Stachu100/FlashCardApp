@@ -1,6 +1,4 @@
-﻿using SQLite;
-
-namespace FiszkiApp.EntityClasses.Models
+﻿namespace FiszkiApp.EntityClasses.Models
 {
     public class Category
     {
@@ -10,8 +8,6 @@ namespace FiszkiApp.EntityClasses.Models
         public string FrontLanguage { get; set; }
         public string BackLanguage { get; set; }
         public string LanguageLevel { get; set; }
-
-        [Ignore]
         public string UserName { get; set; }
     }
 }

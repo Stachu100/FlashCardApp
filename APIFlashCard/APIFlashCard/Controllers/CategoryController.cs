@@ -17,7 +17,7 @@ namespace APIFlashCard.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategory(Category category)
+        public async Task<IActionResult> AddCategory([FromBody] Category category)
         {
             if (category == null || string.IsNullOrWhiteSpace(category.CategoryName))
             {

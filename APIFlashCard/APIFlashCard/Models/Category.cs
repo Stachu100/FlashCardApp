@@ -28,6 +28,6 @@ namespace APIFlashCard.Models
         public string LanguageLevel { get; set; }
 
         [ForeignKey("UserID")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

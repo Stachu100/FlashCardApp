@@ -59,16 +59,32 @@ namespace FiszkiApp.ViewModel
         public IAsyncRelayCommand<LocalCategoryTable> LookFlashCardTappedCommand { get; }
 
         [RelayCommand]
-        private void ClearCategorySearch() => CategorySearch = string.Empty;
+        private async Task ClearCategorySearch()
+        {
+            CategorySearch = string.Empty;
+            await SearchCategoriesAsync();
+        }
 
         [RelayCommand]
-        private void ClearUserSearch() => UserSearch = string.Empty;
+        private async Task ClearUserSearch()
+        {
+            UserSearch = string.Empty;
+            await SearchCategoriesAsync();
+        }
 
         [RelayCommand]
-        private void ClearSelectedLanguageLevel() => SelectedLanguageLevel = null;
+        private async Task ClearSelectedLanguageLevel()
+        {
+            SelectedLanguageLevel = null;
+            await SearchCategoriesAsync();
+        }
 
         [RelayCommand]
-        private void ClearSelectedLanguage() => SelectedLanguage = null;
+        private async Task ClearSelectedLanguage()
+        {
+            SelectedLanguage = null;
+            await SearchCategoriesAsync();
+        }
 
         private async Task SearchCategoriesAsync()
         {
@@ -108,6 +124,15 @@ namespace FiszkiApp.ViewModel
         {
             if (category != null)
             {
+
+                var existingCategory = await _databaseService.GetCategoryByApiIdAsync(category.API_ID_Category);
+
+                if (existingCategory != null)
+                {
+                    await Shell.Current.DisplayAlert("Info", "Ju¿ posiadasz tê kategoriê.", "OK");
+                    return;
+                }
+
                 var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
 
                 if (isAuthenticated && int.TryParse(userIdString, out int userId) && userId > 0)

@@ -100,12 +100,18 @@ namespace FiszkiApp.ViewModel
 
                     var flashcards = await _databaseService.GetFlashcardsByCategoryIdAsync(category.IdCategory);
 
-                    var categoryPost = new CategoryPost();
-                    var result = await categoryPost.AddCategoryAndFlashcardsAsync(newCategory, flashcards);
+                    if (flashcards == null || flashcards.Count == 0)
+                    {
+                        await Shell.Current.DisplayAlert("Uwaga", "Nie można udostępnić kategorii bez fiszek.", "OK");
+                        return;
+                    }
 
-                    if (result)
+                    var newCategoryId = await _categoryPost.AddCategoryAndFlashcardsAsync(newCategory, flashcards);
+
+                    if (newCategoryId.HasValue)
                     {
                         category.IsSent = 1;
+                        category.API_ID_Category = newCategoryId.Value;
                         await _databaseService.UpdateCategoryAsync(category);
                         await LoadCategoriesAsync();
                     }

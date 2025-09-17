@@ -14,7 +14,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             _httpClient = HttpClientService.Instance.HttpClient;
         }
 
-        public async Task<bool> AddCategoryAndFlashcardsAsync(Category category, List<LocalFlashcardTable> flashcards)
+        public async Task<int?> AddCategoryAndFlashcardsAsync(Category category, List<LocalFlashcardTable> flashcards)
         {
             try
             {
@@ -28,39 +28,35 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                     var categoryResponse = JsonConvert.DeserializeObject<Category>(responseCategoryContent);
 
                     var newCategoryId = categoryResponse?.ID_Category;
-                    if (newCategoryId.HasValue)
+
+                    if (newCategoryId > 0)
                     {
-                        var flashcardsToSend = flashcards.Select(f => new FlashCard
+                        if (flashcards != null && flashcards.Any())
                         {
-                            ID_Category = newCategoryId.Value,
-                            FrontFlashCard = f.FrontFlashCard,
-                            BackFlashCard = f.BackFlashCard
-                        }).ToList();
+                            var flashcardsToSend = flashcards.Select(f => new FlashCard
+                            {
+                                ID_Category = newCategoryId.Value,
+                                FrontFlashCard = f.FrontFlashCard,
+                                BackFlashCard = f.BackFlashCard
+                            }).ToList();
 
-                        var jsonFlashcards = JsonConvert.SerializeObject(flashcardsToSend);
-                        var contentFlashcards = new StringContent(jsonFlashcards, Encoding.UTF8, "application/json");
-                        var responseFlashcards = await _httpClient.PostAsync("Flashcard/batch", contentFlashcards);
-                        var responseFlashcardsContent = await responseFlashcards.Content.ReadAsStringAsync();
+                            var jsonFlashcards = JsonConvert.SerializeObject(flashcardsToSend);
+                            var contentFlashcards = new StringContent(jsonFlashcards, Encoding.UTF8, "application/json");
+                            await _httpClient.PostAsync("Flashcard/batch", contentFlashcards);
+                        }
 
-                        if (responseFlashcards.IsSuccessStatusCode)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        return newCategoryId.Value;
                     }
                 }
-                return false;
+                return null;
             }
             catch (HttpRequestException)
             {
-                return false;
+                return null;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
     }

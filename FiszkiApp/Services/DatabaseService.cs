@@ -61,6 +61,13 @@ namespace FiszkiApp.Services
             return _database.Table<LocalCategoryTable>().Where(i => i.IdCategory == id).FirstOrDefaultAsync();
         }
 
+        public Task<LocalCategoryTable> GetCategoryByApiIdAsync(int apiId)
+        {
+            return _database.Table<LocalCategoryTable>()
+                .Where(c => c.API_ID_Category == apiId)
+                .FirstOrDefaultAsync();
+        }
+
         public Task<int> AddFlashcardAsync(LocalFlashcardTable flashcard)
         {
             return _database.InsertAsync(flashcard);
@@ -85,5 +92,14 @@ namespace FiszkiApp.Services
         {
             return _database.UpdateAsync(flashcard);
         }
+
+        //public async Task ResetDatabaseAsync()
+        //{
+        //    await _database.DropTableAsync<LocalFlashcardTable>();
+        //    await _database.DropTableAsync<LocalCategoryTable>();
+
+        //    await _database.CreateTableAsync<LocalCategoryTable>();
+        //    await _database.CreateTableAsync<LocalFlashcardTable>();
+        //}
     }
 }

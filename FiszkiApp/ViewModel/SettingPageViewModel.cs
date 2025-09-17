@@ -70,6 +70,8 @@ namespace FiszkiApp.ViewModel
                     await _databaseService.DeleteCategoryAsync(category);
                 }
 
+                // await _databaseService.ResetDatabaseAsync(); // USUWANIE I BUDOWANIE CA£EJ BAZY NA NOWO, WYKONANIE W DATABASESERVICE ZAKOMENTOWANE
+
                 await Shell.Current.DisplayAlert("Sukces", "Dane zosta³y usuniête.", "OK");
             }
             catch (Exception)
