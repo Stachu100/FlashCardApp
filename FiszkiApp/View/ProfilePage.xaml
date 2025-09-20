@@ -9,7 +9,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <converters:ByteArrayToImageSourceConverter x:Key="AvatarWithFallback" UseFallback="True"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -19,16 +19,16 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="2"/>
+        <Image Source="{DynamicResource BackgroundImage}" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="2" />
 
         <StackLayout Grid.Row="0" Padding="20" HorizontalOptions="Center">
 
             <Grid>
-                <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0" BackgroundColor="#33512BD4" HorizontalOptions="Center" HasShadow="False">
+                <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" Padding="0" Margin="0" HorizontalOptions="Center" HasShadow="False">
 
                     <Image Aspect="AspectFill">
                         <Image.Source>
-                            <Binding Path="ImageAsBytes" Converter="{toolkit:ByteArrayToImageSourceConverter}" TargetNullValue="avataricon2.png" />
+                            <Binding Path="ImageAsBytes" Converter="{StaticResource AvatarWithFallback}" />
                         </Image.Source>
                     </Image>
                     <Frame.GestureRecognizers>
@@ -36,16 +36,16 @@
                     </Frame.GestureRecognizers>
                 </Frame>
 
-                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding DeleteAvatarCommand}" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,105,5"/>
+                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" Command="{Binding DeleteAvatarCommand}" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,105,5" />
                 
             </Grid>
 
-            <Label Text="{Binding User}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#80005F" FontAttributes="Bold" FontSize="Medium"/>
+            <Label Text="{Binding User}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{DynamicResource UserLabelColor}" FontAttributes="Bold" FontSize="Medium" />
 
-            <Label Text="{Binding Country}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#D600AA" FontAttributes="Bold" FontSize="Medium" Margin="5"/>
+            <Label Text="{Binding Country}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" Margin="5" />
 
-            <Frame BackgroundColor="#44512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}" Title="Moje języki fiszek" FontAttributes="Bold" TitleColor="DarkViolet" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Picker ItemsSource="{Binding CountryPicker}" SelectedItem="{Binding CountryPicked}" Title="Moje języki fiszek" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
             </Frame>
 
             <ListView ItemsSource="{Binding Items}" SelectionMode="None">
@@ -61,9 +61,9 @@
 
                                 <Image Source="{Binding Image}" WidthRequest="50" HeightRequest="50" Grid.Column="0" Margin="5,0" HorizontalOptions="Start" VerticalOptions="Center" />
 
-                                <Label Text="{Binding Name}" Grid.Column="1" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="End" FontAttributes="Bold" FontSize="18" />
+                                <Label Text="{Binding Name}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" FontAttributes="Bold" FontSize="18" />
 
-                                <ImageButton Grid.Column="2" Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" HorizontalOptions="End"
+                                <ImageButton Grid.Column="2" Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" HorizontalOptions="End"
                                                                    Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding .}" />
 
                             </Grid>
@@ -71,7 +71,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Wyloguj się" Command="{Binding LogoutCommandCommand}" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0"/>
+            <Button Text="Wyloguj się" Command="{Binding LogoutCommandCommand}" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" />
         </StackLayout>
 
         <Grid Grid.Row="1" VerticalOptions="End">
@@ -79,7 +79,7 @@
                 <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="#D600AA" />
+            <BoxView Grid.Row="0" />
         </Grid>
     </Grid>
 

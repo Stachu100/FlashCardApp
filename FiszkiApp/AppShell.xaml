@@ -6,28 +6,28 @@
     xmlns:local="clr-namespace:FiszkiApp"
     xmlns:view="clr-namespace:FiszkiApp.View"
     Shell.FlyoutBehavior="Flyout"
-    FlyoutBackgroundColor="#DFD8F7">
+    FlyoutBackgroundColor="{DynamicResource FlyoutBackgroundColor}">
 
     <ShellContent
          Title="Loading"
          ContentTemplate="{DataTemplate view:LoadingPage}"
          Route="LoadingPage"
          Shell.FlyoutBehavior="Disabled"
-         Shell.FlyoutItemIsVisible="False"/>
+         Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate view:LoginPage}"
         Route="LoginPage"
         Shell.FlyoutBehavior="Disabled"
-        Shell.FlyoutItemIsVisible="False"/>
+        Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
          Title="Register"
          ContentTemplate="{DataTemplate view:RegisterPage}"
          Route="RegisterPage"
          Shell.FlyoutBehavior="Disabled"
-         Shell.FlyoutItemIsVisible="False"/>
+         Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
         Title="Dodaj kategorię"
@@ -39,46 +39,46 @@
         Title="Dodawanie fiszek"
         ContentTemplate="{DataTemplate view:AddFlashcardsPage}"
         Route="AddFlashcardsPage"
-        Shell.FlyoutItemIsVisible="False"/>
+        Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
         Title="FlipCard"
         ContentTemplate="{DataTemplate view:FlipCardPage}"
         Route="FlipCardPage"
-        Shell.FlyoutItemIsVisible="False"/>
+        Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
         Title="LookFlashCard"
         ContentTemplate="{DataTemplate view:LookFlashCardPage}"
         Route="LookFlashCardPage"
-        Shell.FlyoutItemIsVisible="False"/>
+        Shell.FlyoutItemIsVisible="False" />
 
-    <TabBar FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarBackgroundColor="#ac99ea" Shell.TabBarForegroundColor="#D600AA" Shell.TabBarTitleColor="#D600AA" Shell.TabBarUnselectedColor="White">
+    <TabBar FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
          Icon="homebuttonicon.png"
          Title="Dom"
          ContentTemplate="{DataTemplate view:MainPage}"
-         Route="MainPage"/>
+         Route="MainPage" />
 
         <ShellContent
          Icon="lookbuttonicon.png"
          Title="Lista"
          ContentTemplate="{DataTemplate view:FlashCardList}"
-         Route="FlashCardlist"/>
+         Route="FlashCardlist" />
 
         <ShellContent
          Icon="profilebuttonicon.png"
          Title="Profil"
          ContentTemplate="{DataTemplate view:ProfilePage}"
-         Route="ProfilePage"/>
+         Route="ProfilePage" />
     </TabBar>
 
     <MenuItem
     Text="Wyloguj się"
-    Command="{Binding LogoutCommand}"/>
+    Command="{Binding LogoutCommand}" />
 
     <MenuItem
     Text="Ustawienia"  
-    Command="{Binding SettingsCommand}"/>
+    Command="{Binding SettingsCommand}" />
 
 </Shell>

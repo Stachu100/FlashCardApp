@@ -11,28 +11,20 @@ namespace FiszkiApp.ViewModel
         private readonly DatabaseService _databaseService;
         private readonly AuthService _authService;
 
-        public ICommand SetColorCommand { get; }
-        public ICommand SetTextColorCommand { get; }
         public IAsyncRelayCommand DeleteDataCommand { get; }
+
+        public ICommand ChangeThemeCommand => new Command<string>(theme =>
+        {
+            (Application.Current as App)?.SetTheme(theme);
+            Preferences.Set("AppTheme", theme);
+        });
 
         public SettingsPageViewModel()
         {
             _databaseService = App.Database;
             _authService = new AuthService();
 
-            SetColorCommand = new RelayCommand<string>(SetColor);
-            SetTextColorCommand = new RelayCommand<string>(SetTextColor);
             DeleteDataCommand = new AsyncRelayCommand(DeleteDataAsync);
-        }
-
-        private void SetColor(string color)
-        {
-            Preferences.Set("FlashcardBackgroundColor", color);
-        }
-
-        private void SetTextColor(string color)
-        {
-            Preferences.Set("FlashcardTextColor", color);
         }
 
         private async Task DeleteDataAsync()

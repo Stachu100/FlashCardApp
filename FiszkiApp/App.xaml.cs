@@ -3,6 +3,11 @@ using FiszkiApp.Services;
 using FiszkiApp.dbConnetcion.APIQueries;
 using System;
 using System.IO;
+using FiszkiApp.Resources.Styles.Colors;
+
+#if ANDROID
+using Microsoft.Maui.Platform;
+#endif
 
 namespace FiszkiApp
 {
@@ -10,9 +15,7 @@ namespace FiszkiApp
     {
         public static IConfiguration Configuration { get; private set; }
         public static CountriesDic CountriesDic { get; private set; }
-
         public static ProfileDetails ProfileDetails { get; private set; }
-
         public static UserCountriesService UserCountriesService { get; private set; }
 
         private static DatabaseService _databaseService;
@@ -21,17 +24,48 @@ namespace FiszkiApp
         {
             InitializeComponent();
 
+            var savedTheme = Preferences.Get("AppTheme", "Pink");
+            SetTheme(savedTheme);
+
             CountriesDic = new CountriesDic();
             ProfileDetails = new ProfileDetails();
             UserCountriesService = new UserCountriesService();
 
             var builder = new ConfigurationBuilder()
-            .SetBasePath(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .SetBasePath(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             Configuration = builder.Build();
 
             MainPage = new AppShell();
+        }
+
+        public void SetTheme(string theme)
+        {
+            var oldTheme = Resources.MergedDictionaries.FirstOrDefault(d => d.ContainsKey("ThemeName"));
+            if (oldTheme != null)
+                Resources.MergedDictionaries.Remove(oldTheme);
+
+            ResourceDictionary newDict = theme switch
+            {
+                "Pink" => new Pink(),
+                "Blue" => new Blue(),
+                "Green" => new Green(),
+                _ => new Pink()
+            };
+
+            Resources.MergedDictionaries.Add(newDict);
+
+#if ANDROID
+            if (newDict.TryGetValue("StatusBarColor", out var statusBarColorObj) && statusBarColorObj is Color statusBarColor)
+            {
+                var window = Platform.CurrentActivity?.Window;
+                if (window != null)
+                {
+                    window.SetStatusBarColor(statusBarColor.ToPlatform());
+                }
+            }
+#endif
         }
 
         public static DatabaseService Database
@@ -40,7 +74,10 @@ namespace FiszkiApp
             {
                 if (_databaseService == null)
                 {
-                    var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiszkiApp.db3");
+                    var dbPath = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "FiszkiApp.db3"
+                    );
                     _databaseService = new DatabaseService(dbPath);
                 }
                 return _databaseService;

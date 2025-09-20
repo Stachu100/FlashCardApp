@@ -14,15 +14,15 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="4"/>
+        <Image Source="{DynamicResource BackgroundImage}" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="4" />
         
         <StackLayout Padding="10" Grid.Row="0">
-            <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" HasShadow="False" Margin="0,5">
-                <Entry Text="{Binding FrontText}" Placeholder="Przód fiszki" PlaceholderColor="DarkViolet" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand"/>
+            <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" HasShadow="False" Margin="0,5">
+                <Entry Text="{Binding FrontText}" Placeholder="Przód fiszki" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand" />
             </Frame>
 
-            <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" HasShadow="False" Margin="0,5">
-                <Entry Text="{Binding BackText}" Placeholder="Tył fiszki" PlaceholderColor="DarkViolet" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand"/>
+            <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" HasShadow="False" Margin="0,5">
+                <Entry Text="{Binding BackText}" Placeholder="Tył fiszki" FontAttributes="Bold" MaxLength="50" HorizontalOptions="FillAndExpand" />
             </Frame>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="Dodaj" CornerRadius="30" WidthRequest="150" Margin="5" Command="{Binding AddFlashcardCommand}" />
@@ -30,7 +30,7 @@
             </StackLayout>
         </StackLayout>
 
-        <Grid Grid.Row="1" BackgroundColor="#22512BD4" Padding="10" Margin="10,0">
+        <Grid Grid.Row="1" Opacity="0.2" Padding="10" Margin="10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="*" />
@@ -38,9 +38,9 @@
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
 
-            <Label Text="Lp" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" />
-            <Label Text="Przód Fiszki" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" />
-            <Label Text="Tył Fiszki" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
+            <Label Text="Lp" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" />
+            <Label Text="Przód Fiszki" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" />
+            <Label Text="Tył Fiszki" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
             <Label Grid.Column="3" HorizontalOptions="End"/>
         </Grid>
 
@@ -56,12 +56,12 @@
                                 <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
                             <Label Text="{Binding Lp}" 
-                                           Grid.Column="0" VerticalOptions="Center" TextColor="DarkViolet" FontAttributes="Bold" HorizontalOptions="Start" />
+                                           Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold" HorizontalOptions="Start" />
                             <Label Text="{Binding FrontFlashCard}" 
-                                           Grid.Column="1" VerticalOptions="Center" TextColor="DarkViolet" FontAttributes="Bold" HorizontalOptions="Center" />
+                                           Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold" HorizontalOptions="Center" />
                             <Label Text="{Binding BackFlashCard}" 
-                                           Grid.Column="2" VerticalOptions="Center" TextColor="DarkViolet" FontAttributes="Bold" HorizontalOptions="Center" />
-                            <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15"
+                                           Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" HorizontalOptions="Center" />
+                            <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15"
                                                  Command="{Binding Source={x:Reference AddFlashcardsPageContent}, Path=BindingContext.DeleteFlashcardCommand}" CommandParameter="{Binding .}" Grid.Column="3" HorizontalOptions="End" />
                         </Grid>
                     </ViewCell>
@@ -74,7 +74,7 @@
                 <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="#D600AA" />
+            <BoxView Grid.Row="0" />
         </Grid>
     </Grid>
 </ContentPage>

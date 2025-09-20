@@ -12,18 +12,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3"/>
+        <Image Source="{DynamicResource BackgroundImage}" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3" />
 
-        <Grid Grid.Row="0" BackgroundColor="#22512BD4" Padding="10" Margin="0,20">
+        <Grid Grid.Row="0" Opacity="0.2" Padding="10" Margin="0,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label Text="Lp" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" />
-            <Label Text="Przód Fiszki" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" />
-            <Label Text="Tył Fiszki" FontAttributes="Bold" TextColor="DarkViolet" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
+            <Label Text="Lp" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" />
+            <Label Text="Przód Fiszki" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" />
+            <Label Text="Tył Fiszki" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" />
         </Grid>
 
         <StackLayout Grid.Row="1">
@@ -38,9 +38,9 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Lp}" TextColor="DarkViolet" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" />
-                            <Label Text="{Binding FrontFlashCard}" TextColor="DarkViolet" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" />
-                            <Label Text="{Binding BackFlashCard}" TextColor="DarkViolet" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" />
+                            <Label Text="{Binding Lp}" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" />
+                            <Label Text="{Binding FrontFlashCard}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" />
+                            <Label Text="{Binding BackFlashCard}" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -54,7 +54,7 @@
                 <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="#D600AA" />
+            <BoxView Grid.Row="0" />
         </Grid>
     </Grid>
 </ContentPage>

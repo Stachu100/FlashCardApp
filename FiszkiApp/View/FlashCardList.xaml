@@ -12,39 +12,35 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3"/>
+        <Image Source="{DynamicResource BackgroundImage}" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3" />
 
         <VerticalStackLayout Grid.Row="0" Padding="10" Spacing="10">
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
-                <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <Entry Placeholder="Szukaj kategorii" MaxLength="50" x:Name="CategorySearchEntry" Text="{Binding CategorySearch}" 
-                       PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Entry Placeholder="Szukaj kategorii" MaxLength="50" x:Name="CategorySearchEntry" Text="{Binding CategorySearch}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                 </Frame>
-                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearCategorySearchCommand}" />
+                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" Command="{Binding ClearCategorySearchCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
-                <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <Picker x:Name="LanguageLevelPicker" Title="Poziom językowy" TitleColor="DarkViolet" ItemsSource="{Binding LanguageLevels}" SelectedItem="{Binding SelectedLanguageLevel}" 
-                        TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Picker x:Name="LanguageLevelPicker" Title="Poziom językowy" ItemsSource="{Binding LanguageLevels}" SelectedItem="{Binding SelectedLanguageLevel}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                 </Frame>
-                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearSelectedLanguageLevelCommand}" />
+                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" Command="{Binding ClearSelectedLanguageLevelCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
-                <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <Entry Placeholder="Fiszki użytkownika" MaxLength="50" x:Name="UserSearchEntry" Text="{Binding UserSearch}" 
-                       PlaceholderColor="DarkViolet" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Entry Placeholder="Fiszki użytkownika" MaxLength="50" x:Name="UserSearchEntry" Text="{Binding UserSearch}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                 </Frame>
-                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearUserSearchCommand}" />
+                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" Command="{Binding ClearUserSearchCommand}" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
-                <Frame BackgroundColor="#22512BD4" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <Picker x:Name="LanguagePicker" Title="Język" TitleColor="DarkViolet" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" 
-                        TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <Picker x:Name="LanguagePicker" Title="Język" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                 </Frame>
-                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Transparent" CornerRadius="15" Command="{Binding ClearSelectedLanguageCommand}" />
+                <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" Command="{Binding ClearSelectedLanguageCommand}" />
             </StackLayout>
 
             <Button Text="Wyszukaj" Command="{Binding SearchCommand}" CornerRadius="30" WidthRequest="200" />
@@ -70,27 +66,32 @@
 
                             <StackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Spacing="0">
 
-                                <Label Text="{Binding CategoryName}" TextColor="DarkViolet" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="Medium" />
+                                <Label Text="{Binding CategoryName}" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="Medium" />
                                 <Label Text="{Binding UserName}" TextColor="Gray" FontSize="Small" />
                                 
                             </StackLayout>
                             
-                            <Label Text="{Binding LanguageLevel}" TextColor="DarkViolet" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0"/>
+                            <Label Text="{Binding LanguageLevel}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
 
-                            <Label Text="{Binding FrontLanguage}" TextColor="DarkViolet" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
+                            <Label Text="{Binding FrontLanguage}" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
 
-                            <Label Text="{Binding BackLanguage}" TextColor="DarkViolet" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
+                            <Label Text="{Binding BackLanguage}" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
 
-                            <ImageButton Source="add.png" Grid.Column="4" WidthRequest="35" HeightRequest="35" Margin="3" BackgroundColor="Transparent" Command="{Binding Source={RelativeSource AncestorType={x:Type local:FlashCardListViewModel}}, Path=AddToLocalCommand}" 
-                                         CommandParameter="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <ImageButton Source="add.png" Grid.Column="4" WidthRequest="35" HeightRequest="35" Margin="3" Command="{Binding Source={RelativeSource AncestorType={x:Type local:FlashCardListViewModel}}, Path=AddToLocalCommand}" 
+                                         CommandParameter="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid Grid.Row="2" VerticalOptions="End">
-            <BoxView Color="#D600AA" HeightRequest="3" />
+        
+        <Grid Grid.Row="3" VerticalOptions="End">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3" />
+            </Grid.RowDefinitions>
+
+            <BoxView Grid.Row="0" />
         </Grid>
     </Grid>
 </ContentPage>

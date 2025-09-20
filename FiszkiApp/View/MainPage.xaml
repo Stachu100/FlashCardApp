@@ -10,7 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:IsSentToVisibilityConverter x:Key="IsSentToVisibilityConverter" />
-            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <converters:ByteArrayToImageSourceConverter x:Key="AvatarNoFallback" UseFallback="False" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -21,19 +21,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Source="background.png"
-               Aspect="AspectFill"
-               Opacity="0.2"
-               VerticalOptions="FillAndExpand"
-               HorizontalOptions="FillAndExpand"
-               Grid.RowSpan="3"/>
+        <Image Source="{DynamicResource BackgroundImage}" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="3"/>
 
         <Button Text="Dodaj kategorię" CornerRadius="30" WidthRequest="200" Margin="0,15,0,10" Grid.Row="0" Command="{Binding AddCategoryCommand}" />
 
         <Image HeightRequest="60" WidthRequest="60" Aspect="AspectFill" HorizontalOptions="End" Margin="5" IsVisible="{Binding ImageAsBytes, Converter={StaticResource NullToBoolConverter}}">
             <Image.Source>
                 <Binding Path="ImageAsBytes"
-                 Converter="{StaticResource ByteArrayToImageSourceConverter}" />
+                 Converter="{StaticResource AvatarNoFallback}" />
             </Image.Source>
         </Image>
 
@@ -59,23 +54,20 @@
                                               CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
 
-                            <Label Text="{Binding CategoryName}" Grid.Column="0" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" TextColor="DarkViolet" />
+                            <Label Text="{Binding CategoryName}" Grid.Column="0" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" />
 
-                            <Image Source="{Binding FrontFlagUrl}" Grid.Column="1" WidthRequest="40" HeightRequest="25" Margin="5"/>
-                            <Image Source="{Binding BackFlagUrl}" Grid.Column="2" WidthRequest="40" HeightRequest="25" Margin="5"/>
+                            <Image Source="{Binding FrontFlagUrl}" Grid.Column="1" WidthRequest="40" HeightRequest="25" Margin="5" />
+                            <Image Source="{Binding BackFlagUrl}" Grid.Column="2" WidthRequest="40" HeightRequest="25" Margin="5" />
 
                             <ImageButton Source="add.png" Grid.Column="3" WidthRequest="30" HeightRequest="30" Margin="3"
-                                 BackgroundColor="Transparent"
                                  Command="{Binding Path=BindingContext.ViewFlashcardsCommand, Source={x:Reference Name=MainPageContent}}"
                                  CommandParameter="{Binding .}" />
 
                             <ImageButton Source="remove.png" Grid.Column="4" WidthRequest="30" HeightRequest="30" Margin="3"
-                                 BackgroundColor="Transparent"
                                  Command="{Binding Path=BindingContext.DeleteCategoryCommand, Source={x:Reference Name=MainPageContent}}"
                                  CommandParameter="{Binding .}" />
 
                             <ImageButton Source="cloud.png" Grid.Column="5" WidthRequest="30" HeightRequest="30" Margin="3"
-                                 BackgroundColor="Transparent"
                                  IsVisible="{Binding IsSent, Converter={StaticResource IsSentToVisibilityConverter}}"
                                  Command="{Binding Path=BindingContext.SendCategoryCommand, Source={x:Reference Name=MainPageContent}}"
                                  CommandParameter="{Binding .}" />
@@ -90,7 +82,7 @@
                 <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="#D600AA" />
+            <BoxView Grid.Row="0" />
         </Grid>
     </Grid>
 </ContentPage>

@@ -84,19 +84,6 @@ namespace FiszkiApp.View
             _isCardAnimating = false;
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            var savedColor = Preferences.Get("FlashcardBackgroundColor", "#512BD4");
-
-            FlashCardFrame.BackgroundColor = Color.FromArgb(savedColor);
-
-            var savedTextColor = Preferences.Get("FlashcardTextColor", "#000000");
-
-            FrontCard.TextColor = Color.FromArgb(savedTextColor);
-            BackCard.TextColor = Color.FromArgb(savedTextColor);
-        }
-
         private void FrontCard_SizeChanged(object sender, EventArgs e)
         {
             if (FrontCard == null || string.IsNullOrEmpty(FrontCard.Text) || FlashCardFrame == null)

@@ -13,24 +13,24 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <Image Source="background.png" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="4"/>
+        <Image Source="{DynamicResource BackgroundImage}" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="4" />
 
-        <Label Text="{Binding CategoryName}" Margin="50" TextColor="DarkViolet" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Start" Grid.Row="0"/>
+        <Label Text="{Binding CategoryName}" Margin="50" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Start" Grid.Row="0" />
 
         <Grid Margin="10" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Frame x:Name="FlashCardFrame" Grid.Row="1" BackgroundColor="{Binding FlashcardBackgroundColor}" BorderColor="#808080" CornerRadius="30" HasShadow="True"
-                   WidthRequest="350" HeightRequest="225" IsClippedToBounds="True">
+            <Frame x:Name="FlashCardFrame" Grid.Row="1" BackgroundColor="#B2F0F4FF" CornerRadius="30" HasShadow="True"
+                    WidthRequest="350" HeightRequest="225" IsClippedToBounds="True">
 
                 <Grid>
-                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsFrontVisible}" TextColor="{Binding FlashcardTextColor}" SizeChanged="FrontCard_SizeChanged" />
+                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsFrontVisible}" SizeChanged="FrontCard_SizeChanged" />
 
-                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBackVisible}" TextColor="{Binding FlashcardTextColor}" SizeChanged="BackCard_SizeChanged" />
+                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBackVisible}" SizeChanged="BackCard_SizeChanged" />
                 </Grid>
 
                 <Frame.GestureRecognizers>
@@ -46,9 +46,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ImageButton Source="previous.png" Command="{Binding PreviousFlashcardCommand}" Grid.Column="0" IsEnabled="{Binding CanGoPrevious}" Clicked="OnPreviousButtonClicked" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent" Margin="0,0,40,0"/>
+            <ImageButton Source="{DynamicResource PreviousImage}" Command="{Binding PreviousFlashcardCommand}" Grid.Column="0" IsEnabled="{Binding CanGoPrevious}" Clicked="OnPreviousButtonClicked" WidthRequest="100" HeightRequest="100" Margin="0,0,40,0" />
 
-            <ImageButton Source="next.png" Command="{Binding NextFlashcardCommand}" Grid.Column="1" IsEnabled="{Binding CanGoNext}" Clicked="OnNextButtonClicked" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent"/>
+            <ImageButton Source="{DynamicResource NextImage}" Command="{Binding NextFlashcardCommand}" Grid.Column="1" IsEnabled="{Binding CanGoNext}" Clicked="OnNextButtonClicked" WidthRequest="100" HeightRequest="100" />
         </Grid>
 
         <Grid Grid.Row="3" VerticalOptions="End">
@@ -56,7 +56,7 @@
                 <RowDefinition Height="3" />
             </Grid.RowDefinitions>
 
-            <BoxView Grid.Row="0" Color="#D600AA" />
+            <BoxView Grid.Row="0" />
         </Grid>
     </Grid>
 </ContentPage>

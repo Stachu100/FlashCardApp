@@ -7,20 +7,14 @@
              Shell.NavBarIsVisible="False">
 
     <Grid>
-        <Image Source="background.png"
-               Aspect="AspectFill"
-               Opacity="0.2"
-               VerticalOptions="FillAndExpand"
-               HorizontalOptions="FillAndExpand" />
+        <Image Source="{DynamicResource BackgroundImage}" Aspect="AspectFill" Opacity="0.2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
 
-        <VerticalStackLayout HorizontalOptions="Center"
-                             VerticalOptions="Center"
-                             Spacing="10">
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+            
             <ActivityIndicator IsRunning="True" />
-            <Label Text="Sprawdzanie poprawności danych" 
-                   HorizontalTextAlignment="Center"
-                   TextColor="Black"
-                   FontSize="18"/>
+            
+            <Label Text="Sprawdzanie poprawności danych" HorizontalTextAlignment="Center" TextColor="Black" FontSize="18" />
+            
         </VerticalStackLayout>
 
     </Grid>
