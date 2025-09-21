@@ -42,9 +42,10 @@ namespace FiszkiApp
 
         public void SetTheme(string theme)
         {
-            var oldTheme = Resources.MergedDictionaries.FirstOrDefault(d => d.ContainsKey("ThemeName"));
-            if (oldTheme != null)
-                Resources.MergedDictionaries.Remove(oldTheme);
+            var oldThemes = Resources.MergedDictionaries.Where(d => d.ContainsKey("ThemeName")).ToList();
+
+            foreach (var dict in oldThemes)
+                Resources.MergedDictionaries.Remove(dict);
 
             ResourceDictionary newDict = theme switch
             {

@@ -19,13 +19,14 @@
 
     <Color x:Key="BoxViewColor">#0078D7</Color>
     <Color x:Key="BoxViewBottomColor">#00A4EF</Color>
-    <Color x:Key="UserLabelColor">Black</Color>
+    <Color x:Key="UserLabelColor">Navy</Color>
+    <Color x:Key="ListViewBackgroundColor">#220063B1</Color>
 
     <Color x:Key="ButtonTextColor">#FFFFFF</Color>
-    <Color x:Key="ButtonBackgroundColor">#0078D7</Color>
+    <Color x:Key="ButtonBackgroundColor">MidnightBlue</Color>
     <Color x:Key="ButtonTextDisabledColor">#AAAAAA</Color>
     <Color x:Key="ButtonBackgroundDisabledColor">#E0E0E0</Color>
-    <Color x:Key="CheckBoxColor">#0078D7</Color>
+    <Color x:Key="CheckBoxColor">Navy</Color>
     <Color x:Key="CheckBoxDisabledColor">#AAAAAA</Color>
     <Color x:Key="DatePickerTextColor">#0078D7</Color>
     <Color x:Key="DatePickerTextDisabledColor">#AAAAAA</Color>
@@ -33,19 +34,19 @@
     <Color x:Key="EditorTextDisabledColor">#AAAAAA</Color>
     <Color x:Key="EditorPlaceholderColor">#00A4EF</Color>
     <Color x:Key="EntryTextColor">Black</Color>
-    <Color x:Key="EntryTextDisabledColor">#AAAAAA</Color>
-    <Color x:Key="EntryPlaceholderColor">DarkBlue</Color>
+    <Color x:Key="EntryTextDisabledColor">DarkRed</Color>
+    <Color x:Key="EntryPlaceholderColor">Crimson</Color>
     <Color x:Key="FrameBorderColor">#00A4EF</Color>
     <Color x:Key="FrameBackgroundColor">#220063B1</Color>
-    <Color x:Key="LabelTextColor">DarkBlue</Color>
+    <Color x:Key="LabelTextColor">Crimson</Color>
     <Color x:Key="LabelTextDisabledColor">#AAAAAA</Color>
     <Color x:Key="SpanTextColor">#0078D7</Color>
     <Color x:Key="LabelHeadlineTextColor">#0078D7</Color>
     <Color x:Key="LabelSubHeadlineTextColor">#00A4EF</Color>
     <Color x:Key="ListViewSeparatorColor">#00A4EF</Color>
     <Color x:Key="ListViewRefreshControlColor">#0078D7</Color>
-    <Color x:Key="PickerTextColor">#0078D7</Color>
-    <Color x:Key="PickerTitleColor">DarkBlue</Color>
+    <Color x:Key="PickerTextColor">DarkRed</Color>
+    <Color x:Key="PickerTitleColor">Crimson</Color>
     <Color x:Key="PickerTextDisabledColor">#AAAAAA</Color>
     <Color x:Key="PickerTitleDisabledColor">#AAAAAA</Color>
     <Color x:Key="ProgressBarColor">#0078D7</Color>

@@ -20,9 +20,10 @@
     <Color x:Key="BoxViewColor">#28A745</Color>
     <Color x:Key="BoxViewBottomColor">#6FCF97</Color>
     <Color x:Key="UserLabelColor">DarkGreen</Color>
+    <Color x:Key="ListViewBackgroundColor">#22006400</Color>
 
     <Color x:Key="ButtonTextColor">#FFFFFF</Color>
-    <Color x:Key="ButtonBackgroundColor">#28A745</Color>
+    <Color x:Key="ButtonBackgroundColor">OliveDrab</Color>
     <Color x:Key="ButtonTextDisabledColor">#AAAAAA</Color>
     <Color x:Key="ButtonBackgroundDisabledColor">#E0E0E0</Color>
     <Color x:Key="CheckBoxColor">#28A745</Color>
@@ -37,7 +38,7 @@
     <Color x:Key="EntryPlaceholderColor">DarkGreen</Color>
     <Color x:Key="FrameBorderColor">#6FCF97</Color>
     <Color x:Key="FrameBackgroundColor">#22006400</Color>
-    <Color x:Key="LabelTextColor">#28A745</Color>
+    <Color x:Key="LabelTextColor">Goldenrod</Color>
     <Color x:Key="LabelTextDisabledColor">#AAAAAA</Color>
     <Color x:Key="SpanTextColor">#28A745</Color>
     <Color x:Key="LabelHeadlineTextColor">#28A745</Color>
@@ -85,11 +86,11 @@
     <Color x:Key="ShellTitleColor">DarkGreen</Color>
     <Color x:Key="ShellDisabledColor">#AAAAAA</Color>
     <Color x:Key="ShellUnselectedColor">#FFFFFF</Color>
-    <Color x:Key="ShellTabBarBackgroundColor">#6FCF97</Color>
+    <Color x:Key="ShellTabBarBackgroundColor">LemonChiffon</Color>
     <Color x:Key="ShellTabBarForegroundColor">DarkGreen</Color>
     <Color x:Key="ShellTabBarTitleColor">DarkGreen</Color>
     <Color x:Key="FlyoutBackgroundColor">#D8F7E0</Color>
-    <Color x:Key="ShellTabBarUnselectedColor">#FFFFFF</Color>
+    <Color x:Key="ShellTabBarUnselectedColor">Grey</Color>
     <Color x:Key="NavigationPageBarBackgroundColor">#FFFFFF</Color>
     <Color x:Key="NavigationPageBarTextColor">#28A745</Color>
     <Color x:Key="NavigationPageIconColor">#28A745</Color>
