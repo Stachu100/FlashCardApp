@@ -34,7 +34,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                     return "Istnieje już użytkownik o podanej nazwie";
                 }
 
-                var user = new User { UserName = name, UserPassword = encryptedPassword };
+                var user = new User { UserName = name, UserPassword = encryptedPassword, Is_active = true};
                 var userContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
                 var userResponse = await _httpClient.PostAsync("User", userContent);
 

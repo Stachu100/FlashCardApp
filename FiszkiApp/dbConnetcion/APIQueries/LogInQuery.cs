@@ -49,6 +49,11 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 string decryptedPassword = EntityClasses.AesManaged.Decryption(user.UserPassword, encryptionKeys.EncryptionKey, encryptionKeys.IV);
 
+                if (!user.Is_active)
+                {
+                    return "Konto jest nie aktywne";
+                }
+
                 if (decryptedPassword != null && decryptedPassword == password)
                 {
                     return Convert.ToString(user.ID_User);
