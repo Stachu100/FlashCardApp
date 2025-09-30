@@ -51,7 +51,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 if (!user.Is_active)
                 {
-                    return "Konto jest nie aktywne";
+                    return "Konto jest nieaktywne";
                 }
 
                 if (decryptedPassword != null && decryptedPassword == password)

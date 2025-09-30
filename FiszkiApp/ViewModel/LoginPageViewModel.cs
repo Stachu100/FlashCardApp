@@ -55,7 +55,7 @@ namespace FiszkiApp.ViewModel
             {
                 string result = await _authService.Login(UserName, UserPassword, RememberMe);
 
-                if (result != "Hasło lub login jest niepoprawne" && result != "Wystąpił błąd podczas logowania" && result != "Konto jest nie aktywne")
+                if (result != "Hasło lub login jest niepoprawne" && result != "Wystąpił błąd podczas logowania" && result != "Konto jest nieaktywne")
                 {
                     int userId = int.Parse(result);
 

@@ -30,7 +30,7 @@ namespace FiszkiApp.Services
             var loginInQuery = new dbConnetcion.APIQueries.LogInQuery();
             string result = await loginInQuery.UserLogIn(userName, userPassword);
 
-            if (result != "Hasło lub login jest niepoprawne" && result != "Wystąpił błąd podczas logowania" && result != "Konto jest nie aktywne")
+            if (result != "Hasło lub login jest niepoprawne" && result != "Wystąpił błąd podczas logowania" && result != "Konto jest nieaktywne")
             {
 
                 Preferences.Default.Set(AuthStateKey, true);
