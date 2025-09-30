@@ -6,20 +6,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-//Webio.pl Db
-//builder.Services.AddDbContext<FlashCardDbContext>(options =>
-//    options.UseMySql(
-//        builder.Configuration.GetConnectionString("WebioDb"),
-//        new MySqlServerVersion(new Version(5, 7, 32))
-//    )
-//);
-
-// LocalDb
 builder.Services.AddDbContext<FlashCardDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("FiszkiApp")
+        builder.Configuration.GetConnectionString("AzureDb")
     )
 );
+
+//builder.Services.AddDbContext<FlashCardDbContext>(options =>
+//    options.UseSqlServer(
+//        builder.Configuration.GetConnectionString("FiszkiApp")
+//    )
+//);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
