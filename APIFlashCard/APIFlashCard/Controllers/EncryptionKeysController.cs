@@ -44,5 +44,21 @@ namespace APIFlashCard.Controllers
 
             return CreatedAtAction(nameof(GetEncryptionKeys), new { userId = encryptionKeys.ID_User }, encryptionKeys);
         }
+
+        [HttpPut("{userId:int}/ChangeEncryption")]
+        public async Task<IActionResult> UpdatePassword(int UserId, EncryptionKeys encryptionKeys)
+        {
+            var CurrentEncryptionKeys = await _context.EncryptionKeys.FirstOrDefaultAsync(e => e.ID_User == encryptionKeys.ID_User);
+            if (CurrentEncryptionKeys == null)
+            {
+                return NotFound(new { message = "Nie znaleziono użytkownika." });
+            }
+
+            CurrentEncryptionKeys.EncryptionKey = encryptionKeys.EncryptionKey ;
+            CurrentEncryptionKeys.IV = encryptionKeys.IV;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Dane pomyślnie zmienione" });
+        }
     }
 }

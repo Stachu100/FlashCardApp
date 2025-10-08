@@ -22,6 +22,7 @@ namespace FiszkiApp
             Routing.RegisterRoute(nameof(FlipCardPage), typeof(FlipCardPage));
             Routing.RegisterRoute(nameof(LookFlashCardPage), typeof(LookFlashCardPage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+            Routing.RegisterRoute(nameof(PasswordChangePage), typeof(PasswordChangePage));
 
             BindingContext = this;
 
@@ -30,6 +31,8 @@ namespace FiszkiApp
 
         public Command LogoutCommand => new Command(async () => await LogoutAsync());
         public Command SettingsCommand => new Command(async () => await SettingsAsync());
+
+        public Command ChangePassowrdCommand => new Command(async () => await ChangePasswordAsync());
 
         private async Task LogoutAsync()
         {
@@ -41,6 +44,12 @@ namespace FiszkiApp
         {
             Shell.Current.FlyoutIsPresented = false;
             await Shell.Current.GoToAsync("SettingsPage");
+        }
+
+        private async Task ChangePasswordAsync()
+        {
+            Shell.Current.FlyoutIsPresented = false;
+            await Shell.Current.GoToAsync("PasswordChangePage");
         }
     }
 }

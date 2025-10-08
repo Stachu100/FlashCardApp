@@ -78,6 +78,10 @@
     Command="{Binding LogoutCommand}" />
 
     <MenuItem
+    Text="Zmiana hasła"  
+    Command="{Binding ChangePassowrdCommand}" />
+    
+    <MenuItem
     Text="Ustawienia"  
     Command="{Binding SettingsCommand}" />
 

@@ -84,7 +84,9 @@ namespace FiszkiApp.ViewModel
                 EncryptionResult encryptionResult = AesManaged.Encryption((string)User.Password);
                 User.EncryptedPassword = encryptionResult.EncryptedData;                
                 var createUser = new CreateUser();
-                string result = await createUser.UserInsertAsync((string)User.Name, (byte[])User.EncryptedPassword, (string)User.FirstName, (string)User.LastName, (string)User.Country, (string)User.Email, (byte[])User.UploadedImage, (bool)User.IsAcceptedPolicy, encryptionResult.IV, encryptionResult.Key);
+                string result = await createUser.UserInsertAsync((string)User.Name, (byte[])User.EncryptedPassword, (string)User.FirstName, (string)User.LastName,
+                                                                    (string)User.Country, (string)User.Email, (byte[])User.UploadedImage, (bool)User.IsAcceptedPolicy,
+                                                                    encryptionResult.IV, encryptionResult.Key);
                 if (result == "Rejestracja zakończyła się sukcesem")
                 {
                     await Application.Current.MainPage.DisplayAlert("Sukcess", result, "OK");

@@ -47,5 +47,20 @@ namespace APIFlashCard.Controllers
 
             return CreatedAtAction(nameof(GetUserByUsername), new { username = user.UserName }, user);
         }
+
+        [HttpPut("{userId:int}/ChangePassword")]
+        public async Task<IActionResult> ChangePassowrdUser(int userId, [FromBody] byte[] EncryptedData)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.ID_User == userId);
+            if (user == null)
+            {
+                return NotFound(new { message = "Nie znaleziono użytkownika." });
+            }
+
+            user.UserPassword = EncryptedData;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Hasło zmienione pomyślnie" });
+        }
     }
 }

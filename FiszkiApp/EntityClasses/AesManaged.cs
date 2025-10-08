@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace FiszkiApp.EntityClasses
 {
-    internal class AesManaged
+    public class AesManaged
     {
         private static byte[] Key;
         private static byte[] IV;

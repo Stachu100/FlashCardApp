@@ -35,7 +35,6 @@ namespace FiszkiApp.Services
 
                 Preferences.Default.Set(AuthStateKey, true);
                 Preferences.Default.Set(UserNameKey, userName);
-                Preferences.Default.Set(UserPasswordKey, userPassword);
                 Preferences.Default.Set(UserIdKey, result);
                 Preferences.Default.Set(RememberMe, rememberMe);
                 return result;
