@@ -112,14 +112,14 @@ namespace FiszkiApp.ViewModel
 
                 if (result != null)
                 {
-                    // Use a `using` statement to ensure the stream is disposed of properly
+
                     using (var stream = await result.OpenReadAsync())
                     {
                         using (var memoryStream = new MemoryStream())
                         {
                             await stream.CopyToAsync(memoryStream);
 
-                            // Convert the memory stream to a byte array and assign it to the user's UploadedImage
+ 
                             user.UploadedImage = memoryStream.ToArray();
                             ImageAsByte = user.UploadedImage;
                         }
@@ -128,7 +128,6 @@ namespace FiszkiApp.ViewModel
             }
             catch (Exception ex)
             {
-                // Handle exceptions
                 await Application.Current.MainPage.DisplayAlert("Error", "An error occurred while uploading the image.", "OK");
             }
         }     

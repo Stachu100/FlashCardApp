@@ -24,13 +24,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
         {
             try
             {
-                //var requestBody = new
-                //{
-                //    iD_encryptionKeys = 0,
-                //    iD_User = UserId,
-                //    encryptionKey = Convert.ToBase64String(encryptionResult.EncryptedData),
-                //    iv = Convert.ToBase64String(encryptionResult.IV)
-                //};
+
 
                 var requestBody = new EncryptionKeys
                 {
@@ -40,7 +34,6 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 };
 
                 var json = JsonConvert.SerializeObject(requestBody);
-                //var json = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
                 var responseEncryption = await _httpClient.PutAsync($"EncryptionKeys/{UserId}/ChangeEncryption", content);
