@@ -6,9 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//builder.Services.AddDbContext<FlashCardDbContext>(options =>
+//    options.UseSqlServer(
+//        builder.Configuration.GetConnectionString("AzureDb")
+//    )
+//);
+
 builder.Services.AddDbContext<FlashCardDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("AzureDb")
+        builder.Configuration.GetConnectionString("GoogleDb")
     )
 );
 
