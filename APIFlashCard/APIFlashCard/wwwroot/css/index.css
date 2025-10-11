@@ -184,3 +184,33 @@ input, select {
     .flashcards-table tr:nth-child(odd) {
         background-color: #ffffff;
     }
+
+.toggle-btn {
+    margin-left: 12px;
+    padding: 0.3em 0.8em;
+    font-size: 0.85em;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+    .toggle-btn.active {
+        background-color: #66bb6a;
+    }
+
+        .toggle-btn.active:hover {
+            background-color: #4caf50;
+            transform: translateY(-1px);
+        }
+
+    .toggle-btn.deactivate {
+        background-color: #ef9a9a;
+    }
+
+        .toggle-btn.deactivate:hover {
+            background-color: #f44336;
+            transform: translateY(-1px);
+        }

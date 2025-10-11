@@ -6,8 +6,25 @@
     users.forEach(u => {
         const li = document.createElement('li');
         li.textContent = `${u.iD_User} ${u.userName}`;
+
+        const btn = document.createElement('button');
+        btn.textContent = u.is_active ? 'Deactivate' : 'Activate';
+        btn.className = `toggle-btn ${u.is_active ? 'active' : 'deactivate'}`;
+        btn.onclick = async () => {
+            await toggleUser(u.iD_User);
+            await loadUsers();
+        };
+
+        li.appendChild(btn);
         ul.appendChild(li);
     });
+}
+
+async function toggleUser(id) {
+    const res = await fetch(`/admin/users/${id}/toggle`, { method: 'PUT' });
+    if (!res.ok) {
+        alert('Nie udało się zmienić statusu użytkownika.');
+    }
 }
 
 async function loadLogs() {
@@ -17,7 +34,7 @@ async function loadLogs() {
     ul.innerHTML = '';
     logs.forEach(l => {
         const li = document.createElement('li');
-        li.textContent = `[${new Date(l.timeStamp).toLocaleString()}] (${l.level}) ${l.message}`;
+        li.textContent = `[${new Date(l.timeStamp + 'Z').toLocaleString()}] (${l.level}) ${l.message}`;
         ul.appendChild(li);
     });
 }

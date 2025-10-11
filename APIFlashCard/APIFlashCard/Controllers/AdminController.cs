@@ -21,6 +21,19 @@ public class AdminController : ControllerBase
         return Ok(users);
     }
 
+    [HttpPut("users/{id}/toggle")]
+    public async Task<IActionResult> ToggleUserActive(int id)
+    {
+        var user = await _context.Users.FindAsync(id);
+        if (user == null)
+            return NotFound(new { message = "Użytkownik nie istnieje." });
+
+        user.Is_active = !user.Is_active;
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = $"Status użytkownika {user.UserName} zmieniony na {(user.Is_active ? "aktywny" : "nieaktywny")}.", user.Is_active });
+    }
+
     [HttpGet("logs")]
     public async Task<IActionResult> GetLogs()
     {
