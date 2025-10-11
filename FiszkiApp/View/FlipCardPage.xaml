@@ -28,9 +28,9 @@
                     WidthRequest="350" HeightRequest="225" IsClippedToBounds="True">
 
                 <Grid>
-                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsFrontVisible}" SizeChanged="FrontCard_SizeChanged" />
+                    <Label x:Name="FrontCard" Text="{Binding CurrentFlashcard.FrontFlashCard}" SizeChanged="FrontCard_SizeChanged" LineBreakMode="WordWrap" MaxLines="3" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsFrontVisible}" />
 
-                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}" FontSize="48" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBackVisible}" SizeChanged="BackCard_SizeChanged" />
+                    <Label x:Name="BackCard" Text="{Binding CurrentFlashcard.BackFlashCard}" SizeChanged="BackCard_SizeChanged" LineBreakMode="WordWrap" MaxLines="3" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsBackVisible}" />
                 </Grid>
 
                 <Frame.GestureRecognizers>

@@ -86,51 +86,44 @@ namespace FiszkiApp.View
 
         private void FrontCard_SizeChanged(object sender, EventArgs e)
         {
-            if (FrontCard == null || string.IsNullOrEmpty(FrontCard.Text) || FlashCardFrame == null)
-                return;
-
-            double maxFontSize = 100;
-            double minFontSize = 10;
-            double fontSize = maxFontSize;
-            FrontCard.FontSize = fontSize;
-
-            double maxWidth = FlashCardFrame.Width - FlashCardFrame.Padding.Left - FlashCardFrame.Padding.Right;
-            double maxHeight = FlashCardFrame.Height - FlashCardFrame.Padding.Top - FlashCardFrame.Padding.Bottom;
-
-            while (fontSize > minFontSize)
-            {
-                FrontCard.FontSize = fontSize;
-                var request = FrontCard.Measure(double.PositiveInfinity, double.PositiveInfinity);
-
-                if (request.Request.Width <= maxWidth && request.Request.Height <= maxHeight)
-                    break;
-
-                fontSize -= 1;
-            }
+            AdjustFontFlexible(FrontCard, FlashCardFrame);
         }
 
         private void BackCard_SizeChanged(object sender, EventArgs e)
         {
-            if (BackCard == null || string.IsNullOrEmpty(BackCard.Text) || FlashCardFrame == null)
+            AdjustFontFlexible(BackCard, FlashCardFrame);
+        }
+
+        private void AdjustFontFlexible(Label label, Frame frame)
+        {
+            if (label == null || string.IsNullOrEmpty(label.Text) || frame == null)
                 return;
 
-            double maxFontSize = 100;
-            double minFontSize = 10;
-            double fontSize = maxFontSize;
-            BackCard.FontSize = fontSize;
+            double maxFont = 100;
+            double minFont = 38;
+            int maxChars = 50;
 
-            double maxWidth = FlashCardFrame.Width - FlashCardFrame.Padding.Left - FlashCardFrame.Padding.Right;
-            double maxHeight = FlashCardFrame.Height - FlashCardFrame.Padding.Top - FlashCardFrame.Padding.Bottom;
+            int length = label.Text.Length;
 
-            while (fontSize > minFontSize)
+            double fontSize;
+            if (length <= 5)
+                fontSize = maxFont;
+            else if (length >= maxChars)
+                fontSize = minFont;
+            else
+                fontSize = maxFont - ((length - 5) / (double)(maxChars - 5)) * (maxFont - minFont);
+
+            label.FontSize = fontSize;
+
+            double maxWidth = frame.Width - frame.Padding.Left - frame.Padding.Right;
+            double maxHeight = frame.Height - frame.Padding.Top - frame.Padding.Bottom;
+
+            var request = label.Measure(double.PositiveInfinity, double.PositiveInfinity);
+            while ((request.Request.Width > maxWidth || request.Request.Height > maxHeight) && fontSize > minFont)
             {
-                BackCard.FontSize = fontSize;
-                var request = BackCard.Measure(double.PositiveInfinity, double.PositiveInfinity);
-
-                if (request.Request.Width <= maxWidth && request.Request.Height <= maxHeight)
-                    break;
-
                 fontSize -= 1;
+                label.FontSize = fontSize;
+                request = label.Measure(double.PositiveInfinity, double.PositiveInfinity);
             }
         }
 
