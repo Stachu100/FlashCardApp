@@ -2,19 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using FiszkiApp.dbConnetcion.APIQueries;
 using FiszkiApp.EntityClasses;
-using FiszkiApp.EntityClasses.Models;
 using FiszkiApp.Services;
-using FiszkiApp.View;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks;
 using static FiszkiApp.EntityClasses.AesManaged;
 
 namespace FiszkiApp.ViewModel

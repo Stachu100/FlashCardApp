@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using FiszkiApp.dbConnetcion.APIQueries;
 
 namespace FiszkiApp.Services
 {
@@ -18,13 +19,31 @@ namespace FiszkiApp.Services
             var userId = Preferences.Default.Get<string>(UserIdKey, null);
             var rememberMe = Preferences.Default.Get<bool>(RememberMe, false);
 
-            if (authState && !string.IsNullOrEmpty(userId))
+            if (authState && !string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(userName))
             {
-                return (true, userId);
+                try
+                {
+                    var logInQuery = new LogInQuery();
+                    bool? isActive = await logInQuery.IsUserActiveAsync(userName);
+
+                    if (isActive != true)
+                    {
+                        Logout();
+                        return (false, null);
+                    }
+
+                    return (true, userId);
+                }
+                catch
+                {
+                    Logout();
+                    return (false, null);
+                }
             }
 
             return (false, null);
         }
+
         public async Task<string> Login(string userName, string userPassword, bool rememberMe)
         {
             var loginInQuery = new dbConnetcion.APIQueries.LogInQuery();

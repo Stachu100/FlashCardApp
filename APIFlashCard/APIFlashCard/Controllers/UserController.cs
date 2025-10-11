@@ -62,5 +62,18 @@ namespace APIFlashCard.Controllers
 
             return Ok(new { message = "Hasło zmienione pomyślnie" });
         }
+
+        [HttpGet("active/{username}")]
+        public async Task<ActionResult<bool>> IsUserActive(string username)
+        {
+            var user = await _context.Users.Where(u => u.UserName == username).Select(u => new { u.Is_active }).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return NotFound(new { message = "Użytkownik nie istnieje." });
+            }
+
+            return Ok(user.Is_active);
+        }
     }
 }

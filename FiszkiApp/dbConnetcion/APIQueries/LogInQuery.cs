@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using FiszkiApp.Services;
 using Newtonsoft.Json;
 using FiszkiApp.EntityClasses.Models;
+using System.Net;
 
 namespace FiszkiApp.dbConnetcion.APIQueries
 {
@@ -66,6 +67,27 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             catch (Exception)
             {
                 return "Wystąpił błąd podczas logowania";
+            }
+        }
+
+        public async Task<bool?> IsUserActiveAsync(string username)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"user/active/{username}");
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                    return null;
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+                bool isActive = JsonConvert.DeserializeObject<bool>(json);
+                return isActive;
+            }
+            catch
+            {
+                return null;
             }
         }
     }
