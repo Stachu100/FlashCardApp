@@ -20,5 +20,7 @@ namespace APIFlashCard.Models
 
         [Required]
         public bool Is_active { get; set; }
+
+        public bool Is_admin { get; set; } = false;
     }
 }

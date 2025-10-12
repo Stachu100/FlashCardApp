@@ -1,11 +1,35 @@
 ﻿async function login() {
+    const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const errorMsg = document.getElementById('error-msg');
 
-    if (password === "admin") {
-        document.cookie = "admin_logged_in=true; path=/admin";
+    errorMsg.textContent = "";
+
+    if (!username || !password) {
+        errorMsg.textContent = "Please provide username and password.";
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/adminpanellogin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            errorMsg.textContent = data.message || "Login failed.";
+            return;
+        }
+
+        document.cookie = "admin_logged_in=true; path=/; Secure; SameSite=Lax";
+
         window.location.href = "index.html";
-    } else {
-        errorMsg.textContent = "Wrong password. Try again.";
+    }
+
+    catch (err) {
+        errorMsg.textContent = "Login failed: " + err.message;
     }
 }

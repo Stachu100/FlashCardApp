@@ -120,6 +120,13 @@ async function editCategory(category) {
     loadCategories();
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    loadUsers();
+    loadLogs();
+    loadCategories();
+    document.getElementById('addCategoryBtn').onclick = addCategory;
+});
+
 async function deleteCategory(id) {
     if (!confirm("Delete this category (and its flashcards)?")) return;
 
@@ -173,14 +180,12 @@ async function loadFlashCards(id_Category, categoryName) {
     };
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.onclick = logout;
+});
+
 function logout() {
-    document.cookie = "admin_logged_in=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/admin;";
+    document.cookie = "admin_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     window.location.href = "login.html";
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadUsers();
-    loadLogs();
-    loadCategories();
-    document.getElementById('addCategoryBtn').onclick = addCategory;
-});
