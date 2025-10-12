@@ -58,9 +58,15 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 var response = await _httpClient.PostAsync("usercountries", content);
+
                 if (response.IsSuccessStatusCode)
                 {
-                    CurrentUserCountries?.Add(userCountry);
+                    if (CurrentUserCountries == null)
+                    {
+                        CurrentUserCountries = new List<UserCountries>();
+                    }                        
+
+                    CurrentUserCountries.Add(userCountry);
                     OnPropertyChanged(nameof(CurrentUserCountries));
                     return true;
                 }
@@ -81,7 +87,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 var response = await _httpClient.DeleteAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
-                    CurrentUserCountries?.RemoveAll(c => c.ID_UserCountries == countryId);
+                    CurrentUserCountries?.RemoveAll(c => c.ID_Country == countryId);
                     OnPropertyChanged(nameof(CurrentUserCountries));
                     return true;
                 }
