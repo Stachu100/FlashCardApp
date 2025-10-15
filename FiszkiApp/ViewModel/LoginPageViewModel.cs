@@ -53,11 +53,11 @@ namespace FiszkiApp.ViewModel
             }
             else
             {
-                string result = await _authService.Login(UserName, UserPassword, RememberMe);
+                var result = await _authService.Login(UserName, UserPassword, RememberMe);
 
-                if (result != "Hasło lub login jest niepoprawne" && result != "Wystąpił błąd podczas logowania" && result != "Konto jest nieaktywne")
+                if (result.Message != "Hasło lub login jest niepoprawne" && result.Message != "Wystąpił błąd podczas logowania" && result.Message != "Konto jest nieaktywne")
                 {
-                    int userId = int.Parse(result);
+                    int userId = result.UserId;
 
                     await App.ProfileDetails.GetUserDetailsAsync(userId);
                     await App.UserCountriesService.GetUserCountriesByUserIdAsync(userId);
@@ -66,7 +66,7 @@ namespace FiszkiApp.ViewModel
                 }
                 else
                 {
-                    ErrorMessages = result;
+                    ErrorMessages = result.Message;
                 }
             }
         }

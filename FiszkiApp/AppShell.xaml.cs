@@ -11,6 +11,7 @@ namespace FiszkiApp
         {
             InitializeComponent();
 
+
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
@@ -23,6 +24,7 @@ namespace FiszkiApp
             Routing.RegisterRoute(nameof(LookFlashCardPage), typeof(LookFlashCardPage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
             Routing.RegisterRoute(nameof(PasswordChangePage), typeof(PasswordChangePage));
+            Routing.RegisterRoute(nameof(QrLoginPage), typeof(QrLoginPage));
 
             BindingContext = this;
 
@@ -30,9 +32,12 @@ namespace FiszkiApp
         }
 
         public Command LogoutCommand => new Command(async () => await LogoutAsync());
+
         public Command SettingsCommand => new Command(async () => await SettingsAsync());
 
         public Command ChangePassowrdCommand => new Command(async () => await ChangePasswordAsync());
+
+        public Command QrLoginCommand => new Command(async () => await ChangeQrLoginAsync());
 
         private async Task LogoutAsync()
         {
@@ -50,6 +55,12 @@ namespace FiszkiApp
         {
             Shell.Current.FlyoutIsPresented = false;
             await Shell.Current.GoToAsync("PasswordChangePage");
+        }
+
+        private async Task ChangeQrLoginAsync()
+        {
+            Shell.Current.FlyoutIsPresented = false;
+            await Shell.Current.GoToAsync("QrLoginPage");
         }
     }
 }

@@ -2,6 +2,8 @@
 using FiszkiApp.Services;
 using FiszkiApp.View;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
+using ZXing.Net.Maui.Controls;
 
 namespace FiszkiApp
 {
@@ -13,6 +15,8 @@ namespace FiszkiApp
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseBarcodeReader()
+
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -34,8 +38,9 @@ namespace FiszkiApp
             builder.Services.AddTransient<LookFlashCardPage>();
             builder.Services.AddTransient<AddFlashcardsPage>();
             builder.Services.AddTransient<AddCategoryPage>();
-            builder.Services.AddTransient <PasswordChangePage>();
-            builder.Services.AddTransient<FlipCardPage>();;
+            builder.Services.AddTransient<PasswordChangePage>();
+            builder.Services.AddTransient<FlipCardPage>(); ;
+            builder.Services.AddTransient<QrLoginPage>();
 
             return builder.Build();
         }

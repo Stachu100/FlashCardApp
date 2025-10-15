@@ -64,9 +64,9 @@ namespace FiszkiApp.ViewModel
             var UserName = Preferences.Default.Get("UserName", "");
 
 
-            string resultLoginin = await _authService.Login(UserName, ChangePassowrd.OldPassword, true);
+            var resultLoginin = await _authService.Login(UserName, ChangePassowrd.OldPassword, true);
 
-            if (resultLoginin == "Hasło lub login jest niepoprawne" || resultLoginin == "Wystąpił błąd podczas logowania" || resultLoginin == "Konto jest nieaktywne")
+            if (resultLoginin.Message == "Hasło lub login jest niepoprawne" || resultLoginin.Message == "Wystąpił błąd podczas logowania" || resultLoginin.Message == "Konto jest nieaktywne")
             {
                 ErrorMessages = "Stare hasło nie jest poprawne";
             }
@@ -79,7 +79,7 @@ namespace FiszkiApp.ViewModel
                 EncryptionResult encryptionResult = AesManaged.Encryption((string)changePassowrd.NewPassword);
                 encryptedPassword = encryptionResult.EncryptedData;
 
-                var ChangePasswordService = new dbConnetcion.APIQueries.ChangePasswordService();
+                var ChangePasswordService = new ChangePasswordService();
                 bool result = await ChangePasswordService.UpdatePasswordAsync(UserIdint, encryptionResult);
                 if (result) await Application.Current.MainPage.DisplayAlert("Sukcess","Zmiana hasła przebiegła pomyślnie", "OK");
             }

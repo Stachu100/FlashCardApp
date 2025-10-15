@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading.Tasks;
 using FiszkiApp.Services;
 using Newtonsoft.Json;
 using FiszkiApp.EntityClasses.Models;
@@ -16,14 +15,14 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             _httpClient = HttpClientService.Instance.HttpClient;
         }
 
-        public async Task<string> UserLogIn(string name, string password)
+        public async Task<UserLoginResult> UserLogIn(string name, string password)
         {
             try
             {
                 var userResponse = await _httpClient.GetAsync($"user/{name}");
                 if (!userResponse.IsSuccessStatusCode)
                 {
-                    return "Hasło lub login jest niepoprawne";
+                    return new UserLoginResult { Message = "Hasło lub login jest niepoprawne" };
                 }
 
                 var userJson = await userResponse.Content.ReadAsStringAsync();
@@ -31,13 +30,13 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 if (user == null)
                 {
-                    return "Hasło lub login jest niepoprawne";
+                    return new UserLoginResult { Message = "Hasło lub login jest niepoprawne" };
                 }
 
                 var keysResponse = await _httpClient.GetAsync($"encryptionkeys/{user.ID_User}");
                 if (!keysResponse.IsSuccessStatusCode)
                 {
-                    return "Wystąpił problem z pobraniem kluczy szyfrowania.";
+                    return new UserLoginResult { Message = "Wystąpił problem z pobraniem kluczy szyfrowania." };
                 }
 
                 var keysJson = await keysResponse.Content.ReadAsStringAsync();
@@ -45,28 +44,32 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 if (encryptionKeys == null)
                 {
-                    return "Wystąpił problem z pobraniem kluczy szyfrowania.";
+                    return new UserLoginResult { Message = "Wystąpił problem z pobraniem kluczy szyfrowania." };
                 }
 
-                string decryptedPassword = EntityClasses.AesManaged.Decryption(user.UserPassword, encryptionKeys.EncryptionKey, encryptionKeys.IV);
+                string decryptedPassword = EntityClasses.AesManaged.Decryption(
+                    user.UserPassword, encryptionKeys.EncryptionKey, encryptionKeys.IV);
 
                 if (!user.Is_active)
                 {
-                    return "Konto jest nieaktywne";
+                    return new UserLoginResult { Message = "Konto jest nieaktywne" };
                 }
 
                 if (decryptedPassword != null && decryptedPassword == password)
                 {
-                    return Convert.ToString(user.ID_User);
+                    return new UserLoginResult
+                    {
+                        UserId = user.ID_User,
+                        IsAdmin = user.Is_admin,
+                        Message = "Zalogowano poprawnie"
+                    };
                 }
-                else
-                {
-                    return "Hasło lub login jest niepoprawne";
-                }
+
+                return new UserLoginResult { Message = "Hasło lub login jest niepoprawne" };
             }
-            catch (Exception)
+            catch
             {
-                return "Wystąpił błąd podczas logowania";
+                return new UserLoginResult { Message = "Wystąpił błąd podczas logowania" };
             }
         }
 
@@ -88,6 +91,31 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             catch
             {
                 return null;
+            }
+        }
+
+        public async Task<string> LoginByQrCodeAsync(string qrToken, int userId)
+        {
+            try
+            {
+                var content = new StringContent(
+    JsonConvert.SerializeObject(new { token = qrToken, userID = userId }),
+    Encoding.UTF8,
+    "application/json"
+);
+
+                var response = await _httpClient.PostAsync("qrlogin/verify", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return "Niepoprawny kod QR lub błąd logowania";
+                }
+
+                return "Zalogowano pomyślnie";
+            }
+            catch (Exception)
+            {
+                return "Błąd podczas logowania QR";
             }
         }
     }

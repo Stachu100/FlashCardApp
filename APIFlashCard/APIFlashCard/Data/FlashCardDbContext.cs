@@ -15,6 +15,7 @@ namespace APIFlashCard.Data
         public DbSet<UserCountries> UserCountries { get; set; }
         public DbSet<FlashCard> FlashCards { get; set; }
         public DbSet<Log> Logs { get; set; }
+        public DbSet<QrLoginToken> QrLoginTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,7 +40,7 @@ namespace APIFlashCard.Data
                 .HasKey(ek => ek.ID_encryptionKeys);
 
             modelBuilder.Entity<UserCountries>()
-                .ToTable("usercountries")
+                .ToTable("userCountries")
                 .HasKey(uc => uc.ID_UserCountries);
 
             modelBuilder.Entity<FlashCard>()
@@ -49,6 +50,10 @@ namespace APIFlashCard.Data
             modelBuilder.Entity<Log>()
                 .ToTable("logs")
                 .HasKey(l => l.Id);
+
+            modelBuilder.Entity<QrLoginToken>()
+                .ToTable("qrLoginToken")
+                .HasKey(qlt => qlt.ID_Token);    
         }
     }
 }

@@ -6,5 +6,6 @@
         public string UserName { get; set; }
         public byte[] UserPassword { get; set; }
         public bool Is_active { get; set; }
+        public bool Is_admin { get; set; }
     }
 }

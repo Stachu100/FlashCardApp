@@ -20,6 +20,7 @@
     <Color x:Key="BoxViewColor">#0078D7</Color>
     <Color x:Key="BoxViewBottomColor">#00A4EF</Color>
     <Color x:Key="UserLabelColor">Navy</Color>
+    <Color x:Key="CameraStatusLabelColor">Navy</Color>
     <Color x:Key="ListViewBackgroundColor">#220063B1</Color>
 
     <Color x:Key="ButtonTextColor">#FFFFFF</Color>

@@ -21,6 +21,7 @@
     <Color x:Key="BoxViewColor">#D600AA</Color>
     <Color x:Key="BoxViewBottomColor">#ac99ea</Color>
     <Color x:Key="UserLabelColor">#80005F</Color>
+    <Color x:Key="CameraStatusLabelColor">#80005F</Color>
     <Color x:Key="ListViewBackgroundColor">#22512BD4</Color>
 
     <Color x:Key="ButtonTextColor">#FFFFFF</Color>

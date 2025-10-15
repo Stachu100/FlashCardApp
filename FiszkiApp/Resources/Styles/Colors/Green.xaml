@@ -20,6 +20,7 @@
     <Color x:Key="BoxViewColor">#28A745</Color>
     <Color x:Key="BoxViewBottomColor">#6FCF97</Color>
     <Color x:Key="UserLabelColor">DarkGreen</Color>
+    <Color x:Key="CameraStatusLabelColor">DarkGreen</Color>
     <Color x:Key="ListViewBackgroundColor">#22006400</Color>
 
     <Color x:Key="ButtonTextColor">#FFFFFF</Color>

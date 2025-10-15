@@ -1,11 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using FiszkiApp.dbConnetcion.APIQueries;
 using FiszkiApp.Services;
 using System.Collections.ObjectModel;
 using FiszkiApp.EntityClasses.Models;
-using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
 
 namespace FiszkiApp.ViewModel
 {
