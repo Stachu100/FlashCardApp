@@ -98,11 +98,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
         {
             try
             {
-                var content = new StringContent(
-    JsonConvert.SerializeObject(new { token = qrToken, userID = userId }),
-    Encoding.UTF8,
-    "application/json"
-);
+                var content = new StringContent(JsonConvert.SerializeObject(new { token = qrToken, userID = userId }),Encoding.UTF8,"application/json");
 
                 var response = await _httpClient.PostAsync("qrlogin/verify", content);
 

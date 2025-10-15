@@ -14,9 +14,12 @@
             <button onclick="login()">Login</button>
             <p id="error-msg"></p>
         </div>
-        <button id="qr-login-btn" onclick="startQrLogin()">Logowanie QR</button>
-        <canvas id="qrCanvas"></canvas>
-        <p id="qr-status"></p>
+        <div class="login-card qr-card">
+            <h2>QR Login</h2>
+            <button id="qr-login-btn" class="btn-primary-qr" onclick="startQrLogin()">QR Login</button>
+            <canvas id="qrCanvas"></canvas>
+            <p id="qr-status"></p>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>

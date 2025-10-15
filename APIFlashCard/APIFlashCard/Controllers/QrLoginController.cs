@@ -57,7 +57,6 @@ namespace APIFlashCard.Controllers
             //    return BadRequest(new { message = "Token wygasł" });
 
             tokenEntry.UserID = request.UserId;
-            tokenEntry.IsUsed = true;
             await _context.SaveChangesAsync();
 
             var user = await _context.Users.FindAsync(request.UserId);
@@ -78,10 +77,13 @@ namespace APIFlashCard.Controllers
                 return Ok(new { success = false });
 
             var tokenEntry = await _context.QrLoginTokens
-                .FirstOrDefaultAsync(t => t.Token == request.Token && t.UserID != null);
+                .FirstOrDefaultAsync(t => t.Token == request.Token && t.UserID != null && !t.IsUsed);
 
             if (tokenEntry == null)
                 return Ok(new { success = false });
+
+            tokenEntry.IsUsed = true;
+            await _context.SaveChangesAsync();
 
             var user = await _context.Users.FindAsync(tokenEntry.UserID.Value);
             var username = user?.UserName ?? string.Empty;

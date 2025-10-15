@@ -90,7 +90,7 @@ async function addCategory() {
     document.getElementById('categoryName').value = '';
     document.getElementById('frontLang').value = '';
     document.getElementById('backLang').value = '';
-    document.getElementById('level').value = '';
+    document.getElementById('level').value = 'Brak';
     loadCategories();
 }
 
@@ -104,7 +104,10 @@ async function editCategory(category) {
     const newBack = prompt("Back Language:", category.backLanguage);
     if (!newBack) return;
 
-    const newLevel = prompt("Level:", category.languageLevel ?? "");
+    const levelSelect = document.getElementById('level');
+    levelSelect.value = category.languageLevel || "Brak";
+
+    const newLevel = levelSelect.value;
 
     await fetch(`/admin/categories/${category.iD_Category}`, {
         method: 'PUT',
