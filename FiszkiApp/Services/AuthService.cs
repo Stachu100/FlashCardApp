@@ -12,7 +12,7 @@ namespace FiszkiApp.Services
         private const string IsadminKey = "Is_admin";
         private const string UserIdKey = "UserId";
         private const string RememberMe = "RememberMe";
-        public async Task<(bool AuthStateKey, string? UserId)> IsAuthenticatedAsync()
+        public async Task<(bool AuthStateKey, string? UserId, bool IsAdmin)> IsAuthenticatedAsync()
         {
             var authState = Preferences.Default.Get(AuthStateKey, false);
             var userName = Preferences.Default.Get<string>(UserNameKey, null);
@@ -30,19 +30,19 @@ namespace FiszkiApp.Services
                     if (isActive != true)
                     {
                         Logout();
-                        return (false, null);
+                        return (false, null, false);
                     }
 
-                    return (true, userId);
+                    return (true, userId, is_admin);
                 }
                 catch
                 {
                     Logout();
-                    return (false, null);
+                    return (false, null, false);
                 }
             }
 
-            return (false, null);
+            return (false, null, false);
         }
 
         public async Task<UserLoginResult> Login(string userName, string userPassword, bool rememberMe)

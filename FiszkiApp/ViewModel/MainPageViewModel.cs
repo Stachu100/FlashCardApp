@@ -53,7 +53,7 @@ namespace FiszkiApp.ViewModel
 
         public async Task LoadCategoriesAsync()
         {
-            var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
+            var (isAuthenticated, userIdString, isAdmin) = await _authService.IsAuthenticatedAsync();
 
             if (isAuthenticated && int.TryParse(userIdString, out int userId) && userId > 0)
             {
@@ -85,7 +85,7 @@ namespace FiszkiApp.ViewModel
         {
             if (category != null)
             {
-                var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
+                var (isAuthenticated, userIdString, isAdmin) = await _authService.IsAuthenticatedAsync();
 
                 if (isAuthenticated && int.TryParse(userIdString, out int userId) && userId > 0)
                 {

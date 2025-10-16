@@ -133,7 +133,7 @@ namespace FiszkiApp.ViewModel
                     return;
                 }
 
-                var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
+                var (isAuthenticated, userIdString, isAdmin) = await _authService.IsAuthenticatedAsync();
 
                 if (isAuthenticated && int.TryParse(userIdString, out int userId) && userId > 0)
                 {
@@ -172,7 +172,7 @@ namespace FiszkiApp.ViewModel
 
         public async Task LoadUserLanguagesAsync()
         {
-            var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
+            var (isAuthenticated, userIdString, isAdmin) = await _authService.IsAuthenticatedAsync();
 
             if (isAuthenticated && int.TryParse(userIdString, out int userId) && userId > 0)
             {

@@ -87,6 +87,7 @@
 
     <MenuItem
     x:Name="QrLoginMenuItem"
+    ClassId="QrLogin"
     Text="Logowanie QR"
     Command="{Binding QrLoginCommand}" />
 

@@ -80,7 +80,7 @@ namespace FiszkiApp.ViewModel
         {
             try
             {
-                var (isAuthenticated, userID) = await _authService.IsAuthenticatedAsync();
+                var (isAuthenticated, userID, isAdmin) = await _authService.IsAuthenticatedAsync();
                 intUserId = Convert.ToInt32(userID);
 
                 var userDetails = App.ProfileDetails.CurrentUser;

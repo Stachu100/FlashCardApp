@@ -15,13 +15,15 @@ public partial class LoadingPage : ContentPage
     {
         base.OnAppearing();
 
-        var (isAuthenticated, userId) = await _authService.IsAuthenticatedAsync();
+        var (isAuthenticated, userId, isAdmin) = await _authService.IsAuthenticatedAsync();
 
         if (isAuthenticated && int.TryParse(userId, out int parsedUserId))
         {
             await App.CountriesDic.GetCountriesWithFlagsAsync();
             await App.ProfileDetails.GetUserDetailsAsync(parsedUserId);
             await App.UserCountriesService.GetUserCountriesByUserIdAsync(parsedUserId);
+
+            (App.Current.MainPage as AppShell)?.UpdateAdminMenu(isAdmin);
 
             await Task.Delay(500);
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");

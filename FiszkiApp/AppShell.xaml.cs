@@ -1,4 +1,5 @@
-﻿using FiszkiApp.Services;
+﻿using System.Reflection;
+using FiszkiApp.Services;
 using FiszkiApp.View;
 
 namespace FiszkiApp
@@ -28,6 +29,34 @@ namespace FiszkiApp
             BindingContext = this;
 
             _authService = new AuthService();
+        }
+
+        public void UpdateAdminMenu(bool isAdmin)
+        {
+            if (Application.Current?.MainPage is not Shell shell)
+                return;
+
+            foreach (ShellItem item in shell.Items)
+            {
+                if (item is null)
+                    continue;
+
+                if (item.GetType().ToString().Equals("Microsoft.Maui.Controls.MenuShellItem", StringComparison.OrdinalIgnoreCase))
+                {
+                    Type msiType = item.GetType();
+                    PropertyInfo? miProp = msiType.GetProperty("MenuItem");
+                    if (miProp is null)
+                        continue;
+
+                    if (miProp.GetValue(item) is not MenuItem menu)
+                        continue;
+
+                    if (menu.ClassId?.Equals("QrLogin", StringComparison.OrdinalIgnoreCase) == true)
+                    {
+                        item.SetValue(ShellItem.IsVisibleProperty, isAdmin);
+                    }
+                }
+            }
         }
 
         public Command LogoutCommand => new Command(async () => await LogoutAsync());

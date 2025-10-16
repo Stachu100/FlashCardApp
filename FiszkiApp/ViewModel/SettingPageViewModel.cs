@@ -40,7 +40,7 @@ namespace FiszkiApp.ViewModel
                 return;
             }
 
-            var (isAuthenticated, userIdString) = await _authService.IsAuthenticatedAsync();
+            var (isAuthenticated, userIdString, isAdmin) = await _authService.IsAuthenticatedAsync();
             if (!isAuthenticated || !int.TryParse(userIdString, out int userId) || userId <= 0)
             {
                 await Shell.Current.DisplayAlert("Error", $"Ups... Coœ posz³o nie tak.", "OK");

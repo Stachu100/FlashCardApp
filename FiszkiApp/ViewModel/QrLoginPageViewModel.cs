@@ -26,7 +26,7 @@ namespace FiszkiApp.ViewModel
         {
             StatusMessage = "Trwa weryfikacja kodu QR...";
 
-            var (isAuthenticated, userId) = await _authService.IsAuthenticatedAsync();
+            var (isAuthenticated, userId, isAdmin) = await _authService.IsAuthenticatedAsync();
 
             if (isAuthenticated && int.TryParse(userId, out int parsedUserId))
             {
