@@ -23,9 +23,13 @@ namespace APIFlashCard.Data
                 .ToTable("category")
                 .HasKey(c => c.ID_Category);
 
-            modelBuilder.Entity<User>()
-                .ToTable("user")
-                .HasKey(u => u.ID_User);
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("user")
+                      .HasKey(u => u.ID_User);
+
+                entity.ToTable(tb => tb.HasTrigger("trigger_User_Update"));
+            });
 
             modelBuilder.Entity<Countries>()
                 .ToTable("countries")

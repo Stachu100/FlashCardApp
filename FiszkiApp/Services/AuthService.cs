@@ -62,7 +62,7 @@ namespace FiszkiApp.Services
         }
         public void Logout()
         {
-            Preferences.Default.Remove(AuthStateKey);
+            Preferences.Clear();
         }
     }
 }
