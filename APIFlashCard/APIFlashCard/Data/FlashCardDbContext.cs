@@ -19,9 +19,13 @@ namespace APIFlashCard.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>()
-                .ToTable("category")
-                .HasKey(c => c.ID_Category);
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.ToTable("category")
+                    .HasKey(c => c.ID_Category);
+
+                entity.ToTable(tb => tb.HasTrigger("trigger_Category_Update"));
+            });
 
             modelBuilder.Entity<User>(entity =>
             {
