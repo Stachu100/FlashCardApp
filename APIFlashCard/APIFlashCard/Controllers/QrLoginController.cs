@@ -25,7 +25,7 @@ namespace APIFlashCard.Controllers
 
             var token = "TEST-TOKEN-1234";
 
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
 
             var entry = new QrLoginToken
             {
@@ -53,8 +53,8 @@ namespace APIFlashCard.Controllers
             if (tokenEntry.IsUsed)
                 return BadRequest(new { message = "Token został już użyty" });
 
-            //if (tokenEntry.ExpiresAt < DateTime.UtcNow)
-            //    return BadRequest(new { message = "Token wygasł" });
+            if (tokenEntry.ExpiresAt < DateTime.Now)
+                return BadRequest(new { message = "Token wygasł" });
 
             tokenEntry.UserID = request.UserId;
             await _context.SaveChangesAsync();

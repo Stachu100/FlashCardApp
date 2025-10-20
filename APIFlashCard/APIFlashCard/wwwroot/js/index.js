@@ -1,4 +1,8 @@
-﻿async function loadUsers() {
+﻿/* -------------------------------------------------------------------------- */
+/*                              Sekcja: Users                                 */
+/* -------------------------------------------------------------------------- */
+
+async function loadUsers() {
     const res = await fetch('/admin/users');
     const users = await res.json();
     const ul = document.getElementById('users');
@@ -27,6 +31,10 @@ async function toggleUser(id) {
     }
 }
 
+/* -------------------------------------------------------------------------- */
+/*                              Sekcja: Logs                                  */
+/* -------------------------------------------------------------------------- */
+
 async function loadLogs() {
     const res = await fetch('/admin/logs');
     const logs = await res.json();
@@ -34,10 +42,14 @@ async function loadLogs() {
     ul.innerHTML = '';
     logs.forEach(l => {
         const li = document.createElement('li');
-        li.textContent = `[${new Date(l.timeStamp + 'Z').toLocaleString()}] (${l.level}) ${l.message}`;
+        li.textContent = `[${new Date(l.timeStamp).toLocaleString()}] (${l.level}) ${l.message}`;
         ul.appendChild(li);
     });
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              Sekcja: Categories                            */
+/* -------------------------------------------------------------------------- */
 
 async function loadCategories() {
     const res = await fetch('/admin/categories');
@@ -137,6 +149,10 @@ async function deleteCategory(id) {
     loadCategories();
 }
 
+/* -------------------------------------------------------------------------- */
+/*                              Sekcja: FlashCards                            */
+/* -------------------------------------------------------------------------- */
+
 async function loadFlashCards(id_Category, categoryName) {
     const res = await fetch(`/admin/flashcards/${id_Category}`);
     const flashcards = await res.json();
@@ -182,6 +198,10 @@ async function loadFlashCards(id_Category, categoryName) {
         loadFlashCards(id_Category, categoryName);
     };
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              Sekcja: Admin Menu                            */
+/* -------------------------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logoutBtn');

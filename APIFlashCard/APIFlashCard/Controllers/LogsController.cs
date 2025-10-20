@@ -28,7 +28,7 @@ namespace APIFlashCard.Controllers
         [HttpPost]
         public async Task<ActionResult<Log>> CreateLog(Log log)
         {
-            log.TimeStamp = DateTime.UtcNow;
+            log.TimeStamp = DateTime.Now;
             _context.Logs.Add(log);
             await _context.SaveChangesAsync();
 
