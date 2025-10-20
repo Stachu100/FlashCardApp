@@ -34,6 +34,28 @@ public class AdminController : ControllerBase
         return Ok(new { message = $"Status użytkownika {user.UserName} zmieniony na {(user.Is_active ? "aktywny" : "nieaktywny")}.", user.Is_active });
     }
 
+    [HttpGet("userdetails/{userId:int}")]
+    public async Task<IActionResult> GetUserDetails(int userId)
+    {
+        var userDetails = await _context.UserDetails
+            .Where(u => u.ID_User == userId)
+            .Select(u => new
+            {
+                u.FirstName,
+                u.LastName,
+                u.Country,
+                u.Email
+            })
+            .FirstOrDefaultAsync();
+
+        if (userDetails == null)
+        {
+            return NotFound(new { message = "Nie znaleziono użytkownika." });
+        }
+
+        return Ok(userDetails);
+    }
+
     [HttpGet("logs")]
     public async Task<IActionResult> GetLogs()
     {

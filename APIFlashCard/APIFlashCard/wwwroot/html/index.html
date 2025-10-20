@@ -6,10 +6,17 @@
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-    <header>
+    <header class="admin-header">
+    <div class="admin-left">
         <h1>Admin Panel</h1>
+    </div>
+
+    <div class="admin-right">
+        <span class="welcome-msg">Witaj, <strong id="username">Admin</strong>!</span>
+        <button id="notificationsBtn" class="btn-primary">Notifications 🔔</button>
         <button id="logoutBtn" class="btn-primary">Logout</button>
-    </header>
+    </div>
+</header>
 
     <div id="grid">
         <div class="card users">

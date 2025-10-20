@@ -7,21 +7,39 @@ async function loadUsers() {
     const users = await res.json();
     const ul = document.getElementById('users');
     ul.innerHTML = '';
-    users.forEach(u => {
-        const li = document.createElement('li');
-        li.textContent = `${u.iD_User} ${u.userName}`;
 
-        const btn = document.createElement('button');
-        btn.textContent = u.is_active ? 'Deactivate' : 'Activate';
-        btn.className = `toggle-btn ${u.is_active ? 'active' : 'deactivate'}`;
-        btn.onclick = async () => {
+    for (const u of users) {
+        const li = document.createElement('li');
+
+        let detailsText = '';
+        try {
+            const detailsRes = await fetch(`/admin/userdetails/${u.iD_User}`);
+            if (detailsRes.ok) {
+                const details = await detailsRes.json();
+                detailsText = `${details.firstName} ${details.lastName}, ${details.email}, ${details.country}`;
+            } else {
+                detailsText = 'Details not found';
+            }
+        } catch (err) {
+            detailsText = 'Error loading details';
+        }
+
+        const span = document.createElement('span');
+        span.textContent = `${u.iD_User} ${u.userName} (${detailsText})`;
+
+        const toggleBtn = document.createElement('button');
+        toggleBtn.textContent = u.is_active ? 'Deactivate' : 'Activate';
+        toggleBtn.className = `toggle-btn ${u.is_active ? 'active' : 'deactivate'}`;
+        toggleBtn.onclick = async () => {
             await toggleUser(u.iD_User);
             await loadUsers();
         };
 
-        li.appendChild(btn);
+        li.appendChild(span);
+        li.appendChild(toggleBtn);
+
         ul.appendChild(li);
-    });
+    }
 }
 
 async function toggleUser(id) {
@@ -203,6 +221,13 @@ async function loadFlashCards(id_Category, categoryName) {
 /*                              Sekcja: Admin Menu                            */
 /* -------------------------------------------------------------------------- */
 
+const usernameCookie = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith('admin_username='));
+
+const username = usernameCookie ? decodeURIComponent(usernameCookie.split('=')[1]) : 'Admin';
+document.getElementById('username').textContent = username;
+
+// FUNKCJONALNOŚĆ notificationsBtn // JAK JEST DZWONEK MOŻESZ OBOK ZROBIĆ NP. TYLKO CZERWONĄ KROPKĘ CO BĘDZIE POKAZYWAĆ, ŻE COŚ NOWEGO
+
 document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) logoutBtn.onclick = logout;
@@ -210,5 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function logout() {
     document.cookie = "admin_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.cookie = "admin_username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     window.location.href = "login.html";
 }

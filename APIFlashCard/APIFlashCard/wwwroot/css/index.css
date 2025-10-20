@@ -6,17 +6,49 @@
     color: #333;
 }
 
-header {
+.admin-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1em 2em;
+    background: linear-gradient(90deg, #ff00ff, #e600e6);
+    color: white;
+    border-radius: 12px;
     margin-bottom: 1em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-h1 {
-    font-size: 1.8em;
+.admin-left h1 {
     margin: 0;
+    font-size: 1.8em;
 }
+
+.admin-right {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.welcome-msg {
+    font-size: 1em;
+}
+
+#notificationsBtn {
+    position: relative;
+    padding: 0.4em 0.8em;
+    background-color: #ff66ff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+    #notificationsBtn:hover {
+        background-color: #e600e6;
+        transform: translateY(-1px);
+    }
 
 button, .btn-primary {
     padding: 0.4em 0.8em;
@@ -214,3 +246,29 @@ input, select {
             background-color: #f44336;
             transform: translateY(-1px);
         }
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.2em;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 100%;
+    background: white;
+    border-radius: 12px;
+    padding: 1.2em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 1em;
+}

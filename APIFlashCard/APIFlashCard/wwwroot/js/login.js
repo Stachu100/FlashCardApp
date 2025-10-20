@@ -6,7 +6,7 @@
     errorMsg.textContent = "";
 
     if (!username || !password) {
-        errorMsg.textContent = "Please provide username and password.";
+        errorMsg.textContent = "Please provide username and password";
         return;
     }
 
@@ -20,17 +20,19 @@
         const data = await response.json();
 
         if (!response.ok) {
-            errorMsg.textContent = data.message || "Login failed.";
+            errorMsg.textContent = data.message || "Login failed";
             return;
         }
 
-        document.cookie = "admin_logged_in=true; path=/; Secure; SameSite=Lax";
-
-        window.location.href = "index.html";
+        if (response.ok) {
+            document.cookie = "admin_logged_in=true; path=/; Secure; SameSite=Lax";
+            document.cookie = `admin_username=${encodeURIComponent(username)}; path=/; Secure; SameSite=Lax`;
+            window.location.href = "index.html";
+        }
     }
 
     catch (err) {
-        errorMsg.textContent = "Login failed: " + err.message;
+        errorMsg.textContent = "Login failed";
     }
 }
 
@@ -38,7 +40,7 @@ async function startQrLogin() {
     const status = document.getElementById('qr-status');
     const qrCanvas = document.getElementById('qrCanvas');
 
-    status.textContent = "Oczekiwanie na potwierdzenie QR...";
+    status.textContent = "Waiting for QR confirmation...";
 
     try {
         const response = await fetch('/api/qrlogin/generate', {
@@ -49,7 +51,7 @@ async function startQrLogin() {
         const data = await response.json();
 
         if (!response.ok || !data.token) {
-            status.textContent = data.message || "Błąd generowania tokena";
+            status.textContent = data.message || "Error generating";
             return;
         }
 
@@ -58,10 +60,10 @@ async function startQrLogin() {
         QRCode.toCanvas(qrCanvas, qrToken, function (error) {
             if (error) {
                 console.error(error);
-                status.textContent = "Błąd generowania obrazu QR";
+                status.textContent = "Error generating QR image";
                 return;
             }
-            status.textContent = "Zeskanuj ten kod QR w aplikacji (ważny 2 minuty)";
+            status.textContent = "Scan this QR code in your app (valid for 2 minutes)";
         });
 
         const interval = setInterval(async () => {
@@ -75,14 +77,16 @@ async function startQrLogin() {
 
             if (verifyResp.ok && verifyData.success) {
                 clearInterval(interval);
-                status.textContent = `Zalogowano: ${verifyData.username}`;
+                document.cookie = "admin_logged_in=true; path=/; Secure; SameSite=Lax";
+                document.cookie = `admin_username=${encodeURIComponent(verifyData.username)}; path=/; Secure; SameSite=Lax`;
+                status.textContent = `Logged in: ${verifyData.username}`;
                 await delay(3000);
                 window.location.href = "index.html";
             }
         }, 1000);
 
     } catch (err) {
-        status.textContent = "Błąd: " + err.message;
+        status.textContent = "Unexpected error";
     }
 }
 
