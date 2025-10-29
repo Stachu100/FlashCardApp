@@ -13,7 +13,18 @@
 
     <div class="admin-right">
         <span class="welcome-msg">Witaj, <strong id="username">Admin</strong>!</span>
-        <button id="notificationsBtn" class="btn-primary">Notifications 🔔</button>
+
+        <div class="notification-container">
+            <button id="notificationsBtn" class="notification">
+                <span>Notifications 🔔</span>
+                <span class="badge" id="badge-count">0</span>
+            </button>
+
+            <div id="notification-dropdown" class="notification-dropdown">
+                <ul id="notifications">
+                </ul>
+            </div>
+        </div>
         <button id="logoutBtn" class="btn-primary">Logout</button>
     </div>
 </header>

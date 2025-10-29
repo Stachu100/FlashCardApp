@@ -16,6 +16,7 @@ namespace APIFlashCard.Data
         public DbSet<FlashCard> FlashCards { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<QrLoginToken> QrLoginTokens { get; set; }
+        public DbSet<Notifications> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,7 +62,12 @@ namespace APIFlashCard.Data
 
             modelBuilder.Entity<QrLoginToken>()
                 .ToTable("qrLoginToken")
-                .HasKey(qlt => qlt.ID_Token);    
+                .HasKey(qlt => qlt.ID_Token);
+
+            modelBuilder.Entity<Notifications>()
+                .ToTable("notifications")
+                .HasKey(n => n.ID_notification);
+
         }
     }
 }

@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUsers();
     loadLogs();
     loadCategories();
+    loadNotificationsOnApring();
     document.getElementById('addCategoryBtn').onclick = addCategory;
 });
 
@@ -238,3 +239,81 @@ function logout() {
     document.cookie = "admin_username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     window.location.href = "login.html";
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              Sekcja: Powiadomienia                         */
+/* -------------------------------------------------------------------------- */
+
+
+const notifBtn = document.getElementById('notificationsBtn');
+const dropdown = document.getElementById('notification-dropdown');
+const ul = document.getElementById('notifications');
+const badge = document.getElementById('badge-count');
+const clearBtn = document.getElementById('clear-btn');
+
+async function loadNotificationsOnApring() {
+    try {
+        const res = await fetch('/admin/notifications');
+        const notifications = await res.json();
+        let i = 0;
+
+        notifications.forEach((n) => {
+            if (!n.is_read) i++;
+        });
+
+        badge.textContent = i;
+
+        } catch (err) { }    
+    } 
+
+async function loadNotifications() {
+    try {
+        const res = await fetch('/admin/notifications');
+        const notifications = await res.json();
+
+        ul.innerHTML = '';
+
+        //Renderuj powiadomienia
+        notifications.forEach((n) => {
+            const li = document.createElement('li');
+            li.classList.add('notification-item');
+            if (!n.is_read) li.classList.add('notification-Unread');
+            
+
+            li.innerHTML = `
+            <div class="notif-row">
+              <div class="notif-text">
+                <strong>${n.tableName}</strong> <small>Action:  ${n.action}<small> ${!n.is_read ? `<strong>New!!!</strong>`: ``} <br>
+                <a> User: ${n.userName} ${n.tableName === `User` ? n.user_Is_active ? `,` + 'Deactivate' : `,` + 'Activate' : ``}</a> <br>
+                <a> ${n.tableName === `Category` ? `CategoryName: ` + n.categoryName + `<br>`  : ``} </a>
+                <a>Time: ${ new Date(n.actionDate).toLocaleString() }</a><br>
+              </div>
+            </div>
+          `;
+
+            ul.appendChild(li);
+        });
+        const readNot = await fetch(`/admin/Readnotifications`, { method: 'PUT' });
+        if (!readNot.ok) {
+            alert('Nie udało się odczytać powiadomień.');
+        }
+    } catch (err) {
+        ul.innerHTML = `<li>Błąd</li>`;
+    }
+}
+
+//Otwórz/zamknij pop-uop
+notifBtn.addEventListener('click', async () => {
+    const isVisible = dropdown.style.display === 'block';
+    dropdown.style.display = isVisible ? 'none' : 'block';
+    if (!isVisible) await loadNotifications();
+});
+
+
+//Zamknij pop-up klikając po za nim
+document.addEventListener('click', (event) => {
+    if (!notifBtn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+

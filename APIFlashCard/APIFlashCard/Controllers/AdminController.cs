@@ -152,4 +152,28 @@ public class AdminController : ControllerBase
 
         return CreatedAtAction(nameof(AddFlashCard), new { id = flashCard.ID_flashcard }, flashCard);
     }
+
+    [HttpGet("notifications")]
+    public async Task<IActionResult> Getnotifications()
+    {
+        var notifications = await _context.Notifications
+            .OrderByDescending(n => n.Is_read == null)
+            .Take(200)
+            .ToListAsync();
+        return Ok(notifications);
+    }
+
+    [HttpPut("Readnotifications")]
+    public async Task<IActionResult> Readnotifications()
+    {
+        var notifications = _context.Notifications.ToList();
+
+        foreach (var not in notifications) {
+            not.Is_read = true;
+        }   
+
+        await _context.SaveChangesAsync();
+
+        return Ok();
+    }
 }
