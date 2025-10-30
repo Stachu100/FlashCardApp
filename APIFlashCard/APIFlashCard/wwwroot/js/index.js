@@ -227,8 +227,6 @@ const usernameCookie = document.cookie.split(';').map(c => c.trim()).find(c => c
 const username = usernameCookie ? decodeURIComponent(usernameCookie.split('=')[1]) : 'Admin';
 document.getElementById('username').textContent = username;
 
-// FUNKCJONALNOŚĆ notificationsBtn // JAK JEST DZWONEK MOŻESZ OBOK ZROBIĆ NP. TYLKO CZERWONĄ KROPKĘ CO BĘDZIE POKAZYWAĆ, ŻE COŚ NOWEGO
-
 document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) logoutBtn.onclick = logout;
@@ -243,7 +241,6 @@ function logout() {
 /* -------------------------------------------------------------------------- */
 /*                              Sekcja: Powiadomienia                         */
 /* -------------------------------------------------------------------------- */
-
 
 const notifBtn = document.getElementById('notificationsBtn');
 const dropdown = document.getElementById('notification-dropdown');
@@ -309,11 +306,9 @@ notifBtn.addEventListener('click', async () => {
     if (!isVisible) await loadNotifications();
 });
 
-
 //Zamknij pop-up klikając po za nim
 document.addEventListener('click', (event) => {
     if (!notifBtn.contains(event.target) && !dropdown.contains(event.target)) {
         dropdown.style.display = 'none';
     }
 });
-
