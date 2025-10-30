@@ -8,7 +8,8 @@
     <x:String x:Key="PreviousImage">previous.png</x:String>
     <x:String x:Key="NextImage">next.png</x:String>
     <x:String x:Key="AvatarImage">avataricon2.png</x:String>
-    
+    <x:String x:Key="PasswordImage">gnome_password_pink.png</x:String>
+
     <x:String x:Key="ThemeName">Pink</x:String>
     <Color x:Key="StatusBarColor">#ac99ea</Color>
 

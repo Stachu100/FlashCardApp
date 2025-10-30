@@ -7,6 +7,7 @@
     <x:String x:Key="PreviousImage">previousgreen.png</x:String>
     <x:String x:Key="NextImage">nextgreen.png</x:String>
     <x:String x:Key="AvatarImage">avataricon2green.png</x:String>
+    <x:String x:Key="PasswordImage">gnome_password_green.png</x:String>
 
     <x:String x:Key="ThemeName">Green</x:String>
     <Color x:Key="StatusBarColor">#6FCF97</Color>
