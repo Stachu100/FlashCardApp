@@ -299,7 +299,9 @@ html, body {
     position: absolute;
     background: white;
     border-radius: 10px;
-    width: 250px;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
     z-index: 1;
 }
     .notification-dropdown ul {
@@ -310,6 +312,3 @@ html, body {
     .notification-Unread {
         background-color: gray !important;
     }
-
-
-

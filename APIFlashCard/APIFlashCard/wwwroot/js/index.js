@@ -45,7 +45,7 @@ async function loadUsers() {
 async function toggleUser(id) {
     const res = await fetch(`/admin/users/${id}/toggle`, { method: 'PUT' });
     if (!res.ok) {
-        alert('Nie udało się zmienić statusu użytkownika.');
+        alert('Failed to change user status.');
     }
 }
 
@@ -153,14 +153,6 @@ async function editCategory(category) {
     loadCategories();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadUsers();
-    loadLogs();
-    loadCategories();
-    loadNotificationsOnApring();
-    document.getElementById('addCategoryBtn').onclick = addCategory;
-});
-
 async function deleteCategory(id) {
     if (!confirm("Delete this category (and its flashcards)?")) return;
 
@@ -232,6 +224,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutBtn) logoutBtn.onclick = logout;
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    loadUsers();
+    loadLogs();
+    loadCategories();
+    loadNotificationsOnApiring();
+    document.getElementById('addCategoryBtn').onclick = addCategory;
+});
+
 function logout() {
     document.cookie = "admin_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "admin_username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -248,7 +248,7 @@ const ul = document.getElementById('notifications');
 const badge = document.getElementById('badge-count');
 const clearBtn = document.getElementById('clear-btn');
 
-async function loadNotificationsOnApring() {
+async function loadNotificationsOnApiring() {
     try {
         const res = await fetch('/admin/notifications');
         const notifications = await res.json();
@@ -292,10 +292,10 @@ async function loadNotifications() {
         });
         const readNot = await fetch(`/admin/Readnotifications`, { method: 'PUT' });
         if (!readNot.ok) {
-            alert('Nie udało się odczytać powiadomień.');
+            alert('Failed to read notifications.');
         }
     } catch (err) {
-        ul.innerHTML = `<li>Błąd</li>`;
+        ul.innerHTML = `<li>Error</li>`;
     }
 }
 
@@ -306,9 +306,12 @@ notifBtn.addEventListener('click', async () => {
     if (!isVisible) await loadNotifications();
 });
 
-//Zamknij pop-up klikając po za nim
+//Zamknij pop-up klikając poza nim
 document.addEventListener('click', (event) => {
     if (!notifBtn.contains(event.target) && !dropdown.contains(event.target)) {
+        const isVisible = dropdown.style.display === 'block';
         dropdown.style.display = 'none';
+        
+        if (isVisible) loadNotificationsOnApiring();
     }
 });

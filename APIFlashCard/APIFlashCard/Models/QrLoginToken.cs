@@ -8,10 +8,20 @@ namespace APIFlashCard.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_Token { get; set; }
+
         public int? UserID { get; set; }
+
+        [Required]
+        [MaxLength(255)]
         public string Token { get; set; } = string.Empty;
+
+        [Required]
         public DateTime CreatedAt { get; set; }
+
+        [Required]
         public DateTime ExpiresAt { get; set; }
+
+        [Required]
         public bool IsUsed { get; set; }
     }
 }

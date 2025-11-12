@@ -21,9 +21,9 @@ namespace APIFlashCard.Controllers
         [HttpPost("generate")]
         public async Task<IActionResult> GenerateQrToken()
         {
-            //var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
+            var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
 
-            var token = "TEST-TOKEN-1234";
+            //var token = "TEST-TOKEN-1234";
 
             var now = DateTime.Now;
 
