@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using APIFlashCard.Data;
 using APIFlashCard.Middleware;
+using Microsoft.Extensions.Hosting;
+using Coravel;
+using Coravel.Scheduling.Schedule;
+using APIFlashCard.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,8 +30,15 @@ builder.Services.AddDbContext<FlashCardDbContext>(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScheduler();
+builder.Services.AddTransient<DeleteFalseQrTokenJob>();
 
 var app = builder.Build();
+
+app.Services.UseScheduler(scheduler =>
+{
+    scheduler.Schedule<DeleteFalseQrTokenJob>().Hourly();
+});
 
 if (app.Environment.IsDevelopment())
 {
@@ -35,6 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 
