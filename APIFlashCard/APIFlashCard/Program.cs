@@ -38,6 +38,7 @@ var app = builder.Build();
 app.Services.UseScheduler(scheduler =>
 {
     scheduler.Schedule<DeleteFalseQrTokenJob>().Hourly();
+    //scheduler.Schedule<DeleteFalseQrTokenJob>().EveryMinute();
 });
 
 if (app.Environment.IsDevelopment())

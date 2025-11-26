@@ -10,7 +10,7 @@ namespace APIFlashCard.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime TimeStamp { get; set; }
+        public DateTimeOffset TimeStamp { get; set; }
 
         [Required]
         [MaxLength(50)]

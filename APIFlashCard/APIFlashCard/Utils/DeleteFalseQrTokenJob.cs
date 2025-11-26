@@ -16,7 +16,9 @@ namespace APIFlashCard.Utils
         public async Task Invoke()
         {
 
-            var sqlScript = "DELETE from QrLoginToken where IsUsed = 0;";    
+            var sqlScript = "DELETE FROM QrLoginToken " +
+                            "WHERE IsUsed = 0 " +
+                            "AND ExpiresAt < GETUTCDATE();";    
             await _db.Database.ExecuteSqlRawAsync(sqlScript);
         }
     }

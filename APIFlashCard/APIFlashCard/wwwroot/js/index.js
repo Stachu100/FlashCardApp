@@ -312,6 +312,6 @@ document.addEventListener('click', (event) => {
         const isVisible = dropdown.style.display === 'block';
         dropdown.style.display = 'none';
         
-        if (isVisible) loadNotificationsOnApiring();
+        if (isVisible) badge.textContent = 0;
     }
 });

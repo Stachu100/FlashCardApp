@@ -26,7 +26,7 @@ namespace APIFlashCard.Middleware
                 {
                     var log = new Log
                     {
-                        TimeStamp = DateTime.UtcNow,
+                        TimeStamp = DateTimeOffset.UtcNow,
                         Level = context.Response.StatusCode >= 500 ? "Error" : "Warning",
                         Message = $"[{context.Request.Method}] {context.Request.Path} zakończyło się kodem {context.Response.StatusCode}"
                     };
@@ -41,7 +41,7 @@ namespace APIFlashCard.Middleware
 
                 var log = new Log
                 {
-                    TimeStamp = DateTime.UtcNow,
+                    TimeStamp = DateTimeOffset.UtcNow,
                     Level = "Error",
                     Message = ex.Message,
                     Exception = ex.ToString()
