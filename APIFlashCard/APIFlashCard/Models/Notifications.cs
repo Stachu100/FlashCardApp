@@ -16,7 +16,7 @@ namespace APIFlashCard.Models
         [MaxLength(255)]
         public string TableName { get; set; }
         [Required]
-        public DateTime ActionDate {  get; set; }
+        public DateTimeOffset ActionDate {  get; set; }
 
         [MaxLength(255)]
         public string Action { get; set; }
