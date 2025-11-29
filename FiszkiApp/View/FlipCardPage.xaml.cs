@@ -96,35 +96,27 @@ namespace FiszkiApp.View
 
         private void AdjustFontFlexible(Label label, Frame frame)
         {
-            if (label == null || string.IsNullOrEmpty(label.Text) || frame == null)
+            if (label == null || string.IsNullOrEmpty(label.Text))
                 return;
-
-            double maxFont = 100;
-            double minFont = 38;
-            int maxChars = 50;
 
             int length = label.Text.Length;
 
-            double fontSize;
-            if (length <= 5)
-                fontSize = maxFont;
-            else if (length >= maxChars)
-                fontSize = minFont;
+            int fontSize;
+
+            if (length <= 3)
+                fontSize = 100;
+            else if (length <= 10)
+                fontSize = 75;
+            else if (length <= 18)
+                fontSize = 66;
+            else if (length <= 24)
+                fontSize = 48;
+            else if (length <= 32)
+                fontSize = 38;
             else
-                fontSize = maxFont - ((length - 5) / (double)(maxChars - 5)) * (maxFont - minFont);
+                fontSize = 24;
 
             label.FontSize = fontSize;
-
-            double maxWidth = frame.Width - frame.Padding.Left - frame.Padding.Right;
-            double maxHeight = frame.Height - frame.Padding.Top - frame.Padding.Bottom;
-
-            var request = label.Measure(double.PositiveInfinity, double.PositiveInfinity);
-            while ((request.Request.Width > maxWidth || request.Request.Height > maxHeight) && fontSize > minFont)
-            {
-                fontSize -= 1;
-                label.FontSize = fontSize;
-                request = label.Measure(double.PositiveInfinity, double.PositiveInfinity);
-            }
         }
 
         private async void OnNextButtonClicked(object sender, EventArgs e)
