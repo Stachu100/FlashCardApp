@@ -67,7 +67,7 @@
                                  Command="{Binding Path=BindingContext.DeleteCategoryCommand, Source={x:Reference Name=MainPageContent}}"
                                  CommandParameter="{Binding .}" />
 
-                            <ImageButton Source="cloud.png" Grid.Column="5" WidthRequest="30" HeightRequest="30" Margin="3"
+                            <ImageButton Source="share.png" Grid.Column="5" WidthRequest="30" HeightRequest="30" Margin="3"
                                  IsVisible="{Binding IsSent, Converter={StaticResource IsSentToVisibilityConverter}}"
                                  Command="{Binding Path=BindingContext.SendCategoryCommand, Source={x:Reference Name=MainPageContent}}"
                                  CommandParameter="{Binding .}" />
