@@ -36,6 +36,7 @@
                 <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" Command="{Binding ClearUserSearchCommand}" />
             </StackLayout>
 
+            <Label Text="Najpierw wybierz języki fiszek w profilu" TextColor="Red" IsVisible="{Binding LanguagePickerTitle}" FontAttributes="Bold" />
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <Picker x:Name="LanguagePicker" Title="Język" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
