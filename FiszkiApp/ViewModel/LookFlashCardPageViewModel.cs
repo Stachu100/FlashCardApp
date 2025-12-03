@@ -14,7 +14,6 @@ namespace FiszkiApp.ViewModel
         private readonly int _categoryId;
         private int _currentPage = 1;
         private const int PageSize = 10;
-        private bool _isLoading;
 
 
         public LookFlashCardPageViewModel(int categoryId)
@@ -23,28 +22,17 @@ namespace FiszkiApp.ViewModel
             _flashCardService = new FlashCardService();
             Flashcards = new ObservableCollection<FlashCard>();
             LoadFlashcardsCommand = new AsyncRelayCommand(LoadFlashcardsAsync);
-            LoadFlashcardsCommand.Execute(null);
         }
 
         [ObservableProperty]
         private ObservableCollection<FlashCard> flashcards;
 
-        [ObservableProperty]
-        private FlashCard selectedFlashcard;
-
         public IAsyncRelayCommand LoadFlashcardsCommand { get; }
 
         private async Task LoadFlashcardsAsync()
         {
-            if (_isLoading) return;
-            _isLoading = true;
-
             var flashcardsFromApi = await _flashCardService.GetFlashCardsByCategoryPagedAsync(_categoryId, _currentPage);
-            if (flashcardsFromApi == null || flashcardsFromApi.Count == 0)
-            {
-                _isLoading = false;
-                return;
-            }
+
 
             if (_currentPage == 1) Flashcards.Clear();
 
@@ -56,7 +44,6 @@ namespace FiszkiApp.ViewModel
             }
 
             _currentPage++;
-            _isLoading = false;
         }
     }
 }

@@ -39,7 +39,7 @@
             <Label Text="Najpierw wybierz języki fiszek w profilu" TextColor="Red" IsVisible="{Binding LanguagePickerTitle}" FontAttributes="Bold" />
             <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
                 <Frame Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                    <Picker x:Name="LanguagePicker" Title="Język" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                    <Picker x:Name="LanguagePicker" Title="Język" ItemsSource="{Binding UserLanguages}" SelectedItem="{Binding SelectedLanguage}" IsEnabled="{Binding IsLanguagePickerEnabled}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                 </Frame>
                 <ImageButton Source="trash_red.png" WidthRequest="30" HeightRequest="30" CornerRadius="15" Command="{Binding ClearSelectedLanguageCommand}" />
             </StackLayout>
@@ -47,7 +47,7 @@
             <Button Text="Wyszukaj" Command="{Binding SearchCommand}" CornerRadius="30" WidthRequest="200" />
         </VerticalStackLayout>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding SearchResults}" Margin="10" x:Name="ResultsListView" HasUnevenRows="True">
+        <ListView Grid.Row="1" ItemsSource="{Binding SearchResults}" Margin="10" x:Name="ResultsListView" HasUnevenRows="True" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -58,12 +58,8 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Path=BindingContext.LookFlashCardTappedCommand, Source={x:Reference Name=List}}"
-                                              CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
 
                             <StackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Spacing="0">
 
@@ -78,14 +74,16 @@
 
                             <Label Text="{Binding BackLanguage}" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Small" Margin="0,0,10,0" />
 
-                            <ImageButton Source="add.png" Grid.Column="4" WidthRequest="35" HeightRequest="35" Margin="3" Command="{Binding Source={RelativeSource AncestorType={x:Type local:FlashCardListViewModel}}, Path=AddToLocalCommand}" 
+                            <ImageButton Source="view.png" Grid.Column="4" WidthRequest="35" HeightRequest="35" Margin="3" Command="{Binding Path=BindingContext.LookFlashCardTappedCommand, Source={x:Reference Name=List}}"
+                                         CommandParameter="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center" />
+                            
+                            <ImageButton Source="add.png" Grid.Column="5" WidthRequest="35" HeightRequest="35" Margin="3" Command="{Binding Source={RelativeSource AncestorType={x:Type local:FlashCardListViewModel}}, Path=AddToLocalCommand}" 
                                          CommandParameter="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
         
         <Grid Grid.Row="3" VerticalOptions="End">
             <Grid.RowDefinitions>

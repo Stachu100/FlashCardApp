@@ -54,6 +54,9 @@ namespace FiszkiApp.ViewModel
         [ObservableProperty]
         private bool languagePickerTitle;
 
+        [ObservableProperty]
+        private bool isLanguagePickerEnabled;
+
         public ObservableCollection<string> LanguageLevels { get; }
 
         public IAsyncRelayCommand SearchCommand { get; }
@@ -200,8 +203,13 @@ namespace FiszkiApp.ViewModel
                 if (UserLanguages.Count == 0)
                 {
                     LanguagePickerTitle = true;
-                }   
-                else LanguagePickerTitle = false;
+                    IsLanguagePickerEnabled = false;
+                }
+                else
+                {
+                    LanguagePickerTitle = false;
+                    IsLanguagePickerEnabled = true;
+                } 
             }
         }
 

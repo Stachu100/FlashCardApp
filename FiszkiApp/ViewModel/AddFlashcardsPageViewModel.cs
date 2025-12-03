@@ -20,7 +20,6 @@ namespace FiszkiApp.ViewModel
             Flashcards = new ObservableCollection<LocalFlashcardTable>();
 
             LoadFlashcardsCommand = new AsyncRelayCommand(LoadFlashcardsAsync);
-            LoadFlashcardsCommand.Execute(null);
 
             AddFlashcardCommand = new AsyncRelayCommand(AddFlashcardAsync);
             SubmitFlashcardsCommand = new AsyncRelayCommand(SubmitFlashcardsAsync);
