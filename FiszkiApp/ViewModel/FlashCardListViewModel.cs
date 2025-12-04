@@ -47,13 +47,17 @@ namespace FiszkiApp.ViewModel
         private string selectedLanguageLevel;
 
         private string _selectedLanguage;
+
         public string SelectedLanguage
         {
             get => _selectedLanguage;
             set
             {
                 if (value?.StartsWith("-") == true)
+                {
+                    OnPropertyChanged(nameof(SelectedLanguage));
                     return;
+                }
 
                 SetProperty(ref _selectedLanguage, value);
             }
@@ -214,12 +218,12 @@ namespace FiszkiApp.ViewModel
 
             if (UserLanguages.Any())
             {
-                LanguagePickerItems.Add("— Moje jêzyki —");
+                LanguagePickerItems.Add("- Moje jêzyki -");
                 foreach (var l in UserLanguages)
                     LanguagePickerItems.Add(l);
             }
 
-            LanguagePickerItems.Add("— Pozosta³e jêzyki —");
+            LanguagePickerItems.Add("- Pozosta³e jêzyki -");
             foreach (var l in remainingLanguages)
                 LanguagePickerItems.Add(l);
         }
