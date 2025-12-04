@@ -26,6 +26,7 @@ namespace FiszkiApp.ViewModel
 
             LanguageLevels = new ObservableCollection<string> { "Brak", "A1", "A2", "B1", "B2", "C1", "C2" };
             UserLanguages = new ObservableCollection<string>();
+            LanguagePickerItems = new ObservableCollection<string>();
 
             SearchCommand = new AsyncRelayCommand(SearchCategoriesAsync);
             AddToLocalCommand = new AsyncRelayCommand<LocalCategoryTable>(AddToLocalAsync);
@@ -45,17 +46,24 @@ namespace FiszkiApp.ViewModel
         [ObservableProperty]
         private string selectedLanguageLevel;
 
-        [ObservableProperty]
-        private string selectedLanguage;
+        private string _selectedLanguage;
+        public string SelectedLanguage
+        {
+            get => _selectedLanguage;
+            set
+            {
+                if (value?.StartsWith("-") == true)
+                    return;
+
+                SetProperty(ref _selectedLanguage, value);
+            }
+        }
 
         [ObservableProperty]
         private ObservableCollection<string> userLanguages;
 
         [ObservableProperty]
-        private bool languagePickerTitle;
-
-        [ObservableProperty]
-        private bool isLanguagePickerEnabled;
+        private ObservableCollection<string> languagePickerItems;
 
         public ObservableCollection<string> LanguageLevels { get; }
 
@@ -180,37 +188,40 @@ namespace FiszkiApp.ViewModel
         {
             var (isAuthenticated, userIdString, isAdmin) = await _authService.IsAuthenticatedAsync();
 
-            if (isAuthenticated && int.TryParse(userIdString, out int userId) && userId > 0)
+            if (!isAuthenticated || !int.TryParse(userIdString, out int userId) || userId <= 0)
+                return;
+
+            var allCountries = App.CountriesDic.Countries;
+
+            var userCountries = App.UserCountriesService.CurrentUserCountries;
+
+            UserLanguages.Clear();
+
+            foreach (var c in allCountries)
             {
-                var userCountries = App.UserCountriesService.CurrentUserCountries;
-
-                if (userCountries != null)
-                {
-                    var allCountries = App.CountriesDic.Countries;
-
-                    var filteredLanguages = allCountries
-                        .Where(c => userCountries.Any(uc => uc.ID_Country == c.ID_Country))
-                        .Select(c => c.Country)
-                        .ToList();
-
-                    UserLanguages.Clear();
-                    foreach (var language in filteredLanguages)
-                    {
-                        UserLanguages.Add(language);
-                    }
-                }
-
-                if (UserLanguages.Count == 0)
-                {
-                    LanguagePickerTitle = true;
-                    IsLanguagePickerEnabled = false;
-                }
-                else
-                {
-                    LanguagePickerTitle = false;
-                    IsLanguagePickerEnabled = true;
-                } 
+                if (userCountries.Any(uc => uc.ID_Country == c.ID_Country))
+                    UserLanguages.Add(c.Country);
             }
+
+            LanguagePickerItems.Clear();
+
+            var allLanguages = allCountries.Select(c => c.Country).Distinct().OrderBy(c => c).ToList();
+
+            var myLanguages = UserLanguages.ToList();
+
+            var remainingLanguages = allLanguages.Except(myLanguages).ToList();
+
+
+            if (UserLanguages.Any())
+            {
+                LanguagePickerItems.Add("— Moje jêzyki —");
+                foreach (var l in UserLanguages)
+                    LanguagePickerItems.Add(l);
+            }
+
+            LanguagePickerItems.Add("— Pozosta³e jêzyki —");
+            foreach (var l in remainingLanguages)
+                LanguagePickerItems.Add(l);
         }
 
         private async Task OnLookFlashCardTappedAsync(LocalCategoryTable selectedCategory)

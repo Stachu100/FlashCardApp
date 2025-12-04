@@ -112,21 +112,13 @@ namespace FiszkiApp.ViewModel
         {
             if (SelectedFrontLanguage != null)
             {
-                if (SelectedFrontLanguage == "Polska")
-                {
-                    BackLanguages = new ObservableCollection<string>(_allLanguages.Where(f => f != "Polska"));
-                    SelectedBackLanguage = null;
-                    IsBackLanguageEnabled = true;
-                    IsFrontLanguageEmpty = false;
-                }
-                else
-                {
-                    BackLanguages = new ObservableCollection<string> { "Polska" };
-                    SelectedBackLanguage = null;
-                    IsBackLanguageEnabled = true;
-                    IsFrontLanguageEmpty = false;
-                }
-            }              
+                BackLanguages = new ObservableCollection<string>(
+                    _allLanguages.Where(lang => lang != SelectedFrontLanguage));
+
+                SelectedBackLanguage = null;
+                IsBackLanguageEnabled = true;
+                IsFrontLanguageEmpty = false;
+            }
         }
 
         private async Task CancelCategory()
