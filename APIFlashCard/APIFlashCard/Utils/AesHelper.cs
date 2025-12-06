@@ -50,12 +50,12 @@ namespace APIFlashCard.Utils
 
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
+                byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
+
                 using (MemoryStream msEncrypt = new MemoryStream())
                 using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                using (StreamWriter swEncrypt = new StreamWriter(csEncrypt, Encoding.UTF8))
                 {
-                    swEncrypt.Write(plainText);
-                    swEncrypt.Flush();
+                    csEncrypt.Write(plainBytes, 0, plainBytes.Length);
                     csEncrypt.FlushFinalBlock();
                     return msEncrypt.ToArray();
                 }

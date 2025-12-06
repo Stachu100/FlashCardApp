@@ -41,17 +41,19 @@ namespace APIFlashCard.Controllers
 
             try
             {
-                string decryptedPassword = AesHelper.DecryptStringFromBytes_Aes(
-                    user.UserPassword,
+                byte[] encryptedInput = AesHelper.EncryptStringToBytes_Aes(
+                    request.Password,
                     encryptionKeys.EncryptionKey,
                     encryptionKeys.IV
                 );
 
-                if (!user.Is_active)
-                    return Unauthorized(new { message = "Invalid username or password." });
+                using (var sha = SHA256.Create())
+                {
+                    byte[] inputHash = sha.ComputeHash(encryptedInput);
 
-                if (decryptedPassword != request.Password)
-                    return Unauthorized(new { message = "Invalid username or password." });
+                    if (!inputHash.SequenceEqual(user.UserPassword))
+                        return Unauthorized(new { message = "Invalid username or password." });
+                }
 
                 return Ok(new { message = "Logged in successfully", userId = user.ID_User });
             }

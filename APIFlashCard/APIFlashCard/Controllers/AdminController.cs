@@ -18,7 +18,17 @@ public class AdminController : ControllerBase
     public async Task<IActionResult> GetUsers()
     {
         var users = await _context.Users.ToListAsync();
-        return Ok(users);
+
+        var safeUsers = users.Select(u => new User
+        {
+            ID_User = u.ID_User,
+            UserName = u.UserName,
+            UserPassword = null,
+            Is_active = u.Is_active,
+            Is_admin = u.Is_admin
+        }).ToList();
+
+        return Ok(safeUsers);
     }
 
     [HttpPut("users/{id}/toggle")]

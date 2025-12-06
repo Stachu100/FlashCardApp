@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using APIFlashCard.Data;
+using APIFlashCard.Utils;
 
 namespace APIFlashCard.Controllers
 {
@@ -24,7 +25,43 @@ namespace APIFlashCard.Controllers
             {
                 return NotFound();
             }
-            return Ok(user);
+
+            var safeUser = new User
+            {
+                ID_User = user.ID_User,
+                UserName = user.UserName,
+                UserPassword = null,
+                Is_active = user.Is_active,
+                Is_admin = user.Is_admin
+            };
+
+            return Ok(safeUser);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
+        {
+            if (request == null || request.UserId <= 0 || request.EncryptedPassword == null)
+                return BadRequest();
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.ID_User == request.UserId);
+            if (user == null || !user.Is_active)
+                return BadRequest();
+
+            byte[] hashedPassword;
+            using (var sha = System.Security.Cryptography.SHA256.Create())
+            {
+                hashedPassword = sha.ComputeHash(request.EncryptedPassword);
+            }
+
+            if (user.UserPassword.SequenceEqual(hashedPassword))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("check-username/{username}")]
@@ -42,6 +79,8 @@ namespace APIFlashCard.Controllers
                 return BadRequest(new { message = "Dane użytkownika są wymagane." });
             }
 
+            user.UserPassword = PasswordHash.HashAesPassword(user.UserPassword);
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -57,7 +96,7 @@ namespace APIFlashCard.Controllers
                 return NotFound(new { message = "Nie znaleziono użytkownika." });
             }
 
-            user.UserPassword = EncryptedData;
+            user.UserPassword = PasswordHash.HashAesPassword(EncryptedData);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Hasło zmienione pomyślnie" });

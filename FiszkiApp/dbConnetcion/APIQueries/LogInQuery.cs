@@ -33,6 +33,11 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                     return new UserLoginResult { Message = "Hasło lub login jest niepoprawne" };
                 }
 
+                if (!user.Is_active)
+                {
+                    return new UserLoginResult { Message = "Konto jest nieaktywne" };
+                }
+
                 var keysResponse = await _httpClient.GetAsync($"encryptionkeys/{user.ID_User}");
                 if (!keysResponse.IsSuccessStatusCode)
                 {
@@ -47,15 +52,18 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                     return new UserLoginResult { Message = "Wystąpił problem z pobraniem kluczy szyfrowania." };
                 }
 
-                string decryptedPassword = EntityClasses.AesManaged.Decryption(
-                    user.UserPassword, encryptionKeys.EncryptionKey, encryptionKeys.IV);
+                byte[] encryptedPassword = EntityClasses.AesManaged.EncryptStringToBytes_Aes(password, encryptionKeys.EncryptionKey, encryptionKeys.IV);
 
-                if (!user.Is_active)
+                var loginRequest = new
                 {
-                    return new UserLoginResult { Message = "Konto jest nieaktywne" };
-                }
+                    UserId = user.ID_User,
+                    EncryptedPassword = encryptedPassword
+                };
 
-                if (decryptedPassword != null && decryptedPassword == password)
+                var content = new StringContent(JsonConvert.SerializeObject(loginRequest), Encoding.UTF8, "application/json");
+                var loginResponse = await _httpClient.PostAsync("user/login", content);
+
+                if (loginResponse.IsSuccessStatusCode)
                 {
                     return new UserLoginResult
                     {
