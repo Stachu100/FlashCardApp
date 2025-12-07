@@ -98,8 +98,9 @@ namespace FiszkiApp.ViewModel
 
                 var userCountries = App.UserCountriesService.CurrentUserCountries;
 
-                if (userCountries != null && Items.Count == 0)
+                if (userCountries != null && (Items.Count == 0 || Items.Count != userCountries.Count))
                 {
+                    Items.Clear();
                     var countries = App.CountriesDic.Countries;
 
                     foreach (var userCountry in userCountries)
@@ -110,6 +111,7 @@ namespace FiszkiApp.ViewModel
                         {
                             AddItem(false, null, country.ID_Country, country.Country, country.Url);
                         }
+
                     }
                 }
             }
@@ -131,7 +133,7 @@ namespace FiszkiApp.ViewModel
         [RelayCommand]
         public async Task LogoutCommand(AuthService authService)
         {
-            _authService.Logout();
+            _authService.Logout();            
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 

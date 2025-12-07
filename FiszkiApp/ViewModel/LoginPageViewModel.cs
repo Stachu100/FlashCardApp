@@ -60,7 +60,7 @@ namespace FiszkiApp.ViewModel
                     int userId = result.UserId;
 
                     await App.ProfileDetails.GetUserDetailsAsync(userId);
-                    await App.UserCountriesService.GetUserCountriesByUserIdAsync(userId);
+                    await App.UserCountriesService.GetUserCountriesByUserIdAsync(userId, true);
 
                     (App.Current.MainPage as AppShell)?.UpdateAdminMenu(result.IsAdmin);
 
