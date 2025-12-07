@@ -126,8 +126,10 @@ namespace FiszkiApp.ViewModel
         [RelayCommand]
         public async Task LogoutCommand(AuthService authService)
         {
-            _authService.Logout();            
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            _authService.Logout();
+            App.UserCountriesService.ResetCache();
+            Items.Clear();
+            await Shell.Current.GoToAsync($"///{nameof(LoginPage)}");
         }
 
         private async void AddItem(bool AddToDB, int? UserId, int CountryId, string name, string imageName)
