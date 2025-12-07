@@ -22,6 +22,8 @@ namespace FiszkiApp.ViewModel
 
         private byte[] imageData;
 
+        private bool IsDiffretnCountres = false;
+
         public int intUserId;
 
         private List<(int ID_Country, string Country, string Url)> countriesWithUrl;
@@ -97,8 +99,14 @@ namespace FiszkiApp.ViewModel
                 }
 
                 var userCountries = App.UserCountriesService.CurrentUserCountries;
+                foreach (var country in userCountries)
+                {
+                    Items.FirstOrDefault(i => i.ID_Country != country.ID_Country);
+                    IsDiffretnCountres = true;
+                }
+                    
 
-                if (userCountries != null && (Items.Count == 0 || Items.Count != userCountries.Count))
+                if (userCountries != null && (Items.Count == 0 || Items.Count != userCountries.Count || IsDiffretnCountres == true))
                 {
                     Items.Clear();
                     var countries = App.CountriesDic.Countries;

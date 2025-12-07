@@ -70,7 +70,7 @@ namespace FiszkiApp
         private async Task LogoutAsync()
         {
             _authService.Logout();
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync("///LoginPage");
         }
 
         private async Task SettingsAsync()

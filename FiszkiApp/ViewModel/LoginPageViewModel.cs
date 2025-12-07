@@ -65,6 +65,8 @@ namespace FiszkiApp.ViewModel
                     (App.Current.MainPage as AppShell)?.UpdateAdminMenu(result.IsAdmin);
 
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                    UserName = null;
+                    UserPassword = null;
                 }
                 else
                 {
