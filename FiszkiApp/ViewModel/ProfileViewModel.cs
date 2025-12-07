@@ -28,6 +28,8 @@ namespace FiszkiApp.ViewModel
         private List<(int ID_Country, string Country, string Url)> countriesWithUrl;
         public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
 
+        public static ProfileViewModel ProfileInstance { get; private set; }
+
         [ObservableProperty]
 
         private byte[] imageAsBytes;
@@ -65,6 +67,8 @@ namespace FiszkiApp.ViewModel
             LoadCountriesCommand = new AsyncRelayCommand(LoadCountry);
             LoadCountriesCommand.Execute(null);
             DeleteCommand = new Command<object>(OnTapped);
+
+            ProfileInstance = this;
         }
 
         private async void OnTapped(object obj)
@@ -129,7 +133,7 @@ namespace FiszkiApp.ViewModel
             _authService.Logout();
             App.UserCountriesService.ResetCache();
             Items.Clear();
-            await Shell.Current.GoToAsync($"///{nameof(LoginPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
         private async void AddItem(bool AddToDB, int? UserId, int CountryId, string name, string imageName)

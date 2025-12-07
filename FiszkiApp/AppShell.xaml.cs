@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using FiszkiApp.Services;
 using FiszkiApp.View;
+using FiszkiApp.ViewModel;
 
 namespace FiszkiApp
 {
@@ -71,7 +72,8 @@ namespace FiszkiApp
         {
             _authService.Logout();
             App.UserCountriesService.ResetCache();
-            await Shell.Current.GoToAsync("///LoginPage");
+            ProfileViewModel.ProfileInstance?.Items.Clear();
+            await Shell.Current.GoToAsync("//LoginPage");
         }
 
         private async Task SettingsAsync()
