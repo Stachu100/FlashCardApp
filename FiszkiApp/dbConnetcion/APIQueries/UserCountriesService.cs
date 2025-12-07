@@ -22,6 +22,12 @@ namespace FiszkiApp.dbConnetcion.APIQueries
             }
         }
 
+        public void ResetCache()
+        {
+            _currentUserCountries = null;
+            OnPropertyChanged(nameof(CurrentUserCountries));
+        }
+
         public UserCountriesService()
         {
             _httpClient = HttpClientService.Instance.HttpClient;

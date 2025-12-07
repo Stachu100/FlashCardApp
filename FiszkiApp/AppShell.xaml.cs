@@ -70,6 +70,7 @@ namespace FiszkiApp
         private async Task LogoutAsync()
         {
             _authService.Logout();
+            App.UserCountriesService.ResetCache();
             await Shell.Current.GoToAsync("///LoginPage");
         }
 

@@ -197,7 +197,7 @@ namespace FiszkiApp.ViewModel
 
             var allCountries = App.CountriesDic.Countries;
 
-            var userCountries = App.UserCountriesService.CurrentUserCountries;
+            var userCountries = App.UserCountriesService.CurrentUserCountries ?? new List<UserCountries>();
 
             UserLanguages.Clear();
 

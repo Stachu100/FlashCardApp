@@ -9,6 +9,7 @@ using Microsoft.Maui.Controls;
 using FiszkiApp.EntityClasses;
 using FiszkiApp.EntityClasses.Models;
 using FiszkiApp.dbConnetcion.APIQueries;
+using System.Diagnostics.Metrics;
 
 namespace FiszkiApp.ViewModel
 {
@@ -21,8 +22,6 @@ namespace FiszkiApp.ViewModel
         public Command<object> DeleteCommand { get; set; }
 
         private byte[] imageData;
-
-        private bool IsDiffretnCountres = false;
 
         public int intUserId;
 
@@ -86,47 +85,33 @@ namespace FiszkiApp.ViewModel
                 intUserId = Convert.ToInt32(userID);
 
                 var userDetails = App.ProfileDetails.CurrentUser;
-
                 if (userDetails != null)
                 {
                     User = $"{userDetails.FirstName} {userDetails.LastName}";
                     Country = "Kraj pochodzenia: " + userDetails.Country;
 
                     if (userDetails.Avatar != null && userDetails.Avatar.Length > 0)
-                    {
                         ImageAsBytes = userDetails.Avatar;
-                    }
                 }
 
-                var userCountries = App.UserCountriesService.CurrentUserCountries;
-                foreach (var country in userCountries)
-                {
-                    Items.FirstOrDefault(i => i.ID_Country != country.ID_Country);
-                    IsDiffretnCountres = true;
-                }
-                    
+                var userCountries = App.UserCountriesService.CurrentUserCountries ?? new List<UserCountries>();
 
-                if (userCountries != null && (Items.Count == 0 || Items.Count != userCountries.Count || IsDiffretnCountres == true))
+                Items.Clear();
+
+                if (userCountries.Any())
                 {
-                    Items.Clear();
                     var countries = App.CountriesDic.Countries;
-
                     foreach (var userCountry in userCountries)
                     {
                         var country = countries.FirstOrDefault(c => c.ID_Country == userCountry.ID_Country);
-
                         if (country != null)
-                        {
                             AddItem(false, null, country.ID_Country, country.Country, country.Url);
-                        }
-
                     }
                 }
             }
-
             catch (Exception)
             {
-                await Shell.Current.DisplayAlert("Error", $"Ups... Coś poszło nie tak.", "OK");
+                await Shell.Current.DisplayAlert("Error", "Ups... Coś poszło nie tak.", "OK");
             }
         }
 

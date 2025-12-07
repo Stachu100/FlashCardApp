@@ -19,9 +19,9 @@ public partial class LoadingPage : ContentPage
 
         if (isAuthenticated && int.TryParse(userId, out int parsedUserId))
         {
-            await App.CountriesDic.GetCountriesWithFlagsAsync();
-            await App.ProfileDetails.GetUserDetailsAsync(parsedUserId);
-            await App.UserCountriesService.GetUserCountriesByUserIdAsync(parsedUserId);
+            await App.CountriesDic.GetCountriesWithFlagsAsync(true);
+            await App.ProfileDetails.GetUserDetailsAsync(parsedUserId, true);
+            await App.UserCountriesService.GetUserCountriesByUserIdAsync(parsedUserId, true);
 
             (App.Current.MainPage as AppShell)?.UpdateAdminMenu(isAdmin);
 
@@ -30,7 +30,7 @@ public partial class LoadingPage : ContentPage
         }
         else
         {
-            await App.CountriesDic.GetCountriesWithFlagsAsync();
+            await App.CountriesDic.GetCountriesWithFlagsAsync(true);
 
             await Task.Delay(500);
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
