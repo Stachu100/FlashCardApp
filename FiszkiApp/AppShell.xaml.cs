@@ -73,7 +73,7 @@ namespace FiszkiApp
             _authService.Logout();
             App.UserCountriesService.ResetCache();
             ProfileViewModel.ProfileInstance?.Items.Clear();
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync("///LoginPage");
         }
 
         private async Task SettingsAsync()
