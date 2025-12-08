@@ -100,9 +100,7 @@ namespace FiszkiApp.ViewModel
 
                 var userCountries = App.UserCountriesService.CurrentUserCountries ?? new List<UserCountries>();
 
-                Items.Clear();
-
-                if (userCountries.Any())
+                if (userCountries != null && Items.Count == 0)
                 {
                     var countries = App.CountriesDic.Countries;
                     foreach (var userCountry in userCountries)
