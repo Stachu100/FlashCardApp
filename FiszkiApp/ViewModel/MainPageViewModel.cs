@@ -125,11 +125,22 @@ namespace FiszkiApp.ViewModel
 
         private async Task DeleteCategoryAsync(LocalCategoryTable category)
         {
-            if (category != null)
+            if (category == null)
+                return;
+
+            bool confirm = await Shell.Current.DisplayAlert(
+                "Potwierdzenie",
+                "Czy na pewno chcesz usunąć kategorię?",
+                "Tak",
+                "Nie");
+
+            if (!confirm)
             {
-                await _databaseService.DeleteCategoryAsync(category);
-                Categories.Remove(category);
+                return;
             }
+
+            await _databaseService.DeleteCategoryAsync(category);
+            Categories.Remove(category);
         }
 
         private async Task ViewFlashcardsAsync(LocalCategoryTable category)
