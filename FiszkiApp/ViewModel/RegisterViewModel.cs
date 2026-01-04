@@ -89,8 +89,9 @@ namespace FiszkiApp.ViewModel
                                                                     encryptionResult.IV, encryptionResult.Key);
                 if (result == "Rejestracja zakończyła się sukcesem")
                 {
-                    await Application.Current.MainPage.DisplayAlert("Sukcess", result, "OK");
+                    await Application.Current.MainPage.DisplayAlert("Sukces", result, "OK");
                     User = new UserRegistration();
+                    await Shell.Current.GoToAsync("///LoginPage");
                 }
                 else
                 {

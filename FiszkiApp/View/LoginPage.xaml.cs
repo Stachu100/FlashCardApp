@@ -16,7 +16,7 @@ namespace FiszkiApp.View
 
         private async void OnLabelTapped(object sender, TappedEventArgs e)
         {
-            await Navigation.PushAsync(new RegisterPage());
+            await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
     }
 }
