@@ -16,17 +16,17 @@ builder.Services.AddControllers();
 //    )
 //);
 
-builder.Services.AddDbContext<FlashCardDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("GoogleDb")
-    )
-);
-
 //builder.Services.AddDbContext<FlashCardDbContext>(options =>
 //    options.UseSqlServer(
-//        builder.Configuration.GetConnectionString("FiszkiApp")
+//        builder.Configuration.GetConnectionString("GoogleDb")
 //    )
 //);
+
+builder.Services.AddDbContext<FlashCardDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("FiszkiApp")
+    )
+);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
