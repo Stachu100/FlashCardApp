@@ -69,6 +69,8 @@ async function loadLogs() {
 /*                              Sekcja: Categories                            */
 /* -------------------------------------------------------------------------- */
 
+let editingCategoryId = null;
+
 async function loadCategories() {
     const res = await fetch('/admin/categories');
     const categories = await res.json();
@@ -106,51 +108,54 @@ async function addCategory() {
     const backLang = document.getElementById('backLang').value;
     const level = document.getElementById('level').value;
 
-    await fetch('/admin/categories', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            categoryName: name,
-            frontLanguage: frontLang,
-            backLanguage: backLang,
-            languageLevel: level
-        })
-    });
+    if (!name || !frontLang || !backLang) return;
 
+    if (editingCategoryId) {
+        await fetch(`/admin/categories/${editingCategoryId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                categoryName: name,
+                frontLanguage: frontLang,
+                backLanguage: backLang,
+                languageLevel: level
+            })
+        });
+    }
+    else {
+        await fetch('/admin/categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                categoryName: name,
+                frontLanguage: frontLang,
+                backLanguage: backLang,
+                languageLevel: level
+            })
+        });
+    }
+
+    editingCategoryId = null;
     document.getElementById('categoryName').value = '';
     document.getElementById('frontLang').value = '';
     document.getElementById('backLang').value = '';
     document.getElementById('level').value = 'Brak';
+    document.getElementById('addCategoryBtn').textContent = "Add Category";
+    document.getElementById('categoryTitle').textContent = "Add Category";
+
     loadCategories();
 }
 
-async function editCategory(category) {
-    const newName = prompt("New name:", category.categoryName);
-    if (!newName) return;
+function editCategory(category) {
+    editingCategoryId = category.iD_Category;
 
-    const newFront = prompt("Front Language:", category.frontLanguage);
-    if (!newFront) return;
+    document.getElementById('categoryName').value = category.categoryName;
+    document.getElementById('frontLang').value = category.frontLanguage;
+    document.getElementById('backLang').value = category.backLanguage;
+    document.getElementById('level').value = category.languageLevel || "Brak";
 
-    const newBack = prompt("Back Language:", category.backLanguage);
-    if (!newBack) return;
-
-    const levelSelect = document.getElementById('level');
-    levelSelect.value = category.languageLevel || "Brak";
-
-    const newLevel = levelSelect.value;
-
-    await fetch(`/admin/categories/${category.iD_Category}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            categoryName: newName,
-            frontLanguage: newFront,
-            backLanguage: newBack,
-            languageLevel: newLevel
-        })
-    });
-
-    loadCategories();
+    document.getElementById('addCategoryBtn').textContent = "Save";
+    document.getElementById('categoryTitle').textContent = "Edit Category";
 }
 
 async function deleteCategory(id) {
