@@ -47,7 +47,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                     return responseUser.IsSuccessStatusCode;
 
                 }
-                throw new Exception("Nie udało się zminić hasła");
+                throw new Exception("Nie udało się zmienić hasła");
             }
             catch
             {

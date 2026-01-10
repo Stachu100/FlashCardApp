@@ -61,7 +61,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 if (!detailsResponse.IsSuccessStatusCode)
                 {
-                    return "Wystąpił błąd podczas rejestracji szczegółów użytkownika";
+                    return "Wystąpił błąd podczas rejestracji użytkownika";
                 }
 
                 var encryptionKeys = new EncryptionKeys
@@ -76,7 +76,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 if (!keysResponse.IsSuccessStatusCode)
                 {
-                    return "Wystąpił błąd podczas dodawania kluczy szyfrowania";
+                    return "Wystąpił błąd podczas rejestracji użytkownika";
                 }
 
                 return "Rejestracja zakończyła się sukcesem";

@@ -41,7 +41,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
                 var keysResponse = await _httpClient.GetAsync($"encryptionkeys/{user.ID_User}");
                 if (!keysResponse.IsSuccessStatusCode)
                 {
-                    return new UserLoginResult { Message = "Wystąpił problem z pobraniem kluczy szyfrowania." };
+                    return new UserLoginResult { Message = "Wystąpił błąd danych." };
                 }
 
                 var keysJson = await keysResponse.Content.ReadAsStringAsync();
@@ -49,7 +49,7 @@ namespace FiszkiApp.dbConnetcion.APIQueries
 
                 if (encryptionKeys == null)
                 {
-                    return new UserLoginResult { Message = "Wystąpił problem z pobraniem kluczy szyfrowania." };
+                    return new UserLoginResult { Message = "Wystąpił błąd danych." };
                 }
 
                 byte[] encryptedPassword = EntityClasses.AesManaged.EncryptStringToBytes_Aes(password, encryptionKeys.EncryptionKey, encryptionKeys.IV);
