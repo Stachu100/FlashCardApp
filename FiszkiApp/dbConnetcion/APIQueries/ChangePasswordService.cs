@@ -24,8 +24,6 @@ namespace FiszkiApp.dbConnetcion.APIQueries
         {
             try
             {
-
-
                 var requestBody = new EncryptionKeys
                 {
                     ID_User = UserId,

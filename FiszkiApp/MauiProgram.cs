@@ -39,7 +39,7 @@ namespace FiszkiApp
             builder.Services.AddTransient<AddFlashcardsPage>();
             builder.Services.AddTransient<AddCategoryPage>();
             builder.Services.AddTransient<PasswordChangePage>();
-            builder.Services.AddTransient<FlipCardPage>(); ;
+            builder.Services.AddTransient<FlipCardPage>();
             builder.Services.AddTransient<QrLoginPage>();
 
             return builder.Build();

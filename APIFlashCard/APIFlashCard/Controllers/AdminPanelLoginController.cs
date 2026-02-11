@@ -1,6 +1,8 @@
 ﻿using System.Security.Cryptography;
 using APIFlashCard.Data;
 using APIFlashCard.Models;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 using APIFlashCard.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +56,18 @@ namespace APIFlashCard.Controllers
                     if (!inputHash.SequenceEqual(user.UserPassword))
                         return Unauthorized(new { message = "Invalid username or password." });
                 }
+
+                var claims = new List<Claim>
+                {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim("UserId", user.ID_User.ToString()),
+                new Claim("IsAdmin", "true")
+                };
+
+                var identity = new ClaimsIdentity(claims, "MyCookie");
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync("MyCookie", principal);
 
                 return Ok(new { message = "Logged in successfully", userId = user.ID_User });
             }

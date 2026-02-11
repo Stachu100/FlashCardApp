@@ -219,28 +219,36 @@ async function loadFlashCards(id_Category, categoryName) {
 /*                              Sekcja: Admin Menu                            */
 /* -------------------------------------------------------------------------- */
 
-const usernameCookie = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith('admin_username='));
+document.addEventListener("DOMContentLoaded", async () => {
+    const resp = await fetch("/api/auth/me", {
+        credentials: "include",
+        cache: "no-store"
+    });
 
-const username = usernameCookie ? decodeURIComponent(usernameCookie.split('=')[1]) : 'Admin';
-document.getElementById('username').textContent = username;
+    if (!resp.ok) {
+        window.location.href = "login.html";
+        return;
+    }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) logoutBtn.onclick = logout;
-});
+    const data = await resp.json();
+    document.getElementById("username").textContent = data.username;
 
-document.addEventListener('DOMContentLoaded', () => {
     loadUsers();
     loadLogs();
     loadCategories();
     loadNotificationsOnApiring();
-    document.getElementById('addCategoryBtn').onclick = addCategory;
+
+    document.getElementById("addCategoryBtn").onclick = addCategory;
+    document.getElementById("logoutBtn").onclick = logout;
 });
 
-function logout() {
-    document.cookie = "admin_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    document.cookie = "admin_username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.href = "login.html";
+async function logout() {
+    await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
+    window.location.replace("/html/login.html");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -275,7 +283,6 @@ async function loadNotifications() {
 
         ul.innerHTML = '';
 
-        //Renderuj powiadomienia
         notifications.forEach((n) => {
             const li = document.createElement('li');
             li.classList.add('notification-item');
@@ -304,14 +311,12 @@ async function loadNotifications() {
     }
 }
 
-//Otwórz/zamknij pop-uop
 notifBtn.addEventListener('click', async () => {
     const isVisible = dropdown.style.display === 'block';
     dropdown.style.display = isVisible ? 'none' : 'block';
     if (!isVisible) await loadNotifications();
 });
 
-//Zamknij pop-up klikając poza nim
 document.addEventListener('click', (event) => {
     if (!notifBtn.contains(event.target) && !dropdown.contains(event.target)) {
         const isVisible = dropdown.style.display === 'block';

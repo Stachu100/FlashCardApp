@@ -14,6 +14,7 @@
         const response = await fetch('/api/adminpanellogin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: "include",
             body: JSON.stringify({ username, password })
         });
 
@@ -25,8 +26,6 @@
         }
 
         if (response.ok) {
-            document.cookie = "admin_logged_in=true; path=/; Secure; SameSite=Lax";
-            document.cookie = `admin_username=${encodeURIComponent(username)}; path=/; Secure; SameSite=Lax`;
             window.location.href = "index.html";
         }
     }
@@ -70,6 +69,7 @@ async function startQrLogin() {
             const verifyResp = await fetch('/api/qrlogin/check', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: "include",
                 body: JSON.stringify({ token: qrToken })
             });
 
@@ -77,8 +77,6 @@ async function startQrLogin() {
 
             if (verifyResp.ok && verifyData.success) {
                 clearInterval(interval);
-                document.cookie = "admin_logged_in=true; path=/; Secure; SameSite=Lax";
-                document.cookie = `admin_username=${encodeURIComponent(verifyData.username)}; path=/; Secure; SameSite=Lax`;
                 status.textContent = `Logged in: ${verifyData.username}`;
                 await delay(3000);
                 window.location.href = "index.html";

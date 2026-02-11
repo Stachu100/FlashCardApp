@@ -1,5 +1,6 @@
 ﻿using APIFlashCard.Data;
 using APIFlashCard.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -83,11 +84,22 @@ public class AdminController : ControllerBase
         return Ok(categories);
     }
 
+    [Authorize]
     [HttpPost("categories")]
     public async Task<IActionResult> AddCategory([FromBody] Category category)
     {
+        var userIdClaim = User.FindFirst("UserId");
+
+        if (userIdClaim == null)
+            return Unauthorized();
+
+        int userId = int.Parse(userIdClaim.Value);
+
+        category.UserID = userId;
+
         _context.Categories.Add(category);
         await _context.SaveChangesAsync();
+
         return Ok(category);
     }
 
