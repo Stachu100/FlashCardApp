@@ -47,6 +47,8 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorLoggingMiddleware>();
 
+app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -65,8 +67,6 @@ app.Use(async (context, next) =>
 
     await next();
 });
-
-app.UseStaticFiles();
 
 app.MapControllers();
 

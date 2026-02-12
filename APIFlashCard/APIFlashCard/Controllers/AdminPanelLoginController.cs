@@ -59,9 +59,9 @@ namespace APIFlashCard.Controllers
 
                 var claims = new List<Claim>
                 {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim("UserId", user.ID_User.ToString()),
-                new Claim("IsAdmin", "true")
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim("UserId", user.ID_User.ToString()),
+                    new Claim("IsAdmin", "true")
                 };
 
                 var identity = new ClaimsIdentity(claims, "MyCookie");

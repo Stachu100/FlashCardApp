@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using APIFlashCard.Data;
 using APIFlashCard.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Identity.Data;
 
@@ -86,9 +88,26 @@ namespace APIFlashCard.Controllers
             await _context.SaveChangesAsync();
 
             var user = await _context.Users.FindAsync(tokenEntry.UserID.Value);
-            var username = user?.UserName ?? string.Empty;
+            if (user == null)
+                return Ok(new { success = false });
 
-            return Ok(new { success = true, username });
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim("UserId", user.ID_User.ToString()),
+                new Claim("IsAdmin", user.Is_admin ? "true" : "false")
+            };
+
+            var identity = new ClaimsIdentity(claims, "MyCookie");
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync("MyCookie", principal);
+
+            return Ok(new
+            {
+                success = true,
+                username = user.UserName
+            });
         }
     }
 }
